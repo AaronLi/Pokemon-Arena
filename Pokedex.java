@@ -3,7 +3,6 @@
 //Pokedex, used for reading from datafile first then used for getting information about a pokemon
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
 
@@ -25,7 +24,7 @@ public class Pokedex{
 	private static final int SPECIAL = 3;
 	
 	
-	Map<String,Integer> types = new HashMap<String,Integer>();
+	public HashMap<String,Integer> types = new HashMap<String,Integer>();
 	private HashMap<String,Pokemon> pkmnList = new HashMap<String,Pokemon>();
 	
 	public Pokedex(String dataFile){
@@ -84,5 +83,8 @@ public class Pokedex{
 	
 	public Pokemon getPokemon(String pokeName){
 		return new Pokemon(pkmnList.get(pokeName));
+	}
+	public ArrayList<String> pokemonNames(){
+		return new ArrayList<String>(pkmnList.keySet());
 	}
 }

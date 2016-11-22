@@ -2,7 +2,6 @@
 //Aaron Li
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.HashMap;
 
 public class Pokemon{
@@ -11,7 +10,7 @@ public class Pokemon{
 	
 	private boolean[]debuffs = {false,false};
 	private int energy = 50;
-	private Map<String,Attack> moves = new HashMap<String,Attack>();
+	private HashMap<String,Attack> moves = new HashMap<String,Attack>();
 	
 	public static final int NO_TYPE = 0;
 	public static final int EARTH = 1;
@@ -38,14 +37,19 @@ public class Pokemon{
 		this.energy = pkmnIn.energy;
 		this.moves = new HashMap<String,Attack>(pkmnIn.moves);
 	}
+	
+	public String getName(){
+		return this.name;
+	}
 	public void addAttack(String name, int cost, int damage, int special){
 		moves.put(name,new Attack(name,cost,damage,special));
 	}
 	
 	public boolean attack(Pokemon target, Attack attack){
 		boolean success = false;
-		if(energy>=attack.getCost()){
-			target.setHealth(target.getHealth()-(debuffs[Attack.DISABLE_STATUS]? attack.getDamage(): attack.getDamage()-10));
+		if(this.energy>=attack.getCost()){
+			this.energy -= attack.getCost();
+			target.setHealth(target.hp-(debuffs[Attack.DISABLE_STATUS]? attack.getDamage(): attack.getDamage()-10));
 			success = true;
 		}
 		return success;
