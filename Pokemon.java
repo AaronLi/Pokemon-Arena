@@ -44,16 +44,28 @@ public class Pokemon{
 	public void addAttack(String name, int cost, int damage, int special){
 		moves.put(name,new Attack(name,cost,damage,special));
 	}
-	
+	public void recharge(int amount){
+		energy = Math.min(50,energy+amount);
+	}
 	public boolean attack(Pokemon target, Attack attack){
 		boolean success = false;
+		int damage = target.hp-(debuffs[Attack.DISABLE_STATUS]? attack.getDamage(): attack.getDamage()-10); // damage without disable and with type advantages
 		if(this.energy>=attack.getCost()){
 			this.energy -= attack.getCost();
-			target.setHealth(target.hp-(debuffs[Attack.DISABLE_STATUS]? attack.getDamage(): attack.getDamage()-10));
+			if(this.type == target.weakness){
+				target.setHealth(target.hp-damage*2);
+			}
+			else if(this.type == target.resistance){
+				target.setHealth(target.hp-damage/2);
+			}
+			else{
+				target.setHealth(target.hp-damage);
+			}
 			success = true;
 		}
 		return success;
 	}
+	
 	public void setHealth(int health){
 		this.hp = Math.max(0,health);
 	}

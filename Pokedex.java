@@ -76,7 +76,7 @@ public class Pokedex{
 			}
 		}
 		catch(IOException ex){
-			System.out.println("File not found");
+			System.err.println("File not found");
 		}
 		return pokeListOut;
 	}
