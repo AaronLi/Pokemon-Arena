@@ -37,7 +37,12 @@ public class Pokemon{
 		this.energy = pkmnIn.energy;
 		this.moves = new HashMap<String,Attack>(pkmnIn.moves);
 	}
-	
+	public void stun(){
+		debuffs[Attack.STUN_STATUS] = true;
+	}
+	public void disable(){
+		debuffs[Attack.DISABLE_STATUS] = true;
+	}
 	public String getName(){
 		return this.name;
 	}
@@ -81,7 +86,7 @@ public class Pokemon{
 	}
 	public String toString(){
 		String sOut = "";
-		sOut+=name+"\nHP: "+hp+"\nEnergy: "+energy+"\nType: "+displayTypes[type]+"\nResistance: "+displayTypes[resistance]+"\nWeakness: "+displayTypes[weakness]+"\n\n";
+		sOut+=name+"\nHP: "+hp+"\nEnergy: "+energy+"\nType: "+displayTypes[type]+"\nResistance: "+displayTypes[resistance]+"\nWeakness: "+displayTypes[weakness]+"\nStunned: "+debuffs[0]+"\nDisabled: "+debuffs[1]+"\n\n";
 		for(String moveName : moves.keySet()){
 			sOut+=moves.get(moveName).toString()+"\n\n";
 		}

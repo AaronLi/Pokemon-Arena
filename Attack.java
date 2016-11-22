@@ -21,7 +21,9 @@ public class Attack{
 		this.damage = damage;
 		this.special = special;
 	}
-	
+	public int getSpecial(){
+		return special;
+	}
 	public int getCost(){
 		return energyCost;
 	}

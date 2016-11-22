@@ -3,6 +3,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 public class PkmnArena{
 	
 	public static Pokedex pokedex = new Pokedex("pokemon.txt");
@@ -12,9 +13,9 @@ public class PkmnArena{
 	public static final int RETREAT = 3;
 	public static final int PASS = 4;
 	public static final int COMPUTER_TURN = 5;
+	public static Scanner kb = new Scanner(System.in);
 	
 	public static void main(String[]args){
-		Scanner kb = new Scanner(System.in);
 		int phase = 0;
 		int uIn;
 		Party userParty = Party.pickParty(pokedex);
@@ -24,8 +25,9 @@ public class PkmnArena{
 		while(running){
 			switch(phase){
 				case SELECTING_ACTIVE:
+					System.out.println("Pick a starting pokemon.");
 					userParty.pickActive();
-					phase++;
+					phase = coinFlip()?SELECTING_ACTION : COMPUTER_TURN;
 				break;
 				case SELECTING_ACTION:
 					System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass");
@@ -38,31 +40,33 @@ public class PkmnArena{
 					}
 				break;
 				case PICKING_ATTACK:
-					String[] currentAttacks = userParty.currentPokemon().attacks();
-					System.out.println("Pick an attack:");
-					for(int i = 0;i<currentAttacks.length;i++){
-						System.out.printf("%2d. %s\n",i+1,currentAttacks[i]);
-					}
-					uIn = Integer.parseInt(kb.nextLine());
-					if(uIn>0 && uIn < currentAttacks.length+1){
-						if(userParty.currentPokemon().attack(computerParty.currentPokemon(),userParty.currentPokemon().getAttack(currentAttacks[uIn-1]))){
-							System.out.printf("%s used %s!\n",userParty.currentPokemon().getName(),currentAttacks[uIn-1]);
-							phase = COMPUTER_TURN;
-						}
-					}
+					userParty.attack(computerParty);
+					phase = COMPUTER_TURN;
+					userParty.restAll();
 				break;
 				case RETREAT:
+					System.out.println("Pick a replacement pokemon.");
 					userParty.pickActive();
 					phase = COMPUTER_TURN;
+					userParty.restAll();
 				break;
 				case PASS:
 					phase = COMPUTER_TURN;
+					userParty.restAll();
 				break;
 				case COMPUTER_TURN:
+					//Computer
+					System.out.println("Computer turn here");
+					phase = SELECTING_ACTION;
+					computerParty.restAll();
 				break;
 			}
 			
 		}
+	}
+	public static boolean coinFlip(){ // coin flip with 50/50 chance
+		Random rand = new Random();
+		return rand.nextInt(1) == 1;
 	}
 
 }

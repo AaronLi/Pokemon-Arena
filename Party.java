@@ -7,6 +7,7 @@ import java.util.Random;
 public class Party{
 	private ArrayList<Pokemon> party = new ArrayList<Pokemon>();
 	private int active = 0;
+	
 	private static Scanner kb = new Scanner(System.in);
 	public void addPokemon(Pokemon pkmnIn){
 		party.add(pkmnIn);
@@ -20,7 +21,43 @@ public class Party{
 	public boolean contains(Pokemon pkmnIn){
 		return party.contains(pkmnIn);
 	}
-
+	public void restAll(){
+		for(Pokemon pkmn:party){
+			pkmn.recharge(10);
+		}
+	}
+	public void attack(Party enemyParty){
+		String[] currentAttacks = currentPokemon().attacks();
+		System.out.println("Pick an attack:");
+		for(int i = 0;i<currentAttacks.length;i++){
+			System.out.printf("%2d. %s\n",i+1,currentAttacks[i]);
+		}
+		int uIn = Integer.parseInt(PkmnArena.kb.nextLine());
+		if(uIn>0 && uIn < currentAttacks.length+1){
+			if(currentPokemon().attack(enemyParty.currentPokemon(),currentPokemon().getAttack(currentAttacks[uIn-1]))){
+				int special = currentPokemon().getAttack(currentAttacks[uIn-1]).getSpecial();
+				System.out.println(special);
+				switch(special){
+					case Attack.NO_SPECIAL:
+					break;
+					case Attack.STUN:
+						if(PkmnArena.coinFlip()){
+							enemyParty.currentPokemon().stun();
+						}
+					break;
+					case Attack.WILD_STORM:
+					break;
+					case Attack.DISABLE:
+						enemyParty.currentPokemon().disable();
+					break;
+					case Attack.RECHARGE:
+						currentPokemon().recharge(20);
+					break;
+				}
+				System.out.printf("%s used %s!\n",currentPokemon().getName(),currentAttacks[uIn-1]);
+			}
+		}
+	}
 	public static Party pickParty(Pokedex pokedex){
 		int picked;
 		Party userParty = new Party();
@@ -71,7 +108,6 @@ public class Party{
 	}
 	public void pickActive(){
 		int uIn = 0;
-		System.out.println("Pick a starting pokemon.");
 		ArrayList<String> pokeNames= partyNames();
 		for(int i = 0;i<pokeNames.size();i++){
 			System.out.printf("%2d. %-10s\n",i+1,pokeNames.get(i));
