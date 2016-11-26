@@ -7,7 +7,11 @@ import java.util.Random;
 public class Party{
 	private ArrayList<Pokemon> party = new ArrayList<Pokemon>();
 	private int active = 0;
-	
+	public Party(Party partyIn){
+		this.party = partyIn.party;
+	}
+	public Party(){
+	}
 	private static Scanner kb = new Scanner(System.in);
 	public void addPokemon(Pokemon pkmnIn){
 		party.add(pkmnIn);
@@ -27,41 +31,17 @@ public class Party{
 		}
 	}
 	public void attack(Party enemyParty){
-		String[] currentAttacks = currentPokemon().attacks();
-		System.out.println("Pick an attack:");
-		for(int i = 0;i<currentAttacks.length;i++){
-			System.out.printf("%2d. %s\n",i+1,currentAttacks[i]);
-		}
-		int uIn = Integer.parseInt(PkmnArena.kb.nextLine());
-		if(uIn>0 && uIn < currentAttacks.length+1){
-			if(currentPokemon().attack(enemyParty.currentPokemon(),currentPokemon().getAttack(currentAttacks[uIn-1]))){
-				int special = currentPokemon().getAttack(currentAttacks[uIn-1]).getSpecial();
-				System.out.println(special);
-				switch(special){
-					case Attack.NO_SPECIAL:
-					break;
-					case Attack.STUN:
-						if(PkmnArena.coinFlip()){
-							enemyParty.currentPokemon().stun();
-						}
-					break;
-					case Attack.WILD_STORM:
-					break;
-					case Attack.DISABLE:
-						enemyParty.currentPokemon().disable();
-					break;
-					case Attack.RECHARGE:
-						currentPokemon().recharge(20);
-					break;
-				}
-				System.out.printf("%s used %s!\n",currentPokemon().getName(),currentAttacks[uIn-1]);
-			}
-		}
+	
 	}
 	public static Party pickParty(Pokedex pokedex){
 		int picked;
 		Party userParty = new Party();
 		ArrayList<String> pickablePokemon = pokedex.pokemonNames();
+		ArrayList<Integer> pokemonNumbers = new ArrayList<Integer>();
+		for(int i = 0; i < pickablePokemon.size(); i++){
+			pokemonNumbers.add(new Integer(i));
+		}
+		
 		int numPicked = 0;
 		while(numPicked < 4){
 			System.out.println("Please pick a pokemon:\n");
@@ -73,8 +53,9 @@ public class Party{
 			}
 			System.out.println();
 			picked = Integer.parseInt(kb.nextLine());
-			userParty.addPokemon(pokedex.getPokemon(pickablePokemon.get(picked-1)));
+			userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked-1)));
 			pickablePokemon.remove(picked-1);
+			pokemonNumbers.remove(picked-1);
 			numPicked++;
 		}
 		return userParty;
@@ -82,13 +63,20 @@ public class Party{
 	
 	public static Party computerParty(Pokedex pokedex, Party userPokemon){
 		Party computerParty = new Party();
-		ArrayList<String> remainingPokemon = new ArrayList<String>(pokedex.pokemonNames());
-		remainingPokemon.removeAll(userPokemon.partyNames());
-		for(String pkmn : remainingPokemon){
-			computerParty.addPokemon(pokedex.getPokemon(pkmn));
+		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon();
+		remainingPokemon.removeAll(userPokemon.allMembers());
+		for(Pokemon pkmn : remainingPokemon){
+			computerParty.addPokemon(pkmn);
 		}
 		return computerParty;
 	}
+	
+	/*public Party removeAll(Party toRemove){
+		Party toKeep = new Party(party);
+		for(int i = 0;i < toRemove.size();i++){
+			if(toKeep.contains(toRemove.party.get(i))
+		}
+	} */
 	
 	public ArrayList<String> partyNames(){
 		ArrayList<String> namesOut = new ArrayList<String>();
@@ -97,7 +85,10 @@ public class Party{
 		}
 		return namesOut;
 	}
-	
+	public ArrayList<Pokemon> allMembers(){
+		//return party;
+		return new ArrayList<Pokemon>(party);
+	}
 	
 	public String toString(){
 		String sOut = "";

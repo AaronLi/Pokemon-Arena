@@ -30,6 +30,9 @@ public class Attack{
 	public int getDamage(){
 		return damage;
 	}
+	public String getName(){
+		return attackName;
+	}
 	public String toString(){
 		String sOut = "";
 		sOut += attackName+":\n\tEnergy Cost: "+energyCost+"\n\tDamage: "+damage+"\n\tSpecial: "+specialDisplay[special];
