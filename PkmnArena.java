@@ -58,7 +58,7 @@ public class PkmnArena{
 				break;
 				case COMPUTER_TURN:
 					//Computer
-					System.out.println("Computer turn here");
+					computerMove(computerParty,userParty);
 					phase = SELECTING_ACTION;
 					computerParty.restAll();
 				break;
@@ -82,6 +82,35 @@ public class PkmnArena{
 				}
 				break;
 			}
+		}
+	}
+	public static void computerMove(Party computerParty, Party userParty){
+		if(computerParty.currentPokemon().getHealth() >0){
+			boolean canAttack = false;
+			ArrayList<String> possibleAttacks = new ArrayList<String>();
+			for(String attack : computerParty.currentPokemon().attacks()){
+				if(computerParty.currentPokemon().getAttack(attack).getCost() <= computerParty.currentPokemon().getEnergy()){
+					canAttack = true;
+					possibleAttacks.add(attack);
+				}
+			}
+			if(canAttack){
+				Pokemon attackingPokemon = userParty.currentPokemon();
+				Attack plannedAttack = computerParty.currentPokemon().getAttack(possibleAttacks.get(rand.nextInt(possibleAttacks.size())));
+				System.out.printf("The opponnent %s used %s!\n",computerParty.currentPokemon().getName(),plannedAttack.getName());
+				if(computerParty.currentPokemon().attack(attackingPokemon,plannedAttack)){
+					System.out.printf("The opponent's %s now has %d energy\n",computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
+					System.out.printf("Your %s now has %d health\n",userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
+				}
+			}
+		}
+		else if(computerParty.getActiveIndex() < computerParty.size()){
+			String oldPokemonName = computerParty.currentPokemon().getName();
+			computerParty.setActive(computerParty.getActiveIndex()+1);
+			System.out.printf("%s has fainted, next choice: %s!\n",oldPokemonName,computerParty.currentPokemon().getName());//lisa recommended this
+		}
+		else{
+			//You Win!
 		}
 	}
 }

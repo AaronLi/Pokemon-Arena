@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Pokemon{
 	private int hp, type, resistance, weakness;
 	private String name;
+	private boolean attacked = false;
 	
 	private boolean[]debuffs = {false,false};
 	private int energy = 50;
@@ -81,9 +82,18 @@ public class Pokemon{
 	public void recharge(int amount){
 		energy = Math.min(50,energy+amount);
 	}
+	public String[] availableAttacks(){
+		ArrayList<String> possibleAttacks = new ArrayList<String>();
+		for(String atName : attacks()){
+			if(moves.get(atName).energyCost() <= energy){//LEFT OFF HERE
+				possibleAttacks.add(atName);
+			}
+		}
+		return possibleAttacks.toArray()
+	}
 	public boolean attack(Pokemon target, Attack attack){
 		boolean success = false;
-		int damage = debuffs[Attack.DISABLE_STATUS]? attack.getDamage()-10: attack.getDamage(); // damage without disable and with type advantages
+		int damage = debuffs[Attack.DISABLE_STATUS]? Math.max(attack.getDamage()-10,0): attack.getDamage(); // damage without disable and with type advantages
 		if(this.energy>=attack.getCost()){
 			this.energy -= attack.getCost();
 			if(attack.getSpecial() == Attack.WILD_CARD && PkmnArena.rand.nextBoolean()){
@@ -113,7 +123,7 @@ public class Pokemon{
 				break;
 				case Attack.WILD_STORM:
 					while(PkmnArena.rand.nextBoolean()){
-						System.out.printf("Wild storm! %s used %s again and dealt %d damage!\n",name,attack.getName(),damage);
+						System.out.printf("Wild storm! %s used %s again and dealt an additional %d damage!\n",name,attack.getName(),damage);
 						//System.out.printf("%s dealt %d damage!\n",name,damage); REMOVETHIS
 						target.setHealth(target.hp-damage);
 					}
@@ -123,11 +133,12 @@ public class Pokemon{
 					target.disable();
 				break;
 				case Attack.RECHARGE:
-					System.out.printf("%s has recharged 20 energy",this.name);
+					System.out.printf("%s has recharged 20 energy\n",this.name);
 					recharge(20);
 				break;
 			}
 		}
+		attacked = true;
 		return success;
 	}
 	
@@ -146,6 +157,12 @@ public class Pokemon{
 	}
 	public Attack getAttack(String attackName){
 		return moves.get(attackName);
+	}
+	public boolean hasAttacked(){
+		return attacked;
+	}
+	public void setAttacked(boolean attacked){
+		this.attacked = attacked;
 	}
 	public String toString(){
 		String sOut = "";
