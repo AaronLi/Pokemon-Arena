@@ -21,12 +21,13 @@ public class PkmnArena{
 		int uIn;
 		Party userParty = Party.pickParty(pokedex);
 		Party computerParty = Party.computerParty(pokedex,userParty);
+		computerParty.setActive(0);
 		//System.out.println(userParty.toString());
 		boolean running = true;
 		while(running){
 			switch(phase){
 				case SELECTING_ACTIVE:
-					System.out.println("Pick a starting pokemon.");
+					System.out.println("Pick a pokemon.");
 					userParty.pickActive();
 					phase =PkmnArena.rand.nextBoolean()?SELECTING_ACTION : COMPUTER_TURN;
 				break;
@@ -34,7 +35,16 @@ public class PkmnArena{
 					System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass");
 					uIn = Integer.parseInt(kb.nextLine());
 					if(uIn>0&&uIn<4){
-						phase = 2+uIn-1;
+						if(uIn == 1 && userParty.currentPokemon().getHealth() <= 0){
+							System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
+							phase = 0;
+						}
+						else if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
+							System.out.println("Not enough energy for any attacks!");
+						}
+						else{
+							phase = 2+uIn-1;
+						}
 					}
 					else{
 						//Action if input is not linked to option
@@ -58,6 +68,7 @@ public class PkmnArena{
 				break;
 				case COMPUTER_TURN:
 					//Computer
+					System.out.println("-----COMPUTER PHASE -----");
 					computerMove(computerParty,userParty);
 					phase = SELECTING_ACTION;
 					computerParty.restAll();
@@ -67,7 +78,7 @@ public class PkmnArena{
 		}
 	}
 	public static void pickAttack(Pokemon attacking, Pokemon defending){
-		String[] currentAttacks = attacking.attacks();
+		String[] currentAttacks = attacking.availableAttacks();
 		while(true){
 			System.out.println("Pick an attack:");
 			for(int i = 0;i<currentAttacks.length;i++){
@@ -86,22 +97,18 @@ public class PkmnArena{
 	}
 	public static void computerMove(Party computerParty, Party userParty){
 		if(computerParty.currentPokemon().getHealth() >0){
-			boolean canAttack = false;
-			ArrayList<String> possibleAttacks = new ArrayList<String>();
-			for(String attack : computerParty.currentPokemon().attacks()){
-				if(computerParty.currentPokemon().getAttack(attack).getCost() <= computerParty.currentPokemon().getEnergy()){
-					canAttack = true;
-					possibleAttacks.add(attack);
-				}
-			}
-			if(canAttack){
+			String[] possibleAttacks = computerParty.currentPokemon().availableAttacks();
+			if(possibleAttacks.length > 0){
 				Pokemon attackingPokemon = userParty.currentPokemon();
-				Attack plannedAttack = computerParty.currentPokemon().getAttack(possibleAttacks.get(rand.nextInt(possibleAttacks.size())));
+				Attack plannedAttack = computerParty.currentPokemon().getAttack(possibleAttacks[rand.nextInt(possibleAttacks.length)]);
 				System.out.printf("The opponnent %s used %s!\n",computerParty.currentPokemon().getName(),plannedAttack.getName());
 				if(computerParty.currentPokemon().attack(attackingPokemon,plannedAttack)){
 					System.out.printf("The opponent's %s now has %d energy\n",computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
 					System.out.printf("Your %s now has %d health\n",userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
 				}
+			}
+			else{
+				System.out.println("The opponent passed");
 			}
 		}
 		else if(computerParty.getActiveIndex() < computerParty.size()){

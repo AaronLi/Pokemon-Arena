@@ -85,11 +85,11 @@ public class Pokemon{
 	public String[] availableAttacks(){
 		ArrayList<String> possibleAttacks = new ArrayList<String>();
 		for(String atName : attacks()){
-			if(moves.get(atName).energyCost() <= energy){//LEFT OFF HERE
+			if(moves.get(atName).getCost() <= energy){//LEFT OFF HERE
 				possibleAttacks.add(atName);
 			}
 		}
-		return possibleAttacks.toArray()
+		return possibleAttacks.toArray(new String[possibleAttacks.size()]);
 	}
 	public boolean attack(Pokemon target, Attack attack){
 		boolean success = false;

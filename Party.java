@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Random;
 public class Party{
 	private ArrayList<Pokemon> party = new ArrayList<Pokemon>();
-	private int active = 0;
+	private int active = -1;
 	public Party(Party partyIn){
 		this.party = partyIn.party;
 	}
@@ -110,13 +110,26 @@ public class Party{
 		}
 		return sOut;
 	}
+	public int numAlive(){
+		int alive = 0;
+		for(Pokemon pkmn : this.party){
+			if(pkmn.getHealth()>0){
+				alive++;
+			}
+		}
+		return alive;
+	}
 	public void pickActive(){
 		int uIn = 0;
+		ArrayList<Integer> livingPokemon =  new ArrayList<Integer>();
 		for(int i = 0;i<party.size();i++){
-			System.out.printf(party.get(i).getHealth()>0?"%2d. %-10s\n":"%2d. FAINTED %-10s\n",i+1,party.get(i).getName());
+			if(party.get(i).getHealth()>0 && active != i){
+				livingPokemon.add(new Integer(i));
+				System.out.printf("%d. %s\n",livingPokemon.size(),party.get(i).getName());
+			}
 		}
 		uIn = Integer.parseInt(kb.nextLine());
-		if(uIn>0 && uIn<5){
+		if(uIn>0 && uIn<this.numAlive()+1){
 			setActive(uIn-1);
 			System.out.printf("%s, I choose you!\n",party.get(uIn-1).getName());
 		}
