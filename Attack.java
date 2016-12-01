@@ -10,8 +10,7 @@ public class Attack{
 	public static final int WILD_STORM = 3;
 	public static final int DISABLE = 4;
 	public static final int RECHARGE = 5;
-	public static final int STUN_STATUS = 0;
-	public static final int DISABLE_STATUS = 1;
+
 	public static final String[] specials = {" ", "stun", "wild card", "wild storm", "disable", "recharge"};
 	public static final String[] specialDisplay = {"None", "Stun", "Wild Card", "Wild Storm", "Disable", "Recharge"};
 	

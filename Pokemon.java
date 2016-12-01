@@ -33,6 +33,8 @@ public class Pokemon{
 	private static final int ENERGY_COST = 1;
 	private static final int DAMAGE = 2;
 	private static final int SPECIAL = 3;
+	public static final int STUN_STATUS = 0;
+	public static final int DISABLE_STATUS = 1;
 	
 	public Pokemon(String infoIn){
 		int special = 0;
@@ -67,14 +69,32 @@ public class Pokemon{
 		this.energy = pkmnIn.energy;
 		this.moves = new HashMap<String,Attack>(pkmnIn.moves);
 	}
-	public void stun(){
-		debuffs[Attack.STUN_STATUS] = true;
-	}
-	public void disable(){
-		debuffs[Attack.DISABLE_STATUS] = true;
-	}
 	public String getName(){
 		return this.name;
+	}
+	public boolean getDisable(){
+		return debuffs[DISABLE_STATUS];
+	}
+	public boolean getStun(){
+		return debuffs[STUN_STATUS];
+	}
+	public int getHealth(){
+		return this.hp;
+	}
+	public int getEnergy(){
+		return energy;
+	}
+	public void setAttacked(boolean attacked){ // So the attacking pokemon doesn't recover energy
+		this.attacked = attacked;
+	}
+	public void setHealth(int health){
+		this.hp = Math.max(0,health);
+	}
+	public void setDisable(boolean value){
+		debuffs[DISABLE_STATUS] = value;
+	}
+	public void setStun(boolean value){
+		debuffs[STUN_STATUS] = value;
 	}
 	public void addAttack(String name, int cost, int damage, int special){
 		moves.put(name,new Attack(name,cost,damage,special));
@@ -93,7 +113,7 @@ public class Pokemon{
 	}
 	public boolean attack(Pokemon target, Attack attack){
 		boolean success = false;
-		int damage = debuffs[Attack.DISABLE_STATUS]? Math.max(attack.getDamage()-10,0): attack.getDamage(); // damage without disable and with type advantages
+		int damage = debuffs[DISABLE_STATUS]? Math.max(attack.getDamage()-10,0): attack.getDamage(); // damage without disable and with type advantages
 		if(this.energy>=attack.getCost()){
 			this.energy -= attack.getCost();
 			if(attack.getSpecial() == Attack.WILD_CARD && PkmnArena.rand.nextBoolean()){
@@ -118,7 +138,7 @@ public class Pokemon{
 				case Attack.STUN:
 					if(PkmnArena.rand.nextBoolean()){
 						System.out.printf("%s has been stunned!\n",target.getName());
-						target.stun();
+						target.debuffs[STUN_STATUS] = true;
 					}
 				break;
 				case Attack.WILD_STORM:
@@ -130,7 +150,7 @@ public class Pokemon{
 				break;
 				case Attack.DISABLE:
 					System.out.printf("%s has been disabled!\n",target.getName());
-					target.disable();
+					target.debuffs[DISABLE_STATUS] = true;
 				break;
 				case Attack.RECHARGE:
 					System.out.printf("%s has recharged 20 energy\n",this.name);
@@ -142,15 +162,7 @@ public class Pokemon{
 		return success;
 	}
 	
-	public void setHealth(int health){
-		this.hp = Math.max(0,health);
-	}
-	public int getHealth(){
-		return this.hp;
-	}
-	public int getEnergy(){
-		return energy;
-	}
+
 	public String[] attacks(){
 		String[] sOut = moves.keySet().toArray(new String[moves.keySet().size()]);
 		return sOut;
@@ -161,11 +173,10 @@ public class Pokemon{
 	public boolean hasAttacked(){
 		return attacked;
 	}
-	public void setAttacked(boolean attacked){
-		this.attacked = attacked;
-	}
+
+
 	public String toString(){
-		String sOut = "";
+		String sOut = "";//Change out with stringf version
 		sOut+=name+"\nHP: "+hp+"\nEnergy: "+energy+"\nType: "+displayTypes[type]+"\nResistance: "+displayTypes[resistance]+"\nWeakness: "+displayTypes[weakness]+"\nStunned: "+debuffs[0]+"\nDisabled: "+debuffs[1]+"\n\n";
 		for(String moveName : moves.keySet()){
 			sOut+=moves.get(moveName).toString()+"\n\n";
@@ -179,4 +190,5 @@ public class Pokemon{
 		}
 		return false;
 	}
+	
 }

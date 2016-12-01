@@ -1,0 +1,6 @@
+5
+Pikachu,50,electric, ,fire,2,Quick Attack,10,20, ,Agility,30,0,disable
+Pidgey,40,fighting,earth,electric,1,Whirlwind,15,20,stun
+Spearow,50,fighting,earth,electric,2,Peck,10,10, ,Mirror Move,20,30,wild card
+Doduo,50,fighting,earth,electric,1,Fury Attack,20,40,wild card
+Jigglypuff,60,fighting,fighting,fire,3,Lullaby,30,10,stun,Pound,20,25, ,Sing,20,10,disable

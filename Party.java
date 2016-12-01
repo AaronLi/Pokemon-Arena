@@ -57,7 +57,7 @@ public class Party{
 				if(i%4 == 0){
 					System.out.println();
 				}
-				System.out.printf("%2d. %10s ",i+1,pickablePokemon.get(i));
+				System.out.printf("%2d. %-10s ",i+1,pickablePokemon.get(i));
 			}
 			System.out.println();
 			picked = Integer.parseInt(kb.nextLine());
@@ -119,7 +119,30 @@ public class Party{
 		}
 		return alive;
 	}
-	public void pickActive(){
+	public int pickActive(){
+		int uIn = 0;
+		int nextPhase = PkmnArena.SELECTING_ACTION;
+		ArrayList<Integer> livingPokemon =  new ArrayList<Integer>();
+		System.out.println("0. Back");
+		for(int i = 0;i<party.size();i++){
+			if(party.get(i).getHealth()>0 && active != i){
+				livingPokemon.add(new Integer(i));
+				System.out.printf("%d. %s\n",livingPokemon.size(),party.get(i).getName());
+			}
+		}
+		uIn = Integer.parseInt(kb.nextLine());
+		if(uIn>0 && uIn<livingPokemon.size()+1){
+			setActive(livingPokemon.get(uIn-1));
+			System.out.printf("%s, I choose you!\n",this.currentPokemon().getName());
+			nextPhase = PkmnArena.COMPUTER_TURN;
+		}
+		else{
+			//System.out.println("Invalid pokemon");
+			//Action if input is not linked to option
+		}
+		return nextPhase;
+	}
+	public void pickStarting(){
 		int uIn = 0;
 		ArrayList<Integer> livingPokemon =  new ArrayList<Integer>();
 		for(int i = 0;i<party.size();i++){
@@ -129,11 +152,12 @@ public class Party{
 			}
 		}
 		uIn = Integer.parseInt(kb.nextLine());
-		if(uIn>0 && uIn<this.numAlive()+1){
-			setActive(uIn-1);
-			System.out.printf("%s, I choose you!\n",party.get(uIn-1).getName());
+		if(uIn>0 && uIn<livingPokemon.size()+1){
+			setActive(livingPokemon.get(uIn-1));
+			System.out.printf("%s, I choose you!\n",this.currentPokemon().getName());
 		}
 		else{
+			//System.out.println("Invalid pokemon");
 			//Action if input is not linked to option
 		}
 	}
