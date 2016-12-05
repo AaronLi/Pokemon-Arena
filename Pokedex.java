@@ -23,6 +23,8 @@ public class Pokedex{
 		types.put("water",Pokemon.WATER);
 		types.put("fighting",Pokemon.FIGHTING);
 		types.put("electric",Pokemon.ELECTRIC);
+		types.put("normal",Pokemon.NORMAL);
+		types.put("psychic",Pokemon.PSYCHIC);
 		pkmnList = readPokemon(dataFile);
 	}
 	

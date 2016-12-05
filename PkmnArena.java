@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Random;
 public class PkmnArena{
 	
-	public static Pokedex pokedex = new Pokedex("pokemon.txt");
+	public static Pokedex pokedex = new Pokedex("allPokemon.txt");
 	public static final int SELECTING_ACTIVE = 0;
 	public static final int SELECTING_ACTION = 1;
 	public static final int PICKING_ATTACK = 2;
@@ -74,9 +74,12 @@ public class PkmnArena{
 					computerMove(computerParty,userParty);
 					if(userParty.currentPokemon().getHealth()<=0){
 						System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
+						System.out.println("Pick a new pokemon");
 						userParty.pickStarting();
 					}
-					phase = SELECTING_ACTION;
+					else{
+						phase = SELECTING_ACTION;//Don't know who's turn it is after your pokemon faints
+					}
 					computerParty.restAll();
 				break;
 			}

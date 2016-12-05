@@ -43,6 +43,7 @@ public class Party{
 	}
 	public static Party pickParty(Pokedex pokedex){
 		int picked;
+		String[] pokemonPickedWords = {"","second ","third ","fourth "};
 		Party userParty = new Party();
 		ArrayList<String> pickablePokemon = pokedex.pokemonNames();
 		ArrayList<Integer> pokemonNumbers = new ArrayList<Integer>();
@@ -52,7 +53,7 @@ public class Party{
 		
 		int numPicked = 0;
 		while(numPicked < 4){
-			System.out.println("Please pick a pokemon:\n");
+			System.out.println("Please pick a "+pokemonPickedWords[numPicked]+"pokemon:\n");
 			for(int i = 0;i<pickablePokemon.size(); i++){
 				if(i%4 == 0){
 					System.out.println();

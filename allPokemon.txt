@@ -1,0 +1,31 @@
+29
+Bulbasaur,40,leaf, ,fire,1,Leech Seed,20,20, 
+Ivysaur,60,leaf, ,fire,2,Vine Whip,30,20, ,Poisonpowder,30,20,wild storm
+Venusaur,100,leaf, ,fire,1,Solarbeam,40,60,wild storm
+Charmander,50,fire, ,water,2,Scratch,10,10, ,Ember,20,30,disable
+Charmeleon,80,fire, ,water,2,Slash,30,30, ,Flamethrower,30,50,disable
+Charizard,120,fire,fighting,1,Fire Spin,40,100,wild storm
+Squirtle,40,water, ,electric,2,Bubble,10,10, ,Withdraw,20,0,recharge
+Wartortle,70,water, ,electric,2,Withdraw,20,0,recharge,Bite,30,40, 
+Blastoise,100,water, ,electric,1,Hydro Pump,30,40,wild storm
+Caterpie,40,leaf, ,fire,1,String Shot,10,10,stun
+Metapod,70,leaf, ,fire,2,Stiffen,20,0,disable,Stun Spore,20,20,stun
+Butterfree,70,leaf,fighting,fire,2,Whirlwind,20,20,stun,Mega Drain,40,40,recharge
+Weedle,40,leaf, ,fire,1,Poison Sting,10,10,wild storm
+Kakuna,80,leaf, ,fire,2Stiffen,20,0,disable,Poisonpowder,20,20,wild storm
+Beedrill,80,leaf,fighting,fire,2,Twinneedle,30,30,wild storm,Poison Sting,30,40,wild storm
+Pidgey,40,normal,fighting,electric,1,Whirlwind,20,10,stun
+Pidgeotto,60,normal,fighting,electric,1,Whirlwind,20,20,stun,Mirror Move,10,10,recharge
+Pidgeot,80,normal,fighting,electric,2,Wing Attack,20,20, ,Hurricane,30,30,wild storm
+Rattata,30,normal,psychic,fighting,1,Bite,10,20, 
+Spearow,50,normal,fighting,electric,2,Peck,10,10, ,Mirror Move,10,10,recharge
+Fearow,70,normal,fighting,electric,2,Agility,30,20,stun,Drill Peck,40,40, 
+Ekans,40,leaf, ,psychic,2,Spit Poison,10,10,wild storm,Wrap,20,20,stun
+Arbok,60,leaf, ,psychic,2,Terror Strike,10,10,stun,Poison Fang,30,20,wild storm
+Pikachu,40,electric, ,earth,2,Gnaw,10,10, ,Thunder Jolt,20,30,wild card
+Raichu,80,electric, ,earth,2,Agility,30,20,stun,Thunder,40,60,wild card
+Sandshrew,40,earth,electric,leaf,1,Sand-attack,10,10,disable
+Sandslash,70,earth,electric,leaf,2,Slash,20,20, ,Fury Swipes,20,20,wild storm
+Nidoran(F),60,leaf, ,psychic,2,Fury Swipes,10,10,wild storm,Call For Family,20,10,stun
+Nidorina,70,leaf, ,psychic,2,Supersonic,10,10,stun,Double Kick,30,30,wild storm
+Nidoqueen,90,leaf, ,psychic,2,Boyfriends,20,20,wild storm,Mega Punch,40,50, 

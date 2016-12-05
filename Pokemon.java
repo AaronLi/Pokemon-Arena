@@ -20,6 +20,8 @@ public class Pokemon{
 	public static final int WATER = 4;
 	public static final int FIGHTING = 5;
 	public static final int ELECTRIC = 6;
+	public static final int NORMAL = 7;
+	public static final int PSYCHIC = 8;
 	public static final String[] displayTypes = {"None","Earth","Fire","Grass","Water","Fighting","Electric"};
 	
 	private static final int NAME = 0;
