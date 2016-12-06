@@ -22,7 +22,7 @@ public class Pokemon{
 	public static final int ELECTRIC = 6;
 	public static final int NORMAL = 7;
 	public static final int PSYCHIC = 8;
-	public static final String[] displayTypes = {"None","Earth","Fire","Grass","Water","Fighting","Electric"};
+	public static final String[] displayTypes = {"None","Earth","Fire","Grass","Water","Fighting","Electric","Normal","Psychic"};
 	
 	private static final int NAME = 0;
 	private static final int HEALTH = 1;
@@ -178,12 +178,7 @@ public class Pokemon{
 
 
 	public String toString(){
-		String sOut = "";//Change out with stringf version
-		sOut+=name+"\nHP: "+hp+"\nEnergy: "+energy+"\nType: "+displayTypes[type]+"\nResistance: "+displayTypes[resistance]+"\nWeakness: "+displayTypes[weakness]+"\nStunned: "+debuffs[0]+"\nDisabled: "+debuffs[1]+"\n\n";
-		for(String moveName : moves.keySet()){
-			sOut+=moves.get(moveName).toString()+"\n\n";
-		}
-		return sOut;
+		return String.format("%-15s HP: %3d NRG: %2d TYP: %8s RST: %8s WKS: %8s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,hp,energy,displayTypes[type],displayTypes[resistance],displayTypes[weakness]);
 	}
 	
 	public boolean equals(Object obj){

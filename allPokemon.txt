@@ -1,18 +1,18 @@
-29
+150
 Bulbasaur,40,leaf, ,fire,1,Leech Seed,20,20, 
 Ivysaur,60,leaf, ,fire,2,Vine Whip,30,20, ,Poisonpowder,30,20,wild storm
 Venusaur,100,leaf, ,fire,1,Solarbeam,40,60,wild storm
 Charmander,50,fire, ,water,2,Scratch,10,10, ,Ember,20,30,disable
 Charmeleon,80,fire, ,water,2,Slash,30,30, ,Flamethrower,30,50,disable
-Charizard,120,fire,fighting,1,Fire Spin,40,100,wild storm
-Squirtle,40,water, ,electric,2,Bubble,10,10, ,Withdraw,20,0,recharge
+Charizard,120,fire,fighting,water,1,Fire Spin,40,50,wild storm
+Squirtle,40,water, ,electric,2,Bubble,10,10, ,Withdraw,20,0,disable
 Wartortle,70,water, ,electric,2,Withdraw,20,0,recharge,Bite,30,40, 
 Blastoise,100,water, ,electric,1,Hydro Pump,30,40,wild storm
 Caterpie,40,leaf, ,fire,1,String Shot,10,10,stun
 Metapod,70,leaf, ,fire,2,Stiffen,20,0,disable,Stun Spore,20,20,stun
 Butterfree,70,leaf,fighting,fire,2,Whirlwind,20,20,stun,Mega Drain,40,40,recharge
 Weedle,40,leaf, ,fire,1,Poison Sting,10,10,wild storm
-Kakuna,80,leaf, ,fire,2Stiffen,20,0,disable,Poisonpowder,20,20,wild storm
+Kakuna,80,leaf, ,fire,2,Stiffen,20,0,disable,Poisonpowder,20,20,wild storm
 Beedrill,80,leaf,fighting,fire,2,Twinneedle,30,30,wild storm,Poison Sting,30,40,wild storm
 Pidgey,40,normal,fighting,electric,1,Whirlwind,20,10,stun
 Pidgeotto,60,normal,fighting,electric,1,Whirlwind,20,20,stun,Mirror Move,10,10,recharge
@@ -29,3 +29,8 @@ Sandslash,70,earth,electric,leaf,2,Slash,20,20, ,Fury Swipes,20,20,wild storm
 Nidoran(F),60,leaf, ,psychic,2,Fury Swipes,10,10,wild storm,Call For Family,20,10,stun
 Nidorina,70,leaf, ,psychic,2,Supersonic,10,10,stun,Double Kick,30,30,wild storm
 Nidoqueen,90,leaf, ,psychic,2,Boyfriends,20,20,wild storm,Mega Punch,40,50, 
+Nidoran(M),40,leaf, ,psychic,1,Horn Hazard,10,30,wild card
+Nidorino,60,leaf, ,psychic,2,Double Kick,30,30,wild storm,Horn Drill,40,50, 
+Nidoking,90,leaf, ,psychic,2,Thrash,30,20,wild storm,Toxic,30,40,wild storm
+Clefairy,40,normal,psychic,fighting,1,Sing,10,10,stun
+Clefable,70,normal,psychic,fighting,1,Sing,10,10,stun

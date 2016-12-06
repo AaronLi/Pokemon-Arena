@@ -33,9 +33,7 @@ public class Attack{
 		return attackName;
 	}
 	public String toString(){
-		String sOut = "";
-		sOut += attackName+":\n\tEnergy Cost: "+energyCost+"\n\tDamage: "+damage+"\n\tSpecial: "+specialDisplay[special];
-		return sOut;
+		return String.format("%-15s CST: %3d DMG: %3d SPL: %-10s",attackName,energyCost,damage,specialDisplay[special]);
 	}
 	
 }

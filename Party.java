@@ -43,6 +43,7 @@ public class Party{
 	}
 	public static Party pickParty(Pokedex pokedex){
 		int picked;
+		String uIn;
 		String[] pokemonPickedWords = {"","second ","third ","fourth "};
 		Party userParty = new Party();
 		ArrayList<String> pickablePokemon = pokedex.pokemonNames();
@@ -54,22 +55,41 @@ public class Party{
 		int numPicked = 0;
 		while(numPicked < 4){
 			System.out.println("Please pick a "+pokemonPickedWords[numPicked]+"pokemon:\n");
-			for(int i = 0;i<pickablePokemon.size(); i++){
-				if(i%4 == 0){
-					System.out.println();
+			
+			if(PkmnArena.options[PkmnArena.POKEMON_DETAILS]){
+				System.out.println("s. Simple");
+				for(int i = 0;i<pickablePokemon.size();i++){
+					System.out.printf("%2d. %s\n",i+1,pokedex.getPokemon(pokemonNumbers.get(i)));
 				}
-				System.out.printf("%2d. %-10s ",i+1,pickablePokemon.get(i));
-			}
-			System.out.println();
-			picked = Integer.parseInt(kb.nextLine());
-			if (0<picked && picked < pickablePokemon.size()+1){
-				userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked-1)));
-				pickablePokemon.remove(picked-1);
-				pokemonNumbers.remove(picked-1);
-				numPicked++;
 			}
 			else{
-				System.out.println("Invalid Number");
+				System.out.println("d. Details");
+				for(int i = 0;i<pickablePokemon.size(); i++){
+					if(i%4 == 0){
+						System.out.println();
+					}
+					System.out.printf("%2d. %-10s ",i+1,pickablePokemon.get(i));
+				}	
+			}
+			System.out.println();
+			uIn = kb.nextLine();
+			if(uIn.equals("d")){
+				PkmnArena.options[PkmnArena.POKEMON_DETAILS] = true;
+			}
+			else if(uIn.equals("s")){
+				PkmnArena.options[PkmnArena.POKEMON_DETAILS] = false;
+			}
+			else{
+				picked = Integer.parseInt(uIn);
+				if (0<picked && picked < pickablePokemon.size()+1){
+					userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked-1)));
+					pickablePokemon.remove(picked-1);
+					pokemonNumbers.remove(picked-1);
+					numPicked++;
+				}
+				else{
+					System.out.println("Invalid Number");
+				}
 			}
 		}
 		return userParty;
@@ -128,7 +148,7 @@ public class Party{
 		for(int i = 0;i<party.size();i++){
 			if(party.get(i).getHealth()>0 && active != i){
 				livingPokemon.add(new Integer(i));
-				System.out.printf("%d. %s\n",livingPokemon.size(),party.get(i).getName());
+				System.out.printf("%d. %s\n",livingPokemon.size(),PkmnArena.options[PkmnArena.POKEMON_DETAILS]?party.get(i).getName():party.get(i));
 			}
 		}
 		uIn = Integer.parseInt(kb.nextLine());
@@ -143,24 +163,27 @@ public class Party{
 		}
 		return nextPhase;
 	}
-	public void pickStarting(){
+	public int pickStarting(){
 		int uIn = 0;
+		int nextPhase = PkmnArena.SELECTING_ACTIVE;
 		ArrayList<Integer> livingPokemon =  new ArrayList<Integer>();
 		for(int i = 0;i<party.size();i++){
 			if(party.get(i).getHealth()>0 && active != i){
 				livingPokemon.add(new Integer(i));
-				System.out.printf("%d. %s\n",livingPokemon.size(),party.get(i).getName());
+				System.out.printf("%d. %s\n",livingPokemon.size(),PkmnArena.options[PkmnArena.POKEMON_DETAILS]?party.get(i):party.get(i).getName());
 			}
 		}
 		uIn = Integer.parseInt(kb.nextLine());
 		if(uIn>0 && uIn<livingPokemon.size()+1){
 			setActive(livingPokemon.get(uIn-1));
 			System.out.printf("%s, I choose you!\n",this.currentPokemon().getName());
+			nextPhase = PkmnArena.rand.nextBoolean()?PkmnArena.SELECTING_ACTION : PkmnArena.COMPUTER_TURN;
 		}
 		else{
 			//System.out.println("Invalid pokemon");
 			//Action if input is not linked to option
 		}
+		return nextPhase;
 	}
 	public int getActiveIndex(){
 		return active;
