@@ -30,33 +30,37 @@ public class PkmnArena{
 	private static boolean running = true;
 	
 	public static void main(String[]args){
-		while(running){
-			switch(phase){
-				case SELECTING_ACTIVE:
-					System.out.println("Pick a starting pokemon.");
-					phase = userParty.pickStarting();
-				break;
-				case SELECTING_ACTION:
-					pickNextAction();
-				break;
-				case COMPUTER_TURN:
-					//Computer
-					userParty.restAll();
-					System.out.println("-----COMPUTER PHASE -----");
-					computerMove(computerParty,userParty);
-					if(userParty.currentPokemon().getHealth()<=0){
-						System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
-						System.out.println("Pick a new pokemon");
-						userParty.pickStarting();
-					}
-					else{
-						phase = SELECTING_ACTION;//Don't know who's turn it is after your pokemon faints
-					}
-					computerParty.restAll();
-				break;
-				case OPTIONS:
-					phase = changeOptions();
+		pickActive();
+		battle();
+	}
+	
+	
+	public static void pickActive(){
+		System.out.println("Pick a starting pokemon.");
+		phase = userParty.pickStarting();
+	}
+	
+	
+	public static void changeOptions(){
+		int uIn = -1;
+		while(uIn != 0){
+			System.out.println("0. Back\nToggle...\n1. Pokemon Details "+(options[POKEMON_DETAILS]?"[ON]":"[OFF]")+"\n2. Attack Details"+(options[ATTACK_DETAILS]?"[ON]":"[OFF]")+"\n3. Attack Result Details"+(options[RESULT_DETAILS]?"[ON]":"[OFF]"));
+			uIn = Integer.parseInt(kb.nextLine());
+			if(uIn>0 && uIn <=3){
+					options[uIn-1] = !options[uIn-1];
+					System.out.printf("%s has been turned %s\n",optionNames[uIn-1],options[uIn-1]?"ON":"OFF");
 			}
+		}
+	}
+	
+	
+	public static void battle(){
+		if(rand.nextBoolean()){
+			computerTurn();
+		}
+		while(true){
+			pickNextAction();
+			computerTurn();
 			if(computerParty.numAlive()==0){
 				System.out.println("You are Trainer Supreme!");
 				break;
@@ -67,30 +71,6 @@ public class PkmnArena{
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	public static int changeOptions(){
-		int result = OPTIONS;
-		System.out.println("0. Back\nToggle...\n1. Pokemon Details "+(options[POKEMON_DETAILS]?"[ON]":"[OFF]")+"\n2. Attack Details"+(options[ATTACK_DETAILS]?"[ON]":"[OFF]")+"\n3. Attack Result Details"+(options[RESULT_DETAILS]?"[ON]":"[OFF]"));
-		int uIn = Integer.parseInt(kb.nextLine());
-		if(uIn>=0 && uIn <=3){
-			if(uIn == 0){
-				result = SELECTING_ACTION;
-			}
-			else{
-				options[uIn-1] = !options[uIn-1];
-				System.out.printf("%s has been turned %s\n",optionNames[uIn-1],options[uIn-1]?"ON":"OFF");
-			}
-		}
-		return result;
-	}
-	
-	
-	
-	
 	
 	public static int pickAttack(Pokemon attacking, Pokemon defending){
 		int nextPhase = SELECTING_ACTION;
@@ -140,6 +120,7 @@ public class PkmnArena{
 	
 	
 	public static void pickNextAction(){
+		boolean pickingAction = true;
 		System.out.println("-----USER PHASE -----");
 		if(userParty.currentPokemon().getStun()){
 			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
@@ -147,38 +128,59 @@ public class PkmnArena{
 			phase = COMPUTER_TURN;
 		}
 		else{
-			System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
-			uIn = Integer.parseInt(kb.nextLine());
-			if(uIn>0&&uIn<5){
-				if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
-					System.out.println("Not enough energy for any attacks!");
-				}
-				else if(uIn == 4){
-					phase = changeOptions();
-				}
-				else{
-					System.out.println(uIn);
-					switch(uIn+1){
-						case PICKING_ATTACK:
-							phase = pickAttack(userParty.currentPokemon(),computerParty.currentPokemon());
-						break;
-						case RETREAT:
-							System.out.println("Pick a replacement pokemon.");
-							phase = userParty.pickActive(); 
-						break;
-						case PASS:
-							phase = COMPUTER_TURN;
-						break;
+			while(pickingAction){
+				System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
+				uIn = Integer.parseInt(kb.nextLine());
+				if(uIn>0&&uIn<5){
+					if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
+						System.out.println("Not enough energy for any attacks!");
+					}
+					else if(uIn == 4){
+						changeOptions();
+					}
+					else{
+						System.out.println(uIn);//REMOVE THIS
+						switch(uIn+1){
+							case PICKING_ATTACK:
+								if(pickAttack(userParty.currentPokemon(),computerParty.currentPokemon()) == COMPUTER_TURN){
+									pickingAction = false;
+								}
+							break;
+							case RETREAT:
+								System.out.println("Pick a replacement pokemon.");
+								if(userParty.pickActive() == COMPUTER_TURN){
+									pickingAction = false;
+								} 
+							break;
+							case PASS:
+								pickingAction = false;
+							break;
+							
+						}
 					}
 				}
-			}
-			else{
-				//Action if input is not linked to option
+				else{
+					//Action if input is not linked to option
+				}
 			}
 		}
 	}
 	
-	
+	public static void computerTurn(){
+		//Computer
+		userParty.restAll();
+		System.out.println("-----COMPUTER PHASE -----");
+		computerMove(computerParty,userParty);
+		if(userParty.currentPokemon().getHealth()<=0){
+			System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
+			System.out.println("Pick a new pokemon");
+			userParty.pickActive();
+		}
+		else{
+			phase = SELECTING_ACTION;//Don't know who's turn it is after your pokemon faints
+		}
+		computerParty.restAll();
+	}
 	
 	
 	

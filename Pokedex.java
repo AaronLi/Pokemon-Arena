@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 public class Pokedex{
 	
-	
 	public static HashMap<String,Integer> types = new HashMap<String,Integer>();
 	private ArrayList<Pokemon>pkmnList = new ArrayList<Pokemon>();
 	

@@ -46,7 +46,6 @@ public class Pokemon{
 		name = pokeInfo[NAME];
 		hp = Integer.parseInt(pokeInfo[HEALTH]);
 		maxHp = Integer.parseInt(pokeInfo[HEALTH]);
-		System.out.println(pokeInfo[TYPE]+" "+pokeInfo[RESISTANCE]+" "+pokeInfo[WEAKNESS]);
 		type = Pokedex.types.get(pokeInfo[TYPE]);
 		resistance = Pokedex.types.get(pokeInfo[RESISTANCE]);
 		weakness = Pokedex.types.get(pokeInfo[WEAKNESS]);
@@ -188,7 +187,12 @@ public class Pokemon{
 
 
 	public String toString(){
-		return String.format("%-15s HP: %3d NRG: %2d TYP: %8s RST: %8s WKS: %8s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,hp,energy,displayTypes[type],displayTypes[resistance],displayTypes[weakness]);
+		String attackString = "";
+		String[] atNames = this.attacks();
+		for(int i =0; i<atNames.length;i++){
+			attackString += String.format("MOV %d: %-13s ",i+1,atNames[i]);
+		}
+		return String.format("%-15s HP: %3d/%-3d NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,hp,maxHp,energy,displayTypes[type],displayTypes[resistance],displayTypes[weakness],attackString);
 	}
 	
 	public boolean equals(Object obj){

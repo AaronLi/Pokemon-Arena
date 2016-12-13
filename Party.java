@@ -41,7 +41,9 @@ public class Party{
 	}
 	public void healAll(){
 		for(Pokemon pkmn:party){
-			pkmn.heal(20);
+			if(pkmn.getHealth()>0){
+				pkmn.heal(20);
+			}
 		}
 	}
 	public void attack(Party enemyParty){
@@ -147,7 +149,7 @@ public class Party{
 		for(int i = 0;i<party.size();i++){
 			if(party.get(i).getHealth()>0 && active != i){
 				livingPokemon.add(new Integer(i));
-				System.out.printf("%d. %s\n",livingPokemon.size(),PkmnArena.options[PkmnArena.POKEMON_DETAILS]?party.get(i).getName():party.get(i));
+				System.out.printf("%d. %s\n",livingPokemon.size(),PkmnArena.options[PkmnArena.POKEMON_DETAILS]?party.get(i):party.get(i).getName());
 			}
 		}
 		uIn = Integer.parseInt(kb.nextLine());
