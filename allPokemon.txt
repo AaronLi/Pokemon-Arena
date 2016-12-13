@@ -1,5 +1,5 @@
 150
-Bulbasaur,40,leaf, ,fire,1,Leech Seed,20,20, 
+Bulbasaur,40,leaf, ,fire,1,Leech Seed,20,10,heal
 Ivysaur,60,leaf, ,fire,2,Vine Whip,30,20, ,Poisonpowder,30,20,wild storm
 Venusaur,100,leaf, ,fire,1,Solarbeam,40,60,wild storm
 Charmander,50,fire, ,water,2,Scratch,10,10, ,Ember,20,30,disable
@@ -10,7 +10,7 @@ Wartortle,70,water, ,electric,2,Withdraw,20,0,recharge,Bite,30,40,
 Blastoise,100,water, ,electric,1,Hydro Pump,30,40,wild storm
 Caterpie,40,leaf, ,fire,1,String Shot,10,10,stun
 Metapod,70,leaf, ,fire,2,Stiffen,20,0,disable,Stun Spore,20,20,stun
-Butterfree,70,leaf,fighting,fire,2,Whirlwind,20,20,stun,Mega Drain,40,40,recharge
+Butterfree,70,leaf,fighting,fire,2,Whirlwind,20,20,stun,Mega Drain,40,40,heal
 Weedle,40,leaf, ,fire,1,Poison Sting,10,10,wild storm
 Kakuna,80,leaf, ,fire,2,Stiffen,20,0,disable,Poisonpowder,20,20,wild storm
 Beedrill,80,leaf,fighting,fire,2,Twinneedle,30,30,wild storm,Poison Sting,30,40,wild storm
@@ -34,3 +34,36 @@ Nidorino,60,leaf, ,psychic,2,Double Kick,30,30,wild storm,Horn Drill,40,50,
 Nidoking,90,leaf, ,psychic,2,Thrash,30,20,wild storm,Toxic,30,40,wild storm
 Clefairy,40,normal,psychic,fighting,1,Sing,10,10,stun
 Clefable,70,normal,psychic,fighting,1,Sing,10,10,stun
+Vulpix,50,fire, ,water,1,Confuse Ray,20,20,10
+Ninetales,80,fire, ,water,2,Lure,20,10,stun,Fire Blast,40,40,wild storm
+Jigglypuff,60,normal,psychic,fighting,2,Lullaby,10,10,stun,Pound,20,20, 
+Wigglytuff,80,normal,psychic,fighting,2,Lullaby,10,10,stun,Do the Wave,30,10,wild storm
+Zubat,40,leaf,fighting,psychic,2,Supersonic,20,0,disable,Leech Life,20,10,recharge
+Golbat,60,leaf,fighting,psychic,2,Wing Attack,30,30, ,Leech Life,30,20,recharge
+Oddish,50,leaf, ,fire,2,Stun Spore,10,10,stun,Sprout,20,10,recharge
+Gloom,60,leaf, ,fire,2,Poisonpowder,10,10,wild storm,Foul Odor,20,20,disable
+Vileplume,80,leaf, ,fire,1,Petal Dance,30,40,wild storm
+Paras,40,leaf, ,fire,2,Scratch,20,20, ,Spore,20,10,stun
+Parasect,60,leaf, ,fire,2,Spore,20,10,stun,Slash,30,30, 
+Venonat,40,leaf, ,fire,2,Stun Spore,10,10,stun,Leech Life,20,10,heal
+Venomoth,70,leaf,fighting,fire,1,Venom Powder,20,10,stun
+Diglett,30,fighting,electric,leaf,2,Dig,10,10, ,Mud Slap,20,30, 
+Dugtrio,70,fighting,electric,leaf,2,Slash,30,40, ,Earthquake,40,70,disable
+Meowth,50,normal,psychic,fighting,1,Pay Day,20,10,recharge
+Persian,70,normal,psychic,fighting,2,Scratch,20,20, ,Pounce,30,30,stun
+Psyduck,50,water, ,electric,2,Headache,10,10,stun,Fury Swipes,10,10,wild storm
+Golduck,70,water, ,electric,2,Psyshock,10,10,stun,Hyper Beam,30,20,wild storm
+Mankey,30,fighting, ,psychic,1,Scratch,10,10, 
+Primeape,70,fighting, ,psychic,2,Fury Swipes,20,20,wild storm,Tantrum,50,50,wild card
+Growlithe,60,fire, ,water,1,Flare,20,20, 
+Arcanine,100,fire, ,water,2,Flamethrower,30,50,wild card,Take Down,40,80,stun
+Poliwag,40,water, ,leaf,1,Water Gun,10,10,wild card
+Poliwhirl,60,water, ,leaf,2,Amnesia,20,10,stun,Doubleslap,30,30,wild storm
+Poliwrath,90,water, ,leaf,2,Water Gun,30,30,wild storm,Whirlpool,40,40,stun
+Abra,30,psychic, ,psychic,1,Psyshock,10,10,stun
+Kadabra,60,psychic, ,psychic,2,Recover,10,10,recharge,Super Psy,30,50, 
+Alakazam,80,psychic, ,psychic,1,Confuse Ray,30,30,disable
+Machop,50,fighting, ,psychic,1,Low Kick,10,20, 
+Machoke,80,fighting, ,psychic,2,Karate Chop,30,50,wild storm,Submission,40,60,wild card
+Machamp,100,fighting, ,psychic,1,Seismic Toss,40,60, 
+Bellsprout,40,leaf, ,fire,2,Vine Whip,10,10, ,Call for Family,10,10,stun

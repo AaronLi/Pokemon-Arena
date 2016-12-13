@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Pokemon{
-	private int hp, type, resistance, weakness;
+	private int hp, maxHp, type, resistance, weakness;
 	private String name;
 	private boolean attacked = false;
 	
@@ -45,6 +45,8 @@ public class Pokemon{
 		String[] pokeInfo = infoIn.split(",");
 		name = pokeInfo[NAME];
 		hp = Integer.parseInt(pokeInfo[HEALTH]);
+		maxHp = Integer.parseInt(pokeInfo[HEALTH]);
+		System.out.println(pokeInfo[TYPE]+" "+pokeInfo[RESISTANCE]+" "+pokeInfo[WEAKNESS]);
 		type = Pokedex.types.get(pokeInfo[TYPE]);
 		resistance = Pokedex.types.get(pokeInfo[RESISTANCE]);
 		weakness = Pokedex.types.get(pokeInfo[WEAKNESS]);
@@ -65,6 +67,7 @@ public class Pokemon{
 	public Pokemon(Pokemon pkmnIn){
 		this.name = new String(pkmnIn.name);
 		this.hp = pkmnIn.hp;
+		this.maxHp = pkmnIn.maxHp;
 		this.type = pkmnIn.type;
 		this.resistance = pkmnIn.resistance;
 		this.weakness = pkmnIn.weakness;
@@ -90,7 +93,7 @@ public class Pokemon{
 		this.attacked = attacked;
 	}
 	public void setHealth(int health){
-		this.hp = Math.max(0,health);
+		this.hp = Math.min(Math.max(0,health),maxHp);
 	}
 	public void setDisable(boolean value){
 		debuffs[DISABLE_STATUS] = value;
@@ -104,10 +107,13 @@ public class Pokemon{
 	public void recharge(int amount){
 		energy = Math.min(50,energy+amount);
 	}
+	public void heal(int amount){
+		setHealth(this.hp+amount);
+	}
 	public String[] availableAttacks(){
 		ArrayList<String> possibleAttacks = new ArrayList<String>();
 		for(String atName : attacks()){
-			if(moves.get(atName).getCost() <= energy){//LEFT OFF HERE
+			if(moves.get(atName).getCost() <= energy){
 				possibleAttacks.add(atName);
 			}
 		}
@@ -157,6 +163,10 @@ public class Pokemon{
 				case Attack.RECHARGE:
 					System.out.printf("%s has recharged 20 energy\n",this.name);
 					recharge(20);
+				break;
+				case Attack.HEAL:
+					System.out.printf("%s has healed 20 health\n",this.name);
+					heal(20);
 				break;
 			}
 		}

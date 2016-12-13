@@ -10,7 +10,8 @@ public class Party{
 	public Party(Party partyIn){
 		this.party = partyIn.party;
 	}
-	public Party(){
+	public Party(int active){
+		this.active = active;
 	}
 	private static Scanner kb = new Scanner(System.in);
 	public void addPokemon(Pokemon pkmnIn){
@@ -38,6 +39,11 @@ public class Party{
 			}
 		}
 	}
+	public void healAll(){
+		for(Pokemon pkmn:party){
+			pkmn.heal(20);
+		}
+	}
 	public void attack(Party enemyParty){
 	
 	}
@@ -45,7 +51,7 @@ public class Party{
 		int picked;
 		String uIn;
 		String[] pokemonPickedWords = {"","second ","third ","fourth "};
-		Party userParty = new Party();
+		Party userParty = new Party(-1);
 		ArrayList<String> pickablePokemon = pokedex.pokemonNames();
 		ArrayList<Integer> pokemonNumbers = new ArrayList<Integer>();
 		for(int i = 0; i < pickablePokemon.size(); i++){
@@ -96,7 +102,7 @@ public class Party{
 	}
 	
 	public static Party computerParty(Pokedex pokedex, Party userPokemon){
-		Party computerParty = new Party();
+		Party computerParty = new Party(0);
 		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon();
 		remainingPokemon.removeAll(userPokemon.allMembers());
 		for(Pokemon pkmn : remainingPokemon){
@@ -104,13 +110,6 @@ public class Party{
 		}
 		return computerParty;
 	}
-	
-	/*public Party removeAll(Party toRemove){
-		Party toKeep = new Party(party);
-		for(int i = 0;i < toRemove.size();i++){
-			if(toKeep.contains(toRemove.party.get(i))
-		}
-	} */
 	
 	public ArrayList<String> partyNames(){
 		ArrayList<String> namesOut = new ArrayList<String>();

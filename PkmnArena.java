@@ -23,14 +23,13 @@ public class PkmnArena{
 	public static final int RESULT_DETAILS = 2;
 	
 	
+	public static Party userParty = Party.pickParty(pokedex);
+	public static Party computerParty = Party.computerParty(pokedex,userParty);
+	private	static int phase = 0;
+	private static int uIn;
+	private static boolean running = true;
+	
 	public static void main(String[]args){
-		int phase = 0;
-		int uIn;
-		Party userParty = Party.pickParty(pokedex);
-		Party computerParty = Party.computerParty(pokedex,userParty);
-		computerParty.setActive(0);
-		//System.out.println(userParty.toString());
-		boolean running = true;
 		while(running){
 			switch(phase){
 				case SELECTING_ACTIVE:
@@ -38,43 +37,7 @@ public class PkmnArena{
 					phase = userParty.pickStarting();
 				break;
 				case SELECTING_ACTION:
-					System.out.println("-----USER PHASE -----");
-					if(userParty.currentPokemon().getStun()){
-						System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
-						userParty.currentPokemon().setStun(false);
-						phase = COMPUTER_TURN;
-					}
-					else{
-						System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
-						uIn = Integer.parseInt(kb.nextLine());
-						if(uIn>0&&uIn<5){
-							if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
-								System.out.println("Not enough energy for any attacks!");
-							}
-							else if(uIn == 4){
-								phase = changeOptions();
-							}
-							else{
-								phase = 2+uIn-1;
-							}
-						}
-						else{
-							//Action if input is not linked to option
-						}
-					}
-				break;
-				case PICKING_ATTACK:
-					
-					phase = pickAttack(userParty.currentPokemon(),computerParty.currentPokemon());
-					//phase = COMPUTER_TURN;
-				break;
-				case RETREAT:
-					System.out.println("Pick a replacement pokemon.");
-					phase = userParty.pickActive(); 
-					//phase = COMPUTER_TURN;
-				break;
-				case PASS:
-					phase = COMPUTER_TURN;
+					pickNextAction();
 				break;
 				case COMPUTER_TURN:
 					//Computer
@@ -105,6 +68,10 @@ public class PkmnArena{
 		}
 	}
 	
+	
+	
+	
+	
 	public static int changeOptions(){
 		int result = OPTIONS;
 		System.out.println("0. Back\nToggle...\n1. Pokemon Details "+(options[POKEMON_DETAILS]?"[ON]":"[OFF]")+"\n2. Attack Details"+(options[ATTACK_DETAILS]?"[ON]":"[OFF]")+"\n3. Attack Result Details"+(options[RESULT_DETAILS]?"[ON]":"[OFF]"));
@@ -120,6 +87,11 @@ public class PkmnArena{
 		}
 		return result;
 	}
+	
+	
+	
+	
+	
 	public static int pickAttack(Pokemon attacking, Pokemon defending){
 		int nextPhase = SELECTING_ACTION;
 		String[] currentAttacks = attacking.availableAttacks();
@@ -163,6 +135,53 @@ public class PkmnArena{
 		}
 	return nextPhase;
 	}
+	
+	
+	
+	
+	public static void pickNextAction(){
+		System.out.println("-----USER PHASE -----");
+		if(userParty.currentPokemon().getStun()){
+			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
+			userParty.currentPokemon().setStun(false);
+			phase = COMPUTER_TURN;
+		}
+		else{
+			System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
+			uIn = Integer.parseInt(kb.nextLine());
+			if(uIn>0&&uIn<5){
+				if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
+					System.out.println("Not enough energy for any attacks!");
+				}
+				else if(uIn == 4){
+					phase = changeOptions();
+				}
+				else{
+					System.out.println(uIn);
+					switch(uIn+1){
+						case PICKING_ATTACK:
+							phase = pickAttack(userParty.currentPokemon(),computerParty.currentPokemon());
+						break;
+						case RETREAT:
+							System.out.println("Pick a replacement pokemon.");
+							phase = userParty.pickActive(); 
+						break;
+						case PASS:
+							phase = COMPUTER_TURN;
+						break;
+					}
+				}
+			}
+			else{
+				//Action if input is not linked to option
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	public static void computerMove(Party computerParty, Party userParty){
 		if(computerParty.currentPokemon().getHealth() >0){
 			String[] possibleAttacks = computerParty.currentPokemon().availableAttacks();

@@ -10,9 +10,10 @@ public class Attack{
 	public static final int WILD_STORM = 3;
 	public static final int DISABLE = 4;
 	public static final int RECHARGE = 5;
-
-	public static final String[] specials = {" ", "stun", "wild card", "wild storm", "disable", "recharge"};
-	public static final String[] specialDisplay = {"None", "Stun", "Wild Card", "Wild Storm", "Disable", "Recharge"};
+	public static final int HEAL = 6;
+	
+	public static final String[] specials = {" ", "stun", "wild card", "wild storm", "disable", "recharge","heal"};
+	public static final String[] specialDisplay = {"None", "Stun", "Wild Card", "Wild Storm", "Disable", "Recharge","Heal"};
 	
 	public Attack(String atName, int cost,int damage,int special){
 		this.attackName = atName;
