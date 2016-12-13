@@ -1,5 +1,10 @@
 //PkmnArena.java
 //Aaron Li
+
+
+//ADDTIONS:
+//Normal and Psychic types
+//Heal attack special
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;

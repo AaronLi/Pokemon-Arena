@@ -67,3 +67,85 @@ Machop,50,fighting, ,psychic,1,Low Kick,10,20,
 Machoke,80,fighting, ,psychic,2,Karate Chop,30,50,wild storm,Submission,40,60,wild card
 Machamp,100,fighting, ,psychic,1,Seismic Toss,40,60, 
 Bellsprout,40,leaf, ,fire,2,Vine Whip,10,10, ,Call for Family,10,10,stun
+Weepinbell,70,leaf, ,fire,2,Poisonpowder,10,10,wild storm,Razor Leaf,20,30, 
+Victreebel,80,leaf, ,fire,2,Lure,10,10,stun,Acid,20,20,wild storm
+Tentacool,30,water, ,electric,1,Acid,10,10, 
+Tentacruel,60,water, ,electric,2,Supersonic,10,10,stun,Jellyfish Sting,20,20,wild storm
+Geodude,50,fighting, ,leaf,1,Stone Barrage,20,10,wild storm
+Graveler,60,fighting, ,leaf,2,Harden,20,0,disable,Rock Throw,30,40, 
+Golem,80,fighting, ,leaf,2,Avalanche,40,60, ,Selfdestruct,50,200,wild card
+Ponyta,40,fire, ,water,2,Smash Kick,20,20, ,Flame Tail,20,30, 
+Rapidash,70,fire, ,water,2,Stomp,20,20,wild storm,Agility,30,30,disable
+Slowpoke,50,psychic, ,psychic,2,Spacing Out,10,0,disable,Scavenge,20,10,stun
+Slowbro,60,psychic, ,psychic,1,Psyshock,20,20,disable
+Magnemite,40,electric, ,fighting,2,Thunder Wave,10,10,stun,Selfdestruct,30,60,wild card
+Magneton,60,electric, ,fighting,2,Thunder Wave,30,30,stun,Selfdestruct,40,100,wild card
+Farfetch'd,50,normal,fighting,electric,2,Leek Slap,10,30,wild card,Pot Smash,30,30, 
+Doduo,50,normal,fighting,electric,1,Fury Attack,10,10,wild storm
+Dodrio,70,normal,fighting,electric,1,Rage,30,20,wild storm
+Seel,60,water, ,electric,1,Headbutt,10,10, 
+Dewgong,80,water, ,electric,2,Aurora Beam,30,50, ,Ice Beam,40,30,stun
+Grimer,50,leaf, ,psychic,2,Nasty Goo,10,10,wild storm,Minimize,10,10,disable
+Muk,70,leaf, ,psychic,1,Sludge,30,30,wild storm
+Shellder,30,water, ,electric,2,Supersonic,10,10,stun,Hide in Shell,10,0,disable
+Cloyster,50,water, ,electric,2,Clamp,20,30,stun,Spike Cannon,20,30,wild storm
+Gastly,30,psychic,fighting, ,2,Sleeping Gas,10,10,stun,Destiny Bond,20,10,disable
+Haunter,60,psychic,fighting, ,2,Hypnosis,10,10,stun,Dream Eater,20,50,stun
+Gengar,80,psychic,fighting, ,1,Dark Mind,30,30,disable
+Onix,90,fighting, ,leaf,2,Rock Throw,10,10, ,Harden,20,10,disable
+Drowzee,50,psychic, ,psychic,2,Pound,10,10, ,Confuse Ray,20,10,stun
+Hypno,90,psychic, ,psychic,2,Prophecy,10,10,stun,Dark Mind,30,30,disable
+Krabby,50,water, ,electric,2,Call for Family,10,10,disable,Iron Grip,20,20, 
+Kingler,60,water, ,electric,2,Flail,10,10,wild storm,Crabhammer,30,40, 
+Voltorb,40,electric, ,fighting,1,Tackle,10,10, 
+Electrode,80,electric, ,fighting,1,Electrick Shock,30,50, 
+Exeggcute,50,leaf, ,fire,2,Hypnosis,10,10,stun,Leech Seed,20,20,heal
+Exeggutor,80,leaf, ,fire,2,Teleport,10,10,stun,Big Eggsplosion,10,20,wild storm
+Cubone,40,fighting,electric,leaf,2,Snivel,10,10,disable,Rage,20,10,wild storm
+Marowak,60,fighting,electric,leaf,2,Bonemerang,20,30,wild storm,Call for Friend,30,10,disable
+Hitmonlee,60,fighting, ,psychic,2,Stretch Kick,20,10,disable,High Jump Kick,30,50, 
+Hitmonchan,70,fighting, ,psychic,2,Jab,10,20, ,Special Punch,30,40, 
+Lickitung,90,normal,psychic,fighting,2,Tongue Wrap,10,10,stun,Supersonic,20,20,stun
+Koffing,50,leaf, ,psychic,1,Foul Gas,20,10,stun
+Weezing,60,leaf, ,psychic,2,Smog,20,10,wild storm,Selfdestruct,30,70,wild storm
+Rhyhorn,70,fighting,electric,leaf,2,Leer,10,0,disable,Horn Attack,30,30, 
+Rhydon,100,fighting,electric,leaf,2,Horn Attack,30,30, ,Ram,40,40,wild storm
+Chansey,120,normal,psychic,fighting,2,Scrunch,20,10,heal,Double-edge,40,80, 
+Tangela,50,leaf, ,fire,2,Bind,20,20,stun,Poisonpowder,30,20,wild storm
+Kangashkhan,90,normal,psychic,fighting,2,Fetch,10,10,stun,Comet Punch,40,20,wild storm
+Horsea,40,water, ,electric,1,Smokescreen,10,10,disable
+Seadra,60,water, ,electric,2,Water Gun,20,10,wild storm,Agility,30,20,stun
+Goldeen,40,water, ,electric,1,Horn Attack,10,10, 
+Seaking,70,water, ,electric,2,Horn Attack,10,10, ,Waterfall,20,30, 
+Staryu,40,water, ,electric,1,Slap,10,20, 
+Starmie,60,water, ,electric,2,Recover,20,0,heal,Star Freeze,30,20,stun
+Mr. Mime,40,psychic, ,psychic,1,Meditate,20,10,wild storm
+Scyther,70,leaf,fighting,fire,2,Swords Dance,10,0,disable,Slash,30,30, 
+Jynx,70,psychic, ,psychic,2,Doubleslap,10,10,wild storm,Meditate,30,20,wild storm
+Electabuzz,70,electric, ,fighting,2,Thundershock,10,10,stun,Thunderpunch,20,30,wild storm
+Magmar,50,fire, ,water,2,Fire Punch,20,30, ,Flamethrower,30,50, 
+Pinsir,60,leaf, ,fire,2,Irongrip,20,20,stun,Guillotine,40,50, 
+Tauros,60,normal,psychic,fighting,2,Stomp,20,20, ,Rampage,30,20,wild storm
+Magikarp,30,water, ,electric,2,Tackle,10,10, ,Flail,10,10,wild storm
+Gyrados,100,water,fighting,leaf,2,Dragon Rage,30,50, ,Bubblebeam,40,40,stun
+Lapras,80,water, ,electric,2,Water Gun,10,10,wild storm,Confuse Ray,20,10,stun
+Ditto,50,normal,psychic,fighting,1,Transform,10,0,stun
+Eevee,50,normal,psychic,fighting,2,Tail Wag,10,0,stun,Quick Attack,20,10,wild storm
+Vaporeon,80,water, ,electric,2,Quick Attack,20,10,wild storm,Water Gun,30,20,wild storm,
+Jolteon,70,electric, ,fighting,2,Quick Attack,20,10,wild storm,Pin Missile,30,20,wild storm,
+Flareon,70,fire, ,water,2,Quick Attack,20,10,wild storm,Flamethrower,40,60,wild card
+Porygon,30,normal,psychic,fighting,2,Conversion 1,10,0,disable,Conversion 2,20,10,disable 
+Omanyte,40,water, ,leaf,1,water gun,10,10,wild storm
+Omastar,70,water, ,leaf,2,Water Gun,20,20,wild storm,Spike Cannon,30,30,wild storm
+Kabuto,30,fighting, ,leaf,1,scratch,10,10, 
+Kabutops,60,fighting, ,leaf,2,Sharp Sickle,20,30, ,Absorb,40,40,heal
+Aerodactyl,60,fighting,fighting,leaf,1,Wing Attack,30,30, 
+Snorlax,90,normal,psychic,fighting,1,Body Slam,40,30,stun
+Articuno,70,water,fighting, ,2,Freeze Dry,30,30,stun,Blizzard,40,50, 
+Zapdos,90,electric,fighting, ,2,Thunder,40,60,wild card,Thunderbolt,40,100, 
+Moltres,70,fire,fighting, ,2,Wildfire,10,10, ,Dive Bomb,40,80,wild card
+Dratini,40,normal,psychic, ,1,Pound,10,10, 
+Dragonair,80,normal,psychic, ,2,Slam,30,30,wild storm,Hyper Beam,40,20,disable
+Dragonite,100,normal,fighting, ,1,Slam,40,40,wild storm
+Mewtwo,60,psychic, ,psychic,2,Psychic,20,10,wild storm,Barrier,20,10,disable
+Mew,50,psychic, ,psychic,2,Psywave,10,10,wild storm,Devolution Beam,20,20, 
