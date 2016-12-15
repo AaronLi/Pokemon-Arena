@@ -4,7 +4,8 @@
 
 //ADDTIONS:
 //Normal and Psychic types
-//Heal attack special
+//Heal special
+//User and Computer both pick 6 pokemon(because 4 vs 147 is a bit unfair)
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class PkmnArena{
 	public static final int RETREAT = 3;
 	public static final int PASS = 4;
 	public static final int COMPUTER_TURN = 5;
-	public static final int OPTIONS = 6;
+	public static final int OPTIONS = 5;
 	public static Scanner kb = new Scanner(System.in);
 	public static final Random rand = new Random();
 	public static boolean[] options = {false,false,false}; // Pokemon Details, Attack Details, Health and energy results
@@ -33,6 +34,7 @@ public class PkmnArena{
 	private	static int phase = 0;
 	private static int uIn;
 	private static boolean running = true;
+	public static String botName = PkmnTools.enemyName();
 	
 	public static void main(String[]args){
 		pickActive();
@@ -41,8 +43,10 @@ public class PkmnArena{
 	
 	
 	public static void pickActive(){
-		System.out.println("Pick a starting pokemon.");
-		phase = userParty.pickStarting();
+		while(userParty.getActiveIndex()== -1){
+			System.out.println("Pick a starting pokemon.");
+			phase = userParty.pickStarting();
+		}
 	}
 	
 	
@@ -71,7 +75,7 @@ public class PkmnArena{
 				break;
 			}
 			else if(userParty.numAlive() == 0){
-				System.out.println("You lose...");
+				System.out.println("You have no available pokemon!\nYou lose...");
 				break;
 			}
 		}
@@ -108,7 +112,7 @@ public class PkmnArena{
 					System.out.printf("Your %s used %s!\n",attacking.getName(),currentAttacks[attackNumber-1]);
 					if(attacking.attack(defending,attacking.getAttack(currentAttacks[attackNumber-1])) && options[RESULT_DETAILS]){	
 						System.out.printf("Your %s now has %d energy\n",attacking.getName(),attacking.getEnergy());
-						System.out.printf("The opponent's %s now has %d health\n",defending.getName(),defending.getHealth());
+						System.out.printf("The %s's %s now has %d health\n",botName,defending.getName(),defending.getHealth());
 					}
 					nextPhase = COMPUTER_TURN;
 					break;
@@ -137,17 +141,12 @@ public class PkmnArena{
 				System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
 				uIn = Integer.parseInt(kb.nextLine());
 				if(uIn>0&&uIn<5){
-					if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
-						System.out.println("Not enough energy for any attacks!");
-					}
-					else if(uIn == 4){
-						changeOptions();
-					}
-					else{
-						System.out.println(uIn);//REMOVE THIS
 						switch(uIn+1){
 							case PICKING_ATTACK:
-								if(pickAttack(userParty.currentPokemon(),computerParty.currentPokemon()) == COMPUTER_TURN){
+								if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
+									System.out.println("Not enough energy for any attacks!"+(options[POKEMON_DETAILS]?String.format("(%s has %d energy)",userParty.currentPokemon().getName(),userParty.currentPokemon().getEnergy()):""));
+								}
+								else if(pickAttack(userParty.currentPokemon(),computerParty.currentPokemon()) == COMPUTER_TURN){
 									pickingAction = false;
 								}
 							break;
@@ -160,9 +159,11 @@ public class PkmnArena{
 							case PASS:
 								pickingAction = false;
 							break;
+							case OPTIONS:
+								changeOptions();
+							break;
 							
 						}
-					}
 				}
 				else{
 					//Action if input is not linked to option
@@ -174,15 +175,23 @@ public class PkmnArena{
 	public static void computerTurn(){
 		//Computer
 		userParty.restAll();
-		System.out.println("-----COMPUTER PHASE -----");
-		computerMove(computerParty,userParty);
 		if(userParty.currentPokemon().getHealth()<=0){
 			System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
-			System.out.println("Pick a new pokemon");
-			userParty.pickActive();
+			if(userParty.numAlive()>0){
+				System.out.println("Pick a new pokemon");
+				userParty.pickActive();
+			}
+		}
+		else if(userParty.numAlive() == 0){
+			// Thing that happens when the user has no pokemon anymore
+		}
+		else if(computerParty.numAlive()>0){
+			System.out.println(String.format("-----%s's turn!-----",botName));
+			computerMove(computerParty,userParty);
+			phase = SELECTING_ACTION;
 		}
 		else{
-			phase = SELECTING_ACTION;//Don't know who's turn it is after your pokemon faints
+			System.out.printf("%s has no more pokemon!\n",botName);
 		}
 		computerParty.restAll();
 	}
@@ -193,29 +202,30 @@ public class PkmnArena{
 		if(computerParty.currentPokemon().getHealth() >0){
 			String[] possibleAttacks = computerParty.currentPokemon().availableAttacks();
 			if(computerParty.currentPokemon().getStun()){
-				System.out.printf("%s is stunned! The computer's turn has been skipped.\n",computerParty.currentPokemon().getName());
+				System.out.printf("%s is stunned! The %s's turn has been skipped.\n",computerParty.currentPokemon().getName(),botName);
 				computerParty.currentPokemon().setStun(false);
 			}
 			else if(possibleAttacks.length > 0){
 				Pokemon attackingPokemon = userParty.currentPokemon();
 				Attack plannedAttack = computerParty.currentPokemon().getAttack(possibleAttacks[rand.nextInt(possibleAttacks.length)]);
-				System.out.printf("The opponnent %s used %s!\n",computerParty.currentPokemon().getName(),plannedAttack.getName());
+				System.out.printf("%s's %s used %s!\n",botName,computerParty.currentPokemon().getName(),plannedAttack.getName());
 				if(computerParty.currentPokemon().attack(attackingPokemon,plannedAttack)&&options[RESULT_DETAILS]){
-					System.out.printf("The opponent's %s now has %d energy\n",computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
+					System.out.printf("%s's %s now has %d energy\n",botName,computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
 					System.out.printf("Your %s now has %d health\n",userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
 				}
 			}
 			else{
-				System.out.println("The opponent passed");
+				System.out.println(String.format("%s skipped their turn",botName));
 			}
 		}
-		else if(computerParty.getActiveIndex() < computerParty.size()){
+		else if(computerParty.currentPokemon().getHealth() == 0){
+			userParty.healAll();
 			String oldPokemonName = computerParty.currentPokemon().getName();
 			computerParty.setActive(computerParty.getActiveIndex()+1);
 			System.out.printf("%s has fainted, next choice: %s!\n",oldPokemonName,computerParty.currentPokemon().getName());//lisa recommended this
 		}
 		else{
-			//You Win!
+			
 		}
 	}
 }

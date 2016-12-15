@@ -18,6 +18,7 @@ Pidgey,40,normal,fighting,electric,1,Whirlwind,20,10,stun
 Pidgeotto,60,normal,fighting,electric,1,Whirlwind,20,20,stun,Mirror Move,10,10,recharge
 Pidgeot,80,normal,fighting,electric,2,Wing Attack,20,20, ,Hurricane,30,30,wild storm
 Rattata,30,normal,psychic,fighting,1,Bite,10,20, 
+Raticate,60,normal,psychic,fighting,2,Bite,10,20, ,Super Fang,30,30,wild storm
 Spearow,50,normal,fighting,electric,2,Peck,10,10, ,Mirror Move,10,10,recharge
 Fearow,70,normal,fighting,electric,2,Agility,30,20,stun,Drill Peck,40,40, 
 Ekans,40,leaf, ,psychic,2,Spit Poison,10,10,wild storm,Wrap,20,20,stun
@@ -129,13 +130,13 @@ Tauros,60,normal,psychic,fighting,2,Stomp,20,20, ,Rampage,30,20,wild storm
 Magikarp,30,water, ,electric,2,Tackle,10,10, ,Flail,10,10,wild storm
 Gyrados,100,water,fighting,leaf,2,Dragon Rage,30,50, ,Bubblebeam,40,40,stun
 Lapras,80,water, ,electric,2,Water Gun,10,10,wild storm,Confuse Ray,20,10,stun
-Ditto,50,normal,psychic,fighting,1,Transform,10,0,stun
+Ditto,50,normal,psychic,fighting,1,Transform,10,10,stun
 Eevee,50,normal,psychic,fighting,2,Tail Wag,10,0,stun,Quick Attack,20,10,wild storm
 Vaporeon,80,water, ,electric,2,Quick Attack,20,10,wild storm,Water Gun,30,20,wild storm,
 Jolteon,70,electric, ,fighting,2,Quick Attack,20,10,wild storm,Pin Missile,30,20,wild storm,
 Flareon,70,fire, ,water,2,Quick Attack,20,10,wild storm,Flamethrower,40,60,wild card
 Porygon,30,normal,psychic,fighting,2,Conversion 1,10,0,disable,Conversion 2,20,10,disable 
-Omanyte,40,water, ,leaf,1,water gun,10,10,wild storm
+Omanyte,40,water, ,leaf,1,Water Gun,10,10,wild storm
 Omastar,70,water, ,leaf,2,Water Gun,20,20,wild storm,Spike Cannon,30,30,wild storm
 Kabuto,30,fighting, ,leaf,1,scratch,10,10, 
 Kabutops,60,fighting, ,leaf,2,Sharp Sickle,20,30, ,Absorb,40,40,heal

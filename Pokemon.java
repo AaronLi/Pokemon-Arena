@@ -5,24 +5,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Pokemon{
-	private int hp, maxHp, type, resistance, weakness;
-	private String name;
+	private int hp, maxHp;
+	private String name, type, resistance, weakness;
 	private boolean attacked = false;
 	
 	private boolean[]debuffs = {false,false};
 	private int energy = 50;
 	private HashMap<String,Attack> moves = new HashMap<String,Attack>();
-	
-	public static final int NO_TYPE = 0;
-	public static final int EARTH = 1;
-	public static final int FIRE = 2;
-	public static final int LEAF = 3;
-	public static final int WATER = 4;
-	public static final int FIGHTING = 5;
-	public static final int ELECTRIC = 6;
-	public static final int NORMAL = 7;
-	public static final int PSYCHIC = 8;
-	public static final String[] displayTypes = {"None","Earth","Fire","Grass","Water","Fighting","Electric","Normal","Psychic"};
 	
 	private static final int NAME = 0;
 	private static final int HEALTH = 1;
@@ -46,9 +35,9 @@ public class Pokemon{
 		name = pokeInfo[NAME];
 		hp = Integer.parseInt(pokeInfo[HEALTH]);
 		maxHp = Integer.parseInt(pokeInfo[HEALTH]);
-		type = Pokedex.types.get(pokeInfo[TYPE]);
-		resistance = Pokedex.types.get(pokeInfo[RESISTANCE]);
-		weakness = Pokedex.types.get(pokeInfo[WEAKNESS]);
+		type = Character.toUpperCase(pokeInfo[TYPE].charAt(0))+pokeInfo[TYPE].substring(1);
+		resistance = Character.toUpperCase(pokeInfo[RESISTANCE].charAt(0))+pokeInfo[RESISTANCE].substring(1);
+		weakness = Character.toUpperCase(pokeInfo[WEAKNESS].charAt(0))+pokeInfo[WEAKNESS].substring(1);
 		numAttacks = Integer.parseInt(pokeInfo[NUM_ATTACKS]);
 		for(int i = ATTACKS_START; i<ATTACKS_START+(4*numAttacks); i+=4){
 			atName = pokeInfo[i+ATTACK_NAME];
@@ -127,11 +116,11 @@ public class Pokemon{
 				System.out.println("The attack failed...");
 			}
 			else{
-				if(this.type == target.weakness){
+				if(this.type.equals(target.weakness)){
 					damage*=2;
 					System.out.println("Super effective! x2 damage!");
 				}
-				else if(this.type == target.resistance){
+				else if(this.type.equals(target.resistance)){
 					damage/=2;
 					System.out.println("Not very effective... x1/2 damage");
 				}
@@ -192,7 +181,7 @@ public class Pokemon{
 		for(int i =0; i<atNames.length;i++){
 			attackString += String.format("MOV %d: %-13s ",i+1,atNames[i]);
 		}
-		return String.format("%-15s HP: %3d/%-3d NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,hp,maxHp,energy,displayTypes[type],displayTypes[resistance],displayTypes[weakness],attackString);
+		return String.format("%-15s HP: %3d/%-3d NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,hp,maxHp,energy,type,resistance,weakness,attackString);
 	}
 	
 	public boolean equals(Object obj){

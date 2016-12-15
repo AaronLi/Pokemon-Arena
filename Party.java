@@ -46,13 +46,11 @@ public class Party{
 			}
 		}
 	}
-	public void attack(Party enemyParty){
-	
-	}
 	public static Party pickParty(Pokedex pokedex){
 		int picked;
+		int partySize = 2; //RETURN TO 6 LATER
 		String uIn;
-		String[] pokemonPickedWords = {"","second ","third ","fourth "};
+		String[] pokemonPickedWords = {"","second ","third ","fourth ","fifth ","sixth ","sevent ","eighth ","ninth "}; // Probably won't use all but expansion is there
 		Party userParty = new Party(-1);
 		ArrayList<String> pickablePokemon = pokedex.pokemonNames();
 		ArrayList<Integer> pokemonNumbers = new ArrayList<Integer>();
@@ -61,7 +59,7 @@ public class Party{
 		}
 		
 		int numPicked = 0;
-		while(numPicked < 4){
+		while(numPicked < partySize){
 			System.out.println("Please pick a "+pokemonPickedWords[numPicked]+"pokemon:\n");
 			
 			if(PkmnArena.options[PkmnArena.POKEMON_DETAILS]){
@@ -76,7 +74,7 @@ public class Party{
 					if(i%4 == 0){
 						System.out.println();
 					}
-					System.out.printf("%2d. %-10s ",i+1,pickablePokemon.get(i));
+					System.out.printf("%3d. %-13s ",i+1,pickablePokemon.get(i));
 				}	
 			}
 			System.out.println();
@@ -105,10 +103,14 @@ public class Party{
 	
 	public static Party computerParty(Pokedex pokedex, Party userPokemon){
 		Party computerParty = new Party(0);
+		int computerPartySize = 2; //RETURN TO 6 LATER
+		int nextPokemon = 0;
 		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon();
 		remainingPokemon.removeAll(userPokemon.allMembers());
-		for(Pokemon pkmn : remainingPokemon){
-			computerParty.addPokemon(pkmn);
+		for(int i = 0; i< computerPartySize; i++){
+			nextPokemon = PkmnArena.rand.nextInt(remainingPokemon.size());
+			computerParty.addPokemon(remainingPokemon.get(nextPokemon));
+			remainingPokemon.remove(nextPokemon);
 		}
 		return computerParty;
 	}
@@ -165,7 +167,7 @@ public class Party{
 		return nextPhase;
 	}
 	public int pickStarting(){
-		int uIn = 0;
+		int uIn = -1;
 		int nextPhase = PkmnArena.SELECTING_ACTIVE;
 		ArrayList<Integer> livingPokemon =  new ArrayList<Integer>();
 		for(int i = 0;i<party.size();i++){
@@ -181,7 +183,7 @@ public class Party{
 			nextPhase = PkmnArena.rand.nextBoolean()?PkmnArena.SELECTING_ACTION : PkmnArena.COMPUTER_TURN;
 		}
 		else{
-			//System.out.println("Invalid pokemon");
+			System.out.println("Invalid pokemon");
 			//Action if input is not linked to option
 		}
 		return nextPhase;
