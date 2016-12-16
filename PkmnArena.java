@@ -5,6 +5,7 @@
 //ADDTIONS:
 //Normal and Psychic types
 //Heal special
+//Bot has a name
 //User and Computer both pick 6 pokemon(because 4 vs 147 is a bit unfair)
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class PkmnArena{
 	public static final int OPTIONS = 5;
 	public static Scanner kb = new Scanner(System.in);
 	public static final Random rand = new Random();
-	public static boolean[] options = {false,false,false}; // Pokemon Details, Attack Details, Health and energy results
+	public static boolean[] options = {false,false,true}; // Pokemon Details, Attack Details, Health and energy results
 	public static String[] optionNames = {"Pokemon Stats", "Attack Details", "Attack Results"};
 	public static final int POKEMON_DETAILS = 0;
 	public static final int ATTACK_DETAILS = 1;
@@ -31,7 +32,7 @@ public class PkmnArena{
 	
 	public static Party userParty = Party.pickParty(pokedex);
 	public static Party computerParty = Party.computerParty(pokedex,userParty);
-	private	static int phase = 0;
+	//private	static int phase = 0;
 	private static int uIn;
 	private static boolean running = true;
 	public static String botName = PkmnTools.enemyName();
@@ -43,10 +44,10 @@ public class PkmnArena{
 	
 	
 	public static void pickActive(){
-		while(userParty.getActiveIndex()== -1){
+		//while(userParty.getActiveIndex()== -1){
 			System.out.println("Pick a starting pokemon.");
-			phase = userParty.pickStarting();
-		}
+			userParty.pickActive(false);
+		//}
 	}
 	
 	
@@ -85,8 +86,7 @@ public class PkmnArena{
 		int nextPhase = SELECTING_ACTION;
 		Integer[] currentAttacks = attacking.availableAttacks();
 		while(true){
-			System.out.println("Pick an attack:");
-			System.out.println(" 0. Back");
+			System.out.println("Pick an attack:\n 0. Back");
 			if(options[ATTACK_DETAILS]){
 				System.out.println(" s. Simple");
 				for(int i = 0; i<currentAttacks.length;i++){
@@ -110,9 +110,10 @@ public class PkmnArena{
 				int attackNumber = Integer.parseInt(uIn);
 				if(attackNumber>0 && attackNumber < currentAttacks.length+1){
 					System.out.printf("Your %s used %s!\n",attacking.getName(),attacking.getAttack(currentAttacks[attackNumber-1]).getName());
-					if(attacking.attack(defending,attacking.getAttack(currentAttacks[attackNumber-1])) && options[RESULT_DETAILS]){	
+					attacking.attack(defending,attacking.getAttack(currentAttacks[attackNumber-1]));
+					if(options[RESULT_DETAILS]){	
 						System.out.printf("Your %s now has %d energy\n",attacking.getName(),attacking.getEnergy());
-						System.out.printf("The %s's %s now has %d health\n",botName,defending.getName(),defending.getHealth());
+						System.out.printf("%s's %s now has %d health\n",botName,defending.getName(),defending.getHealth());
 					}
 					nextPhase = COMPUTER_TURN;
 					break;
@@ -134,7 +135,7 @@ public class PkmnArena{
 		if(userParty.currentPokemon().getStun()){
 			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
 			userParty.currentPokemon().setStun(false);
-			phase = COMPUTER_TURN;
+			//phase = COMPUTER_TURN;
 		}
 		else{
 			while(pickingAction){
@@ -151,9 +152,8 @@ public class PkmnArena{
 					break;
 					case RETREAT:
 						System.out.println("Pick a replacement pokemon.");
-						if(userParty.pickActive() == COMPUTER_TURN){
-							pickingAction = false;
-						} 
+						pickingAction = !userParty.pickActive();
+						
 					break;
 					case PASS:
 						pickingAction = false;
@@ -174,8 +174,8 @@ public class PkmnArena{
 		if(userParty.currentPokemon().getHealth()<=0){
 			System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
 			if(userParty.numAlive()>0){
-				System.out.println("Pick a new pokemon");
-				userParty.pickActive();
+					System.out.println("Pick a new pokemon");
+					userParty.pickActive(false);
 			}
 		}
 		else if(userParty.numAlive() == 0){
@@ -184,7 +184,7 @@ public class PkmnArena{
 		else if(computerParty.numAlive()>0){
 			System.out.println(String.format("-----%s's turn!-----",botName));
 			computerMove(computerParty,userParty);
-			phase = SELECTING_ACTION;
+			//phase = SELECTING_ACTION;
 		}
 		else{
 			System.out.printf("%s has no more pokemon!\n",botName);
@@ -205,7 +205,8 @@ public class PkmnArena{
 				Pokemon attackingPokemon = userParty.currentPokemon();
 				Attack plannedAttack = computerParty.currentPokemon().getAttack(possibleAttacks[rand.nextInt(possibleAttacks.length)]);
 				System.out.printf("%s's %s used %s!\n",botName,computerParty.currentPokemon().getName(),plannedAttack.getName());
-				if(computerParty.currentPokemon().attack(attackingPokemon,plannedAttack)&&options[RESULT_DETAILS]){
+				computerParty.currentPokemon().attack(attackingPokemon,plannedAttack);
+				if(options[RESULT_DETAILS]){
 					System.out.printf("%s's %s now has %d energy\n",botName,computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
 					System.out.printf("Your %s now has %d health\n",userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
 				}

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Pokemon{
+	//Pokemon variables
 	private int hp, maxHp;
 	private String name, type, resistance, weakness;
 	private boolean attacked = false;
-	
 	private boolean[]debuffs = {false,false};
 	private int energy = 50;
 	private ArrayList<Attack> moves = new ArrayList<Attack>();
-	
+	//Static variables for constructing a Pokemon object from a String
 	private static final int NAME = 0;
 	private static final int HEALTH = 1;
 	private static final int TYPE = 2;
@@ -23,6 +23,8 @@ public class Pokemon{
 	private static final int ENERGY_COST = 1;
 	private static final int DAMAGE = 2;
 	private static final int SPECIAL = 3;
+	
+	//Status effects 
 	public static final int STUN_STATUS = 0;
 	public static final int DISABLE_STATUS = 1;
 	
@@ -106,61 +108,54 @@ public class Pokemon{
 		}
 		return possibleAttacks.toArray(new Integer[possibleAttacks.size()]);
 	}
-	public boolean attack(Pokemon target, Attack attack){
-		boolean success = false;
-		int damage = attack.getDamage();//debuffs[DISABLE_STATUS]? Math.max(attack.getDamage()-10,0): attack.getDamage(); // damage without disable and with type advantages
-		if(this.energy>=attack.getCost()){
-			this.energy -= attack.getCost();
-			if(attack.getSpecial() == Attack.WILD_CARD && PkmnArena.rand.nextBoolean()){
-				System.out.println("The attack failed...");
-			}
-			else{
-				if(this.type.equals(target.weakness)){
-					damage*=2;
-					System.out.println("Super effective! x2 damage!");
-				}
-				else if(this.type.equals(target.resistance)){
-					damage/=2;
-					System.out.println("Not very effective... x1/2 damage");
-				}
-				System.out.printf("%s dealt %d damage!\n",name,damage-(debuffs[DISABLE_STATUS]?10:0));
-				System.out.println(this.hp + " " + target.hp);
-				target.damage(damage-(debuffs[DISABLE_STATUS]?10:0));
-				System.out.println(this.hp + " " + target.hp);
-			}
-			success = true;
-			switch(attack.getSpecial()){
-				default:
-				break;
-				case Attack.STUN:
-					if(PkmnArena.rand.nextBoolean()){
-						System.out.printf("%s has been stunned!\n",target.getName());
-						target.debuffs[STUN_STATUS] = true;
-					}
-				break;
-				case Attack.WILD_STORM:
-					while(PkmnArena.rand.nextBoolean()){
-						System.out.printf("Wild storm! %s used %s again and dealt an additional %d damage!\n",name,attack.getName(),damage-(debuffs[DISABLE_STATUS]?10:0));
-						//System.out.printf("%s dealt %d damage!\n",name,damage); REMOVETHIS
-						target.damage(damage-(debuffs[DISABLE_STATUS]?10:0));
-					}
-				break;
-				case Attack.DISABLE:
-					System.out.printf("%s has been disabled!\n",target.getName());
-					target.debuffs[DISABLE_STATUS] = true;
-				break;
-				case Attack.RECHARGE:
-					System.out.printf("%s has recharged 20 energy\n",this.name);
-					recharge(20);
-				break;
-				case Attack.HEAL:
-					System.out.printf("%s has healed 20 health\n",this.name);
-					heal(20);
-				break;
-			}
+	public void attack(Pokemon target, Attack attack){
+		int damage = attack.getDamage();
+		this.energy -= attack.getCost();
+		if(attack.getSpecial() == Attack.WILD_CARD && PkmnArena.rand.nextBoolean()){
+			System.out.println("The attack failed...");
 		}
+		else{
+			if(this.type.equals(target.weakness)){
+				damage*=2;
+				System.out.println("Super effective! x2 damage!");
+			}
+			else if(this.type.equals(target.resistance)){
+				damage/=2;
+				System.out.println("Not very effective... x1/2 damage");
+			}
+			System.out.printf("%s dealt %d damage!\n",name,Math.max(0,damage-(debuffs[DISABLE_STATUS]?10:0)));
+			target.damage(damage-(debuffs[DISABLE_STATUS]?10:0));
+		}
+		switch(attack.getSpecial()){
+			default:
+			break;
+			case Attack.STUN:
+				if(PkmnArena.rand.nextBoolean()){
+					System.out.printf("%s has been stunned!\n",target.getName());
+					target.debuffs[STUN_STATUS] = true;
+				}
+			break;
+			case Attack.WILD_STORM:
+				while(PkmnArena.rand.nextBoolean()){
+					System.out.printf("Wild storm! %s used %s again and dealt an additional %d damage!\n",name,attack.getName(),Math.max(damage-(debuffs[DISABLE_STATUS]?10:0),0));
+					target.damage(damage-(debuffs[DISABLE_STATUS]?10:0));
+				}
+			break;
+			case Attack.DISABLE:
+				System.out.printf("%s has been disabled!\n",target.getName());
+				target.debuffs[DISABLE_STATUS] = true;
+			break;
+			case Attack.RECHARGE:
+				System.out.printf("%s has recharged 20 energy\n",this.name);
+				recharge(20);
+			break;
+			case Attack.HEAL:
+				System.out.printf("%s has healed 20 health\n",this.name);
+				heal(20);
+			break;
+		}
+		
 		attacked = true;
-		return success;
 	}
 	
 
