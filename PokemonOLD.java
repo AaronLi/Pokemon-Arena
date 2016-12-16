@@ -2,6 +2,7 @@
 //Aaron Li
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Pokemon{
 	private int hp, maxHp;
@@ -10,7 +11,7 @@ public class Pokemon{
 	
 	private boolean[]debuffs = {false,false};
 	private int energy = 50;
-	private ArrayList<Attack> moves = new ArrayList<Attack>();
+	private HashMap<String,Attack> moves = new HashMap<String,Attack>();
 	
 	private static final int NAME = 0;
 	private static final int HEALTH = 1;
@@ -59,7 +60,7 @@ public class Pokemon{
 		this.resistance = pkmnIn.resistance;
 		this.weakness = pkmnIn.weakness;
 		this.energy = pkmnIn.energy;
-		this.moves = new ArrayList<Attack>(pkmnIn.moves);
+		this.moves = new HashMap<String,Attack>(pkmnIn.moves);
 	}
 	public String getName(){
 		return this.name;
@@ -89,7 +90,7 @@ public class Pokemon{
 		debuffs[STUN_STATUS] = value;
 	}
 	public void addAttack(String name, int cost, int damage, int special){
-		moves.add(new Attack(name,cost,damage,special));
+		moves.put(name,new Attack(name,cost,damage,special));
 	}
 	public void recharge(int amount){
 		energy = Math.min(50,energy+amount);
@@ -97,18 +98,18 @@ public class Pokemon{
 	public void heal(int amount){
 		setHealth(this.hp+amount);
 	}
-	public Integer[] availableAttacks(){
-		ArrayList<Integer> possibleAttacks = new ArrayList<Integer>();
-		for(int i = 0;i < moves.size();i++){
-			if(moves.get(i).getCost() <= energy){
-				possibleAttacks.add(new Integer(i));
+	public String[] availableAttacks(){
+		ArrayList<String> possibleAttacks = new ArrayList<String>();
+		for(String atName : attacks()){
+			if(moves.get(atName).getCost() <= energy){
+				possibleAttacks.add(atName);
 			}
 		}
-		return possibleAttacks.toArray(new Integer[possibleAttacks.size()]);
+		return possibleAttacks.toArray(new String[possibleAttacks.size()]);
 	}
 	public boolean attack(Pokemon target, Attack attack){
 		boolean success = false;
-		int damage = attack.getDamage();//debuffs[DISABLE_STATUS]? Math.max(attack.getDamage()-10,0): attack.getDamage(); // damage without disable and with type advantages
+		int damage = debuffs[DISABLE_STATUS]? Math.max(attack.getDamage()-10,0): attack.getDamage(); // damage without disable and with type advantages
 		if(this.energy>=attack.getCost()){
 			this.energy -= attack.getCost();
 			if(attack.getSpecial() == Attack.WILD_CARD && PkmnArena.rand.nextBoolean()){
@@ -123,14 +124,12 @@ public class Pokemon{
 					damage/=2;
 					System.out.println("Not very effective... x1/2 damage");
 				}
-				System.out.printf("%s dealt %d damage!\n",name,damage-(debuffs[DISABLE_STATUS]?10:0));
-				System.out.println(this.hp + " " + target.hp);
-				target.damage(damage-(debuffs[DISABLE_STATUS]?10:0));
-				System.out.println(this.hp + " " + target.hp);
+				System.out.printf("%s dealt %d damage!\n",name,damage);
+				target.setHealth(target.hp-damage);
 			}
 			success = true;
 			switch(attack.getSpecial()){
-				default:
+				case Attack.NO_SPECIAL:
 				break;
 				case Attack.STUN:
 					if(PkmnArena.rand.nextBoolean()){
@@ -140,9 +139,9 @@ public class Pokemon{
 				break;
 				case Attack.WILD_STORM:
 					while(PkmnArena.rand.nextBoolean()){
-						System.out.printf("Wild storm! %s used %s again and dealt an additional %d damage!\n",name,attack.getName(),damage-(debuffs[DISABLE_STATUS]?10:0));
+						System.out.printf("Wild storm! %s used %s again and dealt an additional %d damage!\n",name,attack.getName(),damage);
 						//System.out.printf("%s dealt %d damage!\n",name,damage); REMOVETHIS
-						target.damage(damage-(debuffs[DISABLE_STATUS]?10:0));
+						target.setHealth(target.hp-damage);
 					}
 				break;
 				case Attack.DISABLE:
@@ -165,21 +164,16 @@ public class Pokemon{
 	
 
 	public String[] attacks(){
-		String[] sOut = new String[moves.size()];
-		for (int i = 0; i<moves.size();i++){
-			sOut[i] = moves.get(i).getName();
-		}
+		String[] sOut = moves.keySet().toArray(new String[moves.keySet().size()]);
 		return sOut;
 	}
-	public Attack getAttack(int attackIndex){
-		return moves.get(attackIndex);
+	public Attack getAttack(String attackName){
+		return moves.get(attackName);
 	}
 	public boolean hasAttacked(){
 		return attacked;
 	}
-	public void damage(int dmgAmt){
-		this.setHealth(this.getHealth()-dmgAmt);
-	}
+
 
 	public String toString(){
 		String attackString = "";

@@ -83,20 +83,20 @@ public class PkmnArena{
 	
 	public static int pickAttack(Pokemon attacking, Pokemon defending){
 		int nextPhase = SELECTING_ACTION;
-		String[] currentAttacks = attacking.availableAttacks();
+		Integer[] currentAttacks = attacking.availableAttacks();
 		while(true){
 			System.out.println("Pick an attack:");
 			System.out.println(" 0. Back");
 			if(options[ATTACK_DETAILS]){
 				System.out.println(" s. Simple");
 				for(int i = 0; i<currentAttacks.length;i++){
-					System.out.printf("%2d. %s\n",i+1,attacking.getAttack(currentAttacks[i]));
+					System.out.printf("%2d. %s\n",i+1,attacking.getAttack(currentAttacks[i]).toString());
 				}
 			}
 			else{
 				System.out.println(" d. Details");
 				for(int i = 0;i<currentAttacks.length;i++){
-					System.out.printf("%2d. %s\n",i+1,currentAttacks[i]);
+					System.out.printf("%2d. %s\n",i+1,attacking.getAttack(currentAttacks[i]).getName());
 				}
 			}
 			String uIn = kb.nextLine();
@@ -109,7 +109,7 @@ public class PkmnArena{
 			else{
 				int attackNumber = Integer.parseInt(uIn);
 				if(attackNumber>0 && attackNumber < currentAttacks.length+1){
-					System.out.printf("Your %s used %s!\n",attacking.getName(),currentAttacks[attackNumber-1]);
+					System.out.printf("Your %s used %s!\n",attacking.getName(),attacking.getAttack(currentAttacks[attackNumber-1]).getName());
 					if(attacking.attack(defending,attacking.getAttack(currentAttacks[attackNumber-1])) && options[RESULT_DETAILS]){	
 						System.out.printf("Your %s now has %d energy\n",attacking.getName(),attacking.getEnergy());
 						System.out.printf("The %s's %s now has %d health\n",botName,defending.getName(),defending.getHealth());
@@ -140,33 +140,29 @@ public class PkmnArena{
 			while(pickingAction){
 				System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
 				uIn = Integer.parseInt(kb.nextLine());
-				if(uIn>0&&uIn<5){
-						switch(uIn+1){
-							case PICKING_ATTACK:
-								if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
-									System.out.println("Not enough energy for any attacks!"+(options[POKEMON_DETAILS]?String.format("(%s has %d energy)",userParty.currentPokemon().getName(),userParty.currentPokemon().getEnergy()):""));
-								}
-								else if(pickAttack(userParty.currentPokemon(),computerParty.currentPokemon()) == COMPUTER_TURN){
-									pickingAction = false;
-								}
-							break;
-							case RETREAT:
-								System.out.println("Pick a replacement pokemon.");
-								if(userParty.pickActive() == COMPUTER_TURN){
-									pickingAction = false;
-								} 
-							break;
-							case PASS:
-								pickingAction = false;
-							break;
-							case OPTIONS:
-								changeOptions();
-							break;
-							
+				switch(uIn+1){
+					case PICKING_ATTACK:
+						if(uIn == 1 && userParty.currentPokemon().availableAttacks().length == 0){
+							System.out.println("Not enough energy for any attacks!"+(options[POKEMON_DETAILS]?String.format("(%s has %d energy)",userParty.currentPokemon().getName(),userParty.currentPokemon().getEnergy()):""));
 						}
-				}
-				else{
-					//Action if input is not linked to option
+						else if(pickAttack(userParty.currentPokemon(),computerParty.currentPokemon()) == COMPUTER_TURN){
+							pickingAction = false;
+						}
+					break;
+					case RETREAT:
+						System.out.println("Pick a replacement pokemon.");
+						if(userParty.pickActive() == COMPUTER_TURN){
+							pickingAction = false;
+						} 
+					break;
+					case PASS:
+						pickingAction = false;
+					break;
+					case OPTIONS:
+						changeOptions();
+					break;
+					default:
+					break;	
 				}
 			}
 		}
@@ -200,7 +196,7 @@ public class PkmnArena{
 	
 	public static void computerMove(Party computerParty, Party userParty){
 		if(computerParty.currentPokemon().getHealth() >0){
-			String[] possibleAttacks = computerParty.currentPokemon().availableAttacks();
+			Integer[] possibleAttacks = computerParty.currentPokemon().availableAttacks();
 			if(computerParty.currentPokemon().getStun()){
 				System.out.printf("%s is stunned! The %s's turn has been skipped.\n",computerParty.currentPokemon().getName(),botName);
 				computerParty.currentPokemon().setStun(false);
