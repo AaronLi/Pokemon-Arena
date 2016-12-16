@@ -30,9 +30,8 @@ public class PkmnArena{
 	public static final int RESULT_DETAILS = 2;
 	
 	
-	public static Party userParty = Party.pickParty(pokedex);
-	public static Party computerParty = Party.computerParty(pokedex,userParty);
-	//private	static int phase = 0;
+	public static Party userParty;
+	public static Party computerParty;
 	private static int uIn;
 	private static boolean running = true;
 	public static String botName = PkmnTools.enemyName();
@@ -44,10 +43,10 @@ public class PkmnArena{
 	
 	
 	public static void pickActive(){
-		//while(userParty.getActiveIndex()== -1){
-			System.out.println("Pick a starting pokemon.");
-			userParty.pickActive(false);
-		//}
+		userParty = Party.pickParty(pokedex);
+		computerParty = Party.computerParty(pokedex,userParty);
+		System.out.println("Pick a starting pokemon.");
+		userParty.pickActive(false);
 	}
 	
 	
@@ -131,7 +130,7 @@ public class PkmnArena{
 	
 	public static void pickNextAction(){
 		boolean pickingAction = true;
-		System.out.println("-----USER PHASE -----");
+		System.out.println("----- Your Turn! -----");
 		if(userParty.currentPokemon().getStun()){
 			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
 			userParty.currentPokemon().setStun(false);
@@ -182,7 +181,7 @@ public class PkmnArena{
 			// Thing that happens when the user has no pokemon anymore
 		}
 		else if(computerParty.numAlive()>0){
-			System.out.println(String.format("-----%s's turn!-----",botName));
+			System.out.println(String.format("----- %s's Turn! -----",botName));
 			computerMove(computerParty,userParty);
 			//phase = SELECTING_ACTION;
 		}
