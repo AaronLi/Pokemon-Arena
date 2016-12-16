@@ -70,6 +70,9 @@ public class Pokemon{
 	public int getHealth(){
 		return this.hp;
 	}
+	public int getMaxHealth(){
+		return this.maxHp;
+	}
 	public int getEnergy(){
 		return energy;
 	}
@@ -161,7 +164,7 @@ public class Pokemon{
 		return attacked;
 	}
 	public void damage(int dmgAmt){ // subtract health from a pokemon
-		this.setHealth(this.getHealth()-dmgAmt);
+		this.setHealth(this.getHealth()-Math.min(dmgAmt,this.getHealth())); // damage will either reduce health or set it to 0
 	}
 
 	public String toString(){
@@ -170,7 +173,7 @@ public class Pokemon{
 		for(int i =0; i<atNames.length;i++){
 			attackString += String.format("MOV %d: %-13s ",i+1,atNames[i]); // format the attack information for printing
 		}
-		return String.format("%-15s HP: %3d/%-3d NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,hp,maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
+		return String.format("%-15s HP: %s %-7s NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(hp,maxHp),hp+"/"+maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
 	}
 	
 	public boolean equals(Object obj){ // used for figuring out whether two pokemon are equal or not

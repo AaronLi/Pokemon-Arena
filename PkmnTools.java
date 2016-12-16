@@ -60,7 +60,7 @@ public class PkmnTools{
 			// Thing that happens when the user has no pokemon anymore
 		}
 		else if(cParty.numAlive()>0){
-			System.out.println(String.format("----- %s's Turn! -----",cParty.getOwner()));
+			System.out.println(String.format("---------- %s's Turn! ----------",cParty.getOwner()));
 			computerMove(cParty,uParty);
 		}
 			//phase = SELECTING_ACTION;
@@ -76,5 +76,17 @@ public class PkmnTools{
 			}
 		}
 		cParty.restAll();
+	}
+	public static String makeBar(int currentHealth, int maxHealth){
+		Double remainingHealth = new Double(((float)currentHealth/(float)maxHealth)*10.0);
+		int remainingHealthInt = remainingHealth.intValue();
+		int leftoverHealth = 10-remainingHealthInt;
+		return multiplyLetter(remainingHealthInt,"|")+multiplyLetter(leftoverHealth,":");
+	}
+	public static String multiplyLetter(int times, String letter){
+		return multiplyLetter(times,letter,"");
+	}
+	public static String multiplyLetter(int times, String letter, String made){
+		return times == 0?made:multiplyLetter(times-1,letter,made+letter);
 	}
 }

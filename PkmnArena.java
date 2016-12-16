@@ -131,7 +131,10 @@ public class PkmnArena{
 	
 	public static void pickNextAction(){
 		boolean pickingAction = true;
-		System.out.println("----- Your Turn! -----");
+		System.out.println("---------- Your Turn! ----------");
+		if(options[POKEMON_DETAILS){
+			System.out.printf("%s %s Energy: %d/50\n",userParty.currentPokemon().getName(),PkmnTools.makeBar(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth()),userParty.currentPokemon().getEnergy());
+		}
 		if(userParty.currentPokemon().getStun()){
 			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
 			userParty.currentPokemon().setStun(false);
