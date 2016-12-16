@@ -49,7 +49,7 @@ public class Party{
 	}
 	public static Party pickParty(Pokedex pokedex){ // used for picking the contents of a party
 		int picked; // number of the pokemon the user picked
-		int partySize = 2; //RETURN TO 6 LATER
+		int partySize = 1; //RETURN TO 6 LATER
 		String uIn; // user input
 		String[] pokemonPickedWords = {"","second ","third ","fourth ","fifth ","sixth ","sevent ","eighth ","ninth "}; // Used for making the prompt read more easily. Probably won't use all but expansion is there
 		Party userParty = new Party(-1); // create a new party with an index of -1
@@ -102,7 +102,7 @@ public class Party{
 	
 	public static Party computerParty(Pokedex pokedex, Party userPokemon){
 		Party computerParty = new Party(0); //create a party with the default index of 0
-		int computerPartySize = 2; //RETURN TO 6 LATER
+		int computerPartySize = 1; //RETURN TO 6 LATER
 		int nextPokemon; // the pokemon that will be added to the party
 		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon(); //get all the pokemon from the pokedex
 		remainingPokemon.removeAll(userPokemon.allMembers()); // remove the pokemon that the user already picked

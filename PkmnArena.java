@@ -170,23 +170,24 @@ public class PkmnArena{
 	public static void computerTurn(){
 		//Computer
 		userParty.restAll();
+		if(userParty.numAlive() == 0){
+			// Thing that happens when the user has no pokemon anymore
+		}
+		else if(computerParty.numAlive()>0){
+			System.out.println(String.format("----- %s's Turn! -----",botName));
+			computerMove(computerParty,userParty);
+		}
+			//phase = SELECTING_ACTION;
+		else{
+			System.out.printf("%s has fainted!\n",computerParty.currentPokemon().getName());
+			System.out.printf("%s has no more available pokemon!\n",botName);
+		}
 		if(userParty.currentPokemon().getHealth()<=0){
 			System.out.printf("%s has fainted!\n",userParty.currentPokemon().getName());
 			if(userParty.numAlive()>0){
 					System.out.println("Pick a new pokemon");
 					userParty.pickActive(false);
 			}
-		}
-		else if(userParty.numAlive() == 0){
-			// Thing that happens when the user has no pokemon anymore
-		}
-		else if(computerParty.numAlive()>0){
-			System.out.println(String.format("----- %s's Turn! -----",botName));
-			computerMove(computerParty,userParty);
-			//phase = SELECTING_ACTION;
-		}
-		else{
-			System.out.printf("%s has no more pokemon!\n",botName);
 		}
 		computerParty.restAll();
 	}
