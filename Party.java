@@ -7,14 +7,22 @@ import java.util.Random;
 public class Party{
 	private ArrayList<Pokemon> party = new ArrayList<Pokemon>(); // Pokemon that the owner of this party owns
 	private int active = -1; // current pokemon that is fighting
+	private String ownerName; // the name of the owner (player, bot)
 	public Party(Party partyIn){ // if you wish to clone a party
+		this.ownerName = partyIn.ownerName;
 		this.party = partyIn.party;
 	}
 	
-	public Party(int active){ // Create a party with an already assigned active index
+	public Party(int active, String name){ // Create a party with an already assigned active index
 		this.active = active;
+		this.ownerName = name;
 	}
-	
+	public String getOwner(){ // gets the name of the owner
+		return ownerName;
+	}
+	public void setOwner(String name){
+		this.ownerName = name;
+	}
 	public void addPokemon(Pokemon pkmnIn){ // add a pokemon to the party
 		party.add(pkmnIn);
 	}
@@ -49,10 +57,10 @@ public class Party{
 	}
 	public static Party pickParty(Pokedex pokedex){ // used for picking the contents of a party
 		int picked; // number of the pokemon the user picked
-		int partySize = 1; //RETURN TO 6 LATER
+		int partySize = 6;
 		String uIn; // user input
 		String[] pokemonPickedWords = {"","second ","third ","fourth ","fifth ","sixth ","sevent ","eighth ","ninth "}; // Used for making the prompt read more easily. Probably won't use all but expansion is there
-		Party userParty = new Party(-1); // create a new party with an index of -1
+		Party userParty = new Party(-1,"User"); // create a new party with an index of -1
 		ArrayList<String> pickablePokemon = pokedex.pokemonNames();  // the names of all pokemon in the pokedex
 		ArrayList<Integer> pokemonNumbers = new ArrayList<Integer>(); // the indexes of all pokemon (allows you to pick a pokemon correctly when the already picked ones are removed)
 		for(int i = 0; i < pickablePokemon.size(); i++){ // add the indexes to the pokemonnumbers arraylist
@@ -101,8 +109,8 @@ public class Party{
 	}
 	
 	public static Party computerParty(Pokedex pokedex, Party userPokemon){
-		Party computerParty = new Party(0); //create a party with the default index of 0
-		int computerPartySize = 1; //RETURN TO 6 LATER
+		Party computerParty = new Party(0,""); //create a party with the default index of 0
+		int computerPartySize = 6;
 		int nextPokemon; // the pokemon that will be added to the party
 		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon(); //get all the pokemon from the pokedex
 		remainingPokemon.removeAll(userPokemon.allMembers()); // remove the pokemon that the user already picked
