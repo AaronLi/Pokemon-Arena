@@ -161,6 +161,7 @@ public class PkmnArena{
 						changeOptions(); // let the user change options
 					break;
 					default:
+						System.out.println("Invalid choice"); // if the user picked something not linked to an option
 					break;	
 				}
 			}
