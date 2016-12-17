@@ -1,6 +1,6 @@
 //PkmnArena.java
 //Aaron Li
-
+//Deals with the main game and the user's actions
 
 //ADDTIONS:
 //Normal and Psychic types
