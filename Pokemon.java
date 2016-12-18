@@ -80,7 +80,7 @@ public class Pokemon{
 		this.attacked = attacked;
 	}
 	public void setHealth(int health){
-		this.hp = Math.min(Math.max(0,health),maxHp);
+		this.hp = Math.min(Math.max(0,health),maxHp); // health can't go below 0 or above max health
 	}
 	public void setDisable(boolean value){
 		debuffs[DISABLE_STATUS] = value;
