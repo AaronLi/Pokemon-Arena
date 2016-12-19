@@ -92,7 +92,7 @@ public class Party{
 			else if(uIn.equals("s")){ // if the user wants the simple view
 				PkmnArena.options[PkmnArena.POKEMON_DETAILS] = false;
 			}
-			else{
+			else if(uIn.replaceAll("[0-9]+","").equals("")){ // if the user's input only contains numbers (removing all numbers results in nothing)
 				picked = Integer.parseInt(uIn); // turn the input into an integer that cna be used to get pokemon
 				if (0<picked && picked < pickablePokemon.size()+1){ // if the selected pokemon is within the range of selectable pokemon
 					userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked-1))); // add the pokemon to the output party
@@ -178,11 +178,13 @@ public class Party{
 			else if(uIn.equals("d") && !PkmnArena.options[PkmnArena.POKEMON_DETAILS]){ // if the user is trying to turn on detailed pokemon info
 				PkmnArena.options[PkmnArena.POKEMON_DETAILS] = true;
 			}
-			else if(Integer.parseInt(uIn)>0 && Integer.parseInt(uIn)<livingPokemon.size()+1){ // check if the pokemon the user is trying to select is a selectable pokemon
-				setActive(livingPokemon.get(Integer.parseInt(uIn)-1)); // set the user's selection to the active pokemon
-				System.out.printf("%s, I choose you!\n",this.currentPokemon().getName());
-				pickedNewPokemon = true;
-				break;
+			else if(uIn.replaceAll("[0-9]+","").equals("")){
+				if(Integer.parseInt(uIn)>0 && Integer.parseInt(uIn)<livingPokemon.size()+1){ // check if the pokemon the user is trying to select is a selectable pokemon and that the input contains only numbers
+					setActive(livingPokemon.get(Integer.parseInt(uIn)-1)); // set the user's selection to the active pokemon
+					System.out.printf("%s, I choose you!\n",this.currentPokemon().getName());
+					pickedNewPokemon = true;
+					break;
+				}
 			}
 			else if(Integer.parseInt(uIn) == 0 && allowBack){ // if the user wants to go back
 				break;
