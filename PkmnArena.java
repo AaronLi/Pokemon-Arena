@@ -94,7 +94,7 @@ public class PkmnArena{
 			}
 			else{
 				for(int i = 0;i<currentAttacks.length;i++){ //print out the names of the attacks
-					System.out.printf("%2d. %s\n",i+1,attacking.getAttack(currentAttacks[i]).getName());
+					System.out.printf("%3d. %s\n",i+1,attacking.getAttack(currentAttacks[i]).getName());
 				}
 			}
 			String uIn = kb.nextLine(); // the user's input is handled as a string first so they can pick more or less details
@@ -130,7 +130,8 @@ public class PkmnArena{
 		boolean pickingAction = true;
 		System.out.println("---------- Your Turn! ----------"); // State that it's the user's turn
 		if(options[POKEMON_DETAILS]){ //if the user wants more details about their pokemon
-			System.out.printf("%s %s Energy: %d/50\n",userParty.currentPokemon().getName(),PkmnTools.makeBar(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth()),userParty.currentPokemon().getEnergy()); //print the health bar and energy
+			System.out.printf("%23s %s Energy: %d/50\n", "Your "+userParty.currentPokemon().getName(),PkmnTools.makeBar(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth()),userParty.currentPokemon().getEnergy()); //print the health bar and energy
+			System.out.printf("%23s %s Energy: %d/50\n", computerParty.getOwner()+"'s "+computerParty.currentPokemon().getName(),PkmnTools.makeBar(computerParty.currentPokemon().getHealth(),computerParty.currentPokemon().getMaxHealth()),computerParty.currentPokemon().getEnergy()); //print the health bar and energy
 		}
 		if(userParty.currentPokemon().getStun()){ // if the user's pokemon has been stunned
 			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
@@ -139,7 +140,11 @@ public class PkmnArena{
 		else{ // if the user's pokemon hasn't been stunned
 			while(pickingAction){
 				System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
-				uIn = Integer.parseInt(kb.nextLine()); //get user input
+				String lIn = kb.nextLine();
+				uIn = 0;
+				if(lIn.replaceAll("[0-9]+","").equals("") && lIn!="") {
+					uIn = Integer.parseInt(lIn); //get user input
+				}
 				switch(uIn+1){ // switch based on input
 					case PICKING_ATTACK: // if the user chooses to attack
 						if(userParty.currentPokemon().availableAttacks().length == 0){ // if the pokemon has no usable attacks

@@ -44,8 +44,8 @@ public class Pokemon{
 			atName = pokeInfo[i+ATTACK_NAME];
 			energyCost = Integer.parseInt(pokeInfo[i+ENERGY_COST]);
 			damage = Integer.parseInt(pokeInfo[i+DAMAGE]);
-			special = Character.toUpperCase(pokeInfo[i+SPECIAL].charAt(0))+pokeInfo[i+SPECIAL].substring(1); // capitalize the special for printing
-			moves.add(new Attack(atName,energyCost,damage,special)); // add attack to the pokemon's move list
+			special = pokeInfo[i+SPECIAL]; // capitalize the special for printing
+			moves.add(new Attack(atName,energyCost,damage,Attack.Special.fromFileString(special))); // add attack to the pokemon's move list
 		}
 	}
 	public Pokemon(Pokemon pkmnIn){ //constructor for cloning pokemon
@@ -106,7 +106,7 @@ public class Pokemon{
 	public void attack(Pokemon target, Attack attack){ //Method used for attacking other pokemon
 		int damage = attack.getDamage(); // basic damage without any modifiers
 		this.energy -= attack.getCost(); // reduce the attack cost from the attacking pokemon's energy pool
-		if(attack.getSpecial().equals("Wild card") && PkmnArena.rand.nextBoolean()){ // check whether or not the wild card effect is possible
+		if(attack.getSpecial().equals(Attack.Special.WILD_CARD) && PkmnArena.rand.nextBoolean()){ // check whether or not the wild card effect is possible
 			System.out.println("The attack failed...");
 		}
 		else{
@@ -122,27 +122,27 @@ public class Pokemon{
 			target.damage(damage-(debuffs[DISABLE_STATUS]?10:0)); // damage the targeted pokemon
 		}
 		//Specials
-		if(attack.getSpecial().equals("Stun")){ // if the special is stun
+		if(attack.getSpecial().equals(Attack.Special.STUN)){ // if the special is stun
 			if(PkmnArena.rand.nextBoolean()){ // rng 50/50 chance
 				System.out.printf("%s has been stunned!\n",target.getName()); // Print if the pokemon has been stunned
 				target.debuffs[STUN_STATUS] = true; // make the pokemon stunned
 			}
 		}
-		else if(attack.getSpecial().equals("Wild storm")){ // If the special is Wild storm
+		else if(attack.getSpecial().equals(Attack.Special.WILD_STORM)){ // If the special is Wild storm
 			while(PkmnArena.rand.nextBoolean()){ // Loop with 50/50 chance of breaking each iteration
 				System.out.printf("Wild storm! %s used %s again and dealt an additional %d damage!\n",name,attack.getName(),Math.max(damage-(debuffs[DISABLE_STATUS]?10:0),0)); // Print the resulting successful wild storm
 				target.damage(damage-(debuffs[DISABLE_STATUS]?10:0)); // damage the target
 			}
 		}
-		else if(attack.getSpecial().equals("Disable")){ // if the special is Disable
+		else if(attack.getSpecial().equals(Attack.Special.DISABLE)){ // if the special is Disable
 			System.out.printf("%s has been disabled!\n",target.getName()); // print that the target is disabled
 			target.debuffs[DISABLE_STATUS] = true; // disable the target
 		}
-		else if(attack.getSpecial().equals("Recharge")){ // if the special is Recharge
+		else if(attack.getSpecial().equals(Attack.Special.RECHARGE)){ // if the special is Recharge
 			System.out.printf("%s has recharged 20 energy\n",this.name); // print the result
 			recharge(20); // recharge 20 energy
 		}
-		else if(attack.getSpecial().equals("Heal")){ // if the special is heal
+		else if(attack.getSpecial().equals(Attack.Special.HEAL)){ // if the special is heal
 			System.out.printf("%s has healed 20 health\n",this.name); // print the result
 			heal(20); // heal 20 hp
 		};
@@ -171,7 +171,7 @@ public class Pokemon{
 		String attackString = "";
 		String[] atNames = this.attacks(); // get the names of the attacks
 		for(int i =0; i<atNames.length;i++){
-			attackString += String.format("MOV %d: %-13s ",i+1,atNames[i]); // format the attack information for printing
+			attackString += String.format("MOV %d: %-16s ",i+1,atNames[i]); // format the attack information for printing
 		}
 		return String.format("%-15s HP: %s %-7s NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(hp,maxHp),hp+"/"+maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
 	}
