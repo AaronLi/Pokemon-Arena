@@ -44,7 +44,7 @@ public class PkmnArena{
 	
 	public static void pickActive(){ // Let the user pick the pokemon they're going to use
 		userParty = Party.pickParty(pokedex); // let the user pick
-		computerParty = Party.computerParty(pokedex,userParty); // let the computer pick
+		computerParty = Party.computerParty(pokedex,userParty, new Party(0,"")); // let the computer pick
 		computerParty.setOwner(botName); // the computerParty method defaults to "" as the owner of the party, change the name to the bot name
 		System.out.println("Pick a starting pokemon.");
 		userParty.pickActive(false); // Ask the user to pick an active pokemon (false means they can't use the back option)
@@ -104,14 +104,14 @@ public class PkmnArena{
 			else if(uIn.equals("s")){
 				options[ATTACK_DETAILS] = false;
 			}
-			else{
+			else if(uIn.replaceAll("[0-9]", "").equals("") && !uIn.equals("")){
 				int attackNumber = Integer.parseInt(uIn); // If they aren't trying to change the setting, handle the input as an Integer
 				if(attackNumber>0 && attackNumber < currentAttacks.length+1){ //if the chosen attack is a valid choice
 					System.out.printf("Your %s used %s!\n",attacking.getName(),attacking.getAttack(currentAttacks[attackNumber-1]).getName()); // prompt the user that their pokemon attacked
 					attacking.attack(defending,attacking.getAttack(currentAttacks[attackNumber-1])); // Attack the computer's pokemon
 					if(options[RESULT_DETAILS]){	//if the user wants more details then print more details
-						System.out.printf("Your %s now has %d energy\n",attacking.getName(),attacking.getEnergy());
-						System.out.printf("%s's %s now has %d health\n",botName,defending.getName(),defending.getHealth());
+						System.out.printf("Your %s now has "+PkmnTools.ANSI_CYAN+"%d energy"+PkmnTools.ANSI_RESET+"\n",attacking.getName(),attacking.getEnergy());
+						System.out.printf("%s's %s now has "+PkmnTools.ANSI_RED+"%d health"+PkmnTools.ANSI_RESET+"\n",botName,defending.getName(),defending.getHealth());
 					}
 					return true; // the method returns true if the user ended up attacking
 				}
@@ -142,7 +142,7 @@ public class PkmnArena{
 				System.out.println("Pick an action:\n1. Attack\n2. Retreat\n3. Pass\n4. Options");
 				String lIn = kb.nextLine();
 				uIn = 0;
-				if(lIn.replaceAll("[0-9]+","").equals("") && lIn!="") {
+				if(lIn.replaceAll("[0-9]+","").equals("") && !lIn.equals("")) {
 					uIn = Integer.parseInt(lIn); //get user input
 				}
 				switch(uIn+1){ // switch based on input

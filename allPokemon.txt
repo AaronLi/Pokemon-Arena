@@ -1,4 +1,4 @@
-150
+151
 Bulbasaur,40,leaf, ,fire,1,Leech Seed,20,10,heal
 Ivysaur,60,leaf, ,fire,2,Vine Whip,30,20, ,Poisonpowder,30,20,wild storm
 Venusaur,100,leaf, ,fire,1,Solarbeam,40,60,wild storm

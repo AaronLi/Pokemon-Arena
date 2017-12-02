@@ -20,11 +20,13 @@ public class Party{
 	public String getOwner(){ // gets the name of the owner
 		return ownerName;
 	}
-	public void setOwner(String name){
+	public Party setOwner(String name){
 		this.ownerName = name;
+		return this;
 	}
-	public void addPokemon(Pokemon pkmnIn){ // add a pokemon to the party
+	public Party addPokemon(Pokemon pkmnIn){ // add a pokemon to the party
 		party.add(pkmnIn);
+		return this;
 	}
 	public int size(){ // get the amount of pokemon in the party
 		return party.size();
@@ -32,13 +34,14 @@ public class Party{
 	public Pokemon currentPokemon(){ // get the pokemon that is currently fighting in the party
 		return party.get(active);
 	}
-	public void setActive(int reqActive){ // change the active pokemon
+	public Party setActive(int reqActive){ // change the active pokemon
 		active = reqActive;
+		return this;
 	}
 	public boolean contains(Pokemon pkmnIn){ // check whether a pokemon is in the party or not
 		return party.contains(pkmnIn);
 	}
-	public void restAll(){ // give energy to all pokemon that haven't attacked
+	public Party restAll(){ // give energy to all pokemon that haven't attacked
 		for(Pokemon pkmn:party){
 			if(!pkmn.hasAttacked()){ // if the pokemon has attacked it will recharge
 				pkmn.recharge(10);
@@ -47,13 +50,15 @@ public class Party{
 				pkmn.setAttacked(false); // if the pokemon attacked in the round before it will be able to recharge next round (unless it attacks again)
 			}
 		}
+		return this;
 	}
-	public void healAll(){ // heal all pokemon in the party by 20 health
+	public Party healAll(){ // heal all pokemon in the party by 20 health
 		for(Pokemon pkmn:party){
 			if(pkmn.getHealth()>0){ // the pokemon needs to be alive to heal
 				pkmn.heal(20);
 			}
 		}
+		return this;
 	}
 	public static Party pickParty(Pokedex pokedex){ // used for picking the contents of a party
 		int picked; // number of the pokemon the user picked
@@ -70,7 +75,10 @@ public class Party{
 		int numPicked = 0; // amount of pokemon you've picked
 		while(numPicked < partySize){
 			System.out.println("Please pick a "+pokemonPickedWords[numPicked]+"pokemon:\n"); // print the prompt
-			System.out.println(PkmnArena.options[PkmnArena.POKEMON_DETAILS]?"s. simple\n":"d. Details");
+			System.out.println((PkmnArena.options[PkmnArena.POKEMON_DETAILS]?"s. simple\n":"d. Details\n")+"p. Pick for me");
+			if(numPicked>0){
+				System.out.println("f. Finished");
+			}
 			if(PkmnArena.options[PkmnArena.POKEMON_DETAILS]){ // print the details or just the name of each pokemon
 				for(int i = 0;i<pickablePokemon.size();i++){ // print all the pickable pokemon
 					System.out.printf("%3d. %s\n",i+1,pokedex.getPokemon(pokemonNumbers.get(i))); // print detailed version
@@ -92,9 +100,18 @@ public class Party{
 			else if(uIn.equals("s")){ // if the user wants the simple view
 				PkmnArena.options[PkmnArena.POKEMON_DETAILS] = false;
 			}
+			else if(uIn.equals("p")){
+				Party pOut = computerParty(pokedex, userParty, userParty);
+				pOut.setOwner("User");
+				return pOut;
+			}
+			else if(uIn.equals("f") && numPicked>0){
+				return userParty;
+			}
 			else if(uIn.replaceAll("[0-9]+","").equals("") && !uIn.equals("")){ // if the user's input only contains numbers (removing all numbers results in nothing)
 				picked = Integer.parseInt(uIn); // turn the input into an integer that cna be used to get pokemon
 				if (0<picked && picked < pickablePokemon.size()+1){ // if the selected pokemon is within the range of selectable pokemon
+					System.out.printf("You picked %s!\n",pokedex.getPokemon(pokemonNumbers.get(picked-1)).getName());
 					userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked-1))); // add the pokemon to the output party
 					pickablePokemon.remove(picked-1); // remove the name of the pokemon
 					pokemonNumbers.remove(picked-1); // remove the index of the pokemon
@@ -108,18 +125,19 @@ public class Party{
 		return userParty;
 	}
 	
-	public static Party computerParty(Pokedex pokedex, Party userPokemon){
-		Party computerParty = new Party(0,""); //create a party with the default index of 0
-		int computerPartySize = 6;
+	public static Party computerParty(Pokedex pokedex, Party userPokemon, Party initial){
+		//Party computerParty = new Party(0,""); //create a party with the default index of 0
+		int computerPartySize = 6-initial.size();
 		int nextPokemon; // the pokemon that will be added to the party
 		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon(); //get all the pokemon from the pokedex
 		remainingPokemon.removeAll(userPokemon.allMembers()); // remove the pokemon that the user already picked
+		remainingPokemon.removeAll(initial.allMembers());
 		for(int i = 0; i< computerPartySize; i++){ // pick the amount of pokemon defined in computerPartySize
 			nextPokemon = PkmnArena.rand.nextInt(remainingPokemon.size()); // pick a random pokemon from remainingPokemon
-			computerParty.addPokemon(remainingPokemon.get(nextPokemon)); // add the pokemon to the computerParty
+			initial.addPokemon(remainingPokemon.get(nextPokemon)); // add the pokemon to the computerParty
 			remainingPokemon.remove(nextPokemon); //remove the pokemon from the selectable pokemon
 		}
-		return computerParty;
+		return initial;
 	}
 	
 	public ArrayList<String> partyNames(){ // get the names of the pokemon from the party
