@@ -54,11 +54,11 @@ public class PkmnArena{
 	public static void changeOptions(){ // Allow the user to toggle the information they want to see from the battle
 		int uIn = -1;
 		while(uIn != 0){ // while the user input isn't back (will also be broken later)
-			System.out.println("0. Back\nToggle...\n1. Pokemon Details "+(options[POKEMON_DETAILS]?"[ON]":"[OFF]")+"\n2. Attack Details"+(options[ATTACK_DETAILS]?"[ON]":"[OFF]")+"\n3. Attack Result Details"+(options[RESULT_DETAILS]?"[ON]":"[OFF]")); // print the state of the options
+			System.out.println("Toggle...\n0. Back\n1. Pokemon Details "+(options[POKEMON_DETAILS]?"[ON]":"[OFF]")+"\n2. Attack Details"+(options[ATTACK_DETAILS]?"[ON]":"[OFF]")+"\n3. Attack Result Details"+(options[RESULT_DETAILS]?"[ON]":"[OFF]")); // print the state of the options
 			uIn = Integer.parseInt(kb.nextLine()); //get the user's input
 			if(uIn>0 && uIn <=options.length){ // if the user's input maps to an option
 					options[uIn-1] = !options[uIn-1]; //subtract 1 from the input because options are listed 1 to x+1 while the list is 0 to x
-					System.out.printf("%s has been turned %s\n",optionNames[uIn-1],options[uIn-1]?"ON":"OFF"); // tell the user what the setting has changed to
+					System.out.printf("%s has been turned %s\n"+PkmnTools.ANSI_RESET,optionNames[uIn-1],options[uIn-1]?(PkmnTools.ANSI_GREEN+"ON"):(PkmnTools.ANSI_RED+"OFF")); // tell the user what the setting has changed to
 			}
 		}
 	}
@@ -72,14 +72,16 @@ public class PkmnArena{
 			pickNextAction(); // prompt the user to pick the next action
 			PkmnTools.computerTurn(userParty,computerParty); // let the computer choose its action
 			if(computerParty.numAlive()==0){ // if the computer has no more living pokemon
-				System.out.println("You are Trainer Supreme!"); // crown the user as the winner
+				System.out.println(PkmnTools.ANSI_RED+"*"+PkmnTools.ANSI_YELLOW+"*"+PkmnTools.ANSI_GREEN+"*"+PkmnTools.ANSI_BLUE+"*"+PkmnTools.ANSI_BRIGHT_CYAN+"You are Trainer Supreme!"+PkmnTools.ANSI_BLUE+"*"+PkmnTools.ANSI_GREEN+"*"+PkmnTools.ANSI_YELLOW+"*"+ PkmnTools.ANSI_RED+"*"+PkmnTools.ANSI_RESET); // crown the user as the winner
 				break;
 			}
 			else if(userParty.numAlive() == 0){//Tell the user they lost
-				System.out.println("You have no available pokemon!\nYou lose..."); // would be much more creepy if it said "I win"
+				System.out.println(PkmnTools.ANSI_RED+"You have no available pokemon!\nYou lose..."+PkmnTools.ANSI_RESET); // would be much more creepy if it said "I win"
 				break;
 			}
 		}
+		System.out.println(PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"MADE"+PkmnTools.ANSI_BG_WHITE+PkmnTools.ANSI_BLACK+" IN CA"+PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"NADA"+PkmnTools.ANSI_RESET);
+		System.out.println(PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"By A"+PkmnTools.ANSI_BG_WHITE+PkmnTools.ANSI_BLACK+"aron L"+PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"i   "+PkmnTools.ANSI_RESET);
 	}
 	
 	public static boolean pickAttack(Pokemon attacking, Pokemon defending){ //Prompt the user to pick the attack they wish to use, then attacks the computer's pokemon with it
@@ -130,11 +132,11 @@ public class PkmnArena{
 		boolean pickingAction = true;
 		System.out.println("---------- Your Turn! ----------"); // State that it's the user's turn
 		if(options[POKEMON_DETAILS]){ //if the user wants more details about their pokemon
-			System.out.printf("%23s %s Energy: %d/50\n", "Your "+userParty.currentPokemon().getName(),PkmnTools.makeBar(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth()),userParty.currentPokemon().getEnergy()); //print the health bar and energy
-			System.out.printf("%23s %s Energy: %d/50\n", computerParty.getOwner()+"'s "+computerParty.currentPokemon().getName(),PkmnTools.makeBar(computerParty.currentPokemon().getHealth(),computerParty.currentPokemon().getMaxHealth()),computerParty.currentPokemon().getEnergy()); //print the health bar and energy
+			System.out.printf("%23s %s "+PkmnTools.pbcColourMultiplier(userParty.currentPokemon().getEnergy(),50)+"Energy: %d/50\n"+PkmnTools.ANSI_RESET, "Your "+userParty.currentPokemon().getName(),PkmnTools.makeBar(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth()),userParty.currentPokemon().getEnergy()); //print the health bar and energy
+			System.out.printf("%23s %s "+PkmnTools.pbcColourMultiplier(computerParty.currentPokemon().getEnergy(), 50)+"Energy: %d/50\n"+PkmnTools.ANSI_RESET, computerParty.getOwner()+"'s "+computerParty.currentPokemon().getName(),PkmnTools.makeBar(computerParty.currentPokemon().getHealth(),computerParty.currentPokemon().getMaxHealth()),computerParty.currentPokemon().getEnergy()); //print the health bar and energy
 		}
 		if(userParty.currentPokemon().getStun()){ // if the user's pokemon has been stunned
-			System.out.printf("%s is stunned! Your turn has been skipped\n",userParty.currentPokemon().getName());
+			System.out.printf(PkmnTools.ANSI_YELLOW+"%s is stunned! Your turn has been skipped\n"+PkmnTools.ANSI_RESET,userParty.currentPokemon().getName());
 			userParty.currentPokemon().setStun(false); // unstun the pokemon
 		}
 		else{ // if the user's pokemon hasn't been stunned
@@ -148,7 +150,7 @@ public class PkmnArena{
 				switch(uIn+1){ // switch based on input
 					case PICKING_ATTACK: // if the user chooses to attack
 						if(userParty.currentPokemon().availableAttacks().length == 0){ // if the pokemon has no usable attacks
-							System.out.println("Not enough energy for any attacks!"+(options[POKEMON_DETAILS]?String.format("(%s has %d energy)",userParty.currentPokemon().getName(),userParty.currentPokemon().getEnergy()):"")); // if the user wants more detail then it will tell them how much energy the pokemon has
+							System.out.println(PkmnTools.ANSI_RED+"Not enough energy for any attacks!"+(options[POKEMON_DETAILS]?String.format(PkmnTools.ANSI_RESET+" (%s has"+PkmnTools.pbcColourMultiplier(userParty.currentPokemon().getEnergy(), 50)+" %d energy"+PkmnTools.ANSI_RESET+")",userParty.currentPokemon().getName(),userParty.currentPokemon().getEnergy()):"")+PkmnTools.ANSI_RESET); // if the user wants more detail then it will tell them how much energy the pokemon has
 						}
 						else {
 							pickingAction = !pickAttack(userParty.currentPokemon(),computerParty.currentPokemon()); // pickAttack returns true or false depending on whether the user attacked or not, it will become the bot's turn when pickingAction becomes false

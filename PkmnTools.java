@@ -19,8 +19,11 @@ public class PkmnTools{
 	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
+	public static final String ANSI_BRIGHT_CYAN = "\u001B[96m";
+	public static final String ANSI_BG_WHITE = "\u001B[47m";
+	public static final String ANSI_BG_RED = "\u001B[41m";
 	public static final String[] ANSI_RYG = {ANSI_RED, ANSI_YELLOW, ANSI_GREEN};
-	public static final String[] ANSI_PBC = {ANSI_PURPLE, ANSI_CYAN, "\u001B[97m"};
+	public static final String[] ANSI_PBC = {ANSI_PURPLE, ANSI_CYAN, ANSI_BRIGHT_CYAN};
 	public static String enemyName(){
 		try{
 			Scanner nameFile = new Scanner(new BufferedReader(new FileReader("possibleNames.txt"))); // open the file for reading
@@ -46,8 +49,8 @@ public class PkmnTools{
 				System.out.printf("%s's %s used %s!\n",computerParty.getOwner(),computerParty.currentPokemon().getName(),plannedAttack.getName()); // print out what the computer chose
 				computerParty.currentPokemon().attack(attackingPokemon,plannedAttack); // attack the user's pokemon with the seslected attack
 				if(PkmnArena.options[PkmnArena.RESULT_DETAILS]){ // if the user wants more details about the attack
-					System.out.printf("%s's %s now has %d energy\n",computerParty.getOwner(),computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
-					System.out.printf("Your %s now has %d health\n",userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
+					System.out.printf("%s's %s now has"+PkmnTools.pbcColourMultiplier(computerParty.currentPokemon().getEnergy(), 50)+" %d energy\n"+PkmnTools.ANSI_RESET,computerParty.getOwner(),computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
+					System.out.printf("Your %s now has"+PkmnTools.rygColourMultiplier(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth())+" %d health\n"+PkmnTools.ANSI_RESET,userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
 				}
 			}
 			else{
@@ -58,7 +61,7 @@ public class PkmnTools{
 			userParty.healAll(); // heal all the user's pokemon
 			String oldPokemonName = computerParty.currentPokemon().getName(); // the name of the pokemon that fainted
 			computerParty.setActive(computerParty.getActiveIndex()+1);
-			System.out.printf("%s has fainted, next choice: %s!\n",oldPokemonName,computerParty.currentPokemon().getName());//print out the bot's next active pokemon
+			System.out.printf(PkmnTools.ANSI_RED+"%s has fainted, next choice: %s!\n"+PkmnTools.ANSI_RESET,oldPokemonName,computerParty.currentPokemon().getName());//print out the bot's next active pokemon
 		}
 	}
 	public static void computerTurn(Party uParty, Party cParty){ // deals with whether the bot has been defeated or not
@@ -68,7 +71,7 @@ public class PkmnTools{
 			System.out.println(String.format("---------- %s's Turn! ----------",cParty.getOwner())); // Start bot's turn
 			computerMove(cParty,uParty); // let the bot pick an attack to use
 			if(uParty.currentPokemon().getHealth()<=0){ // If the user's pokemon has fainted after the bot has attacked
-				System.out.printf("%s has fainted!\n",uParty.currentPokemon().getName());
+				System.out.printf(ANSI_RED+"%s has fainted!\n"+ANSI_RESET,uParty.currentPokemon().getName());
 				if(uParty.numAlive()>0){ // If the user still has pokemon alive
 					System.out.println("Pick a new pokemon");
 					uParty.pickActive(false); // let the user pick a new starting pokemon
@@ -76,7 +79,7 @@ public class PkmnTools{
 			}
 		}
 		else{ // if the computerParty has no living pokemon
-			System.out.printf("%s has fainted!\n",cParty.currentPokemon().getName()); // When the bot's pokemon have all fainted
+			System.out.printf(PkmnTools.ANSI_RED+"%s has fainted!\n"+PkmnTools.ANSI_RESET,cParty.currentPokemon().getName()); // When the bot's pokemon have all fainted
 			System.out.printf("%s has no more available pokemon!\n",cParty.getOwner());
 		}
 		cParty.restAll(); // recharge all the pokemon on the computer's team
@@ -85,7 +88,7 @@ public class PkmnTools{
 		Double remainingHealth = new Double(((float)currentHealth/(float)maxHealth)*10.0); // divide with floats first because dividing with integers will lose the decimal places
 		int remainingHealthInt = remainingHealth.intValue(); // convert from Double to int
 		int leftoverHealth = 10-remainingHealthInt; // find the remaining units in the health bar
-		return multiplyLetter(remainingHealthInt,"|")+multiplyLetter(leftoverHealth,":"); // make the health bar with | and :
+		return PkmnTools.rygColourMultiplier(currentHealth,maxHealth)+multiplyLetter(remainingHealthInt,"▓")+multiplyLetter(leftoverHealth,"░")+PkmnTools.ANSI_RESET; // make the health bar with | and :
 	}
 	public static String multiplyLetter(int times, String letter){ // recursively add multiple letters together
 		return multiplyLetter(times,letter,"");
