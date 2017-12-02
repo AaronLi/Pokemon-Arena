@@ -19,6 +19,8 @@ public class PkmnTools{
 	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
+	public static final String[] ANSI_RYG = {ANSI_RED, ANSI_YELLOW, ANSI_GREEN};
+	public static final String[] ANSI_PBC = {ANSI_PURPLE, ANSI_CYAN, "\u001B[97m"};
 	public static String enemyName(){
 		try{
 			Scanner nameFile = new Scanner(new BufferedReader(new FileReader("possibleNames.txt"))); // open the file for reading
@@ -88,7 +90,16 @@ public class PkmnTools{
 	public static String multiplyLetter(int times, String letter){ // recursively add multiple letters together
 		return multiplyLetter(times,letter,"");
 	}
-	public static String multiplyLetter(int times, String letter, String made){ 
+	public static String multiplyLetter(int times, String letter, String made){
 		return times == 0?made:multiplyLetter(times-1,letter,made+letter);//call multiplyLetter while adding the letter to the end of made then reducing the number of times it should be added
+	}
+	public static String pickColourMultiplier(int val, int max, String[] colourScale){
+		return colourScale[(int)((colourScale.length-1)*((double)val/(double)max))];
+	}
+	public static String rygColourMultiplier(int val, int max){
+		return pickColourMultiplier(val, max, ANSI_RYG);
+	}
+	public static String pbcColourMultiplier(int val, int max){
+		return pickColourMultiplier(val, max, ANSI_PBC);
 	}
 }

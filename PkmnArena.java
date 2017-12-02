@@ -110,8 +110,8 @@ public class PkmnArena{
 					System.out.printf("Your %s used %s!\n",attacking.getName(),attacking.getAttack(currentAttacks[attackNumber-1]).getName()); // prompt the user that their pokemon attacked
 					attacking.attack(defending,attacking.getAttack(currentAttacks[attackNumber-1])); // Attack the computer's pokemon
 					if(options[RESULT_DETAILS]){	//if the user wants more details then print more details
-						System.out.printf("Your %s now has "+PkmnTools.ANSI_CYAN+"%d energy"+PkmnTools.ANSI_RESET+"\n",attacking.getName(),attacking.getEnergy());
-						System.out.printf("%s's %s now has "+PkmnTools.ANSI_RED+"%d health"+PkmnTools.ANSI_RESET+"\n",botName,defending.getName(),defending.getHealth());
+						System.out.printf("Your %s now has "+PkmnTools.pbcColourMultiplier(attacking.getEnergy(), 50)+"%d energy"+PkmnTools.ANSI_RESET+"\n",attacking.getName(),attacking.getEnergy());
+						System.out.printf("%s's %s now has "+PkmnTools.rygColourMultiplier(defending.getHealth(), defending.getMaxHealth())+"%d health"+PkmnTools.ANSI_RESET+"\n",botName,defending.getName(),defending.getHealth());
 					}
 					return true; // the method returns true if the user ended up attacking
 				}

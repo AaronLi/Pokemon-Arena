@@ -112,11 +112,11 @@ public class Pokemon{
 		else{
 			if(this.type.equals(target.weakness)){ // double the damage if the pokemon's type is the target's weakness
 				damage*=2;
-				System.out.println("Super effective! x2 damage!");
+				System.out.println("Super effective! "+PkmnTools.ANSI_GREEN+"x2 damage!"+PkmnTools.ANSI_RESET);
 			}
 			else if(this.type.equals(target.resistance)){ // halve the damage if the pokemon's type is the target's resistance
 				damage/=2;
-				System.out.println("Not very effective... x1/2 damage");
+				System.out.println("Not very effective..."+PkmnTools.ANSI_RED+" x1/2 damage"+PkmnTools.ANSI_RESET);
 			}
 			System.out.printf("%s dealt %d damage!\n",name,Math.max(0,damage-(debuffs[DISABLE_STATUS]?10:0))); // Print the resulting damage with the disable debuff deducted
 			target.damage(damage-(debuffs[DISABLE_STATUS]?10:0)); // damage the targeted pokemon
@@ -173,7 +173,7 @@ public class Pokemon{
 		for(int i =0; i<atNames.length;i++){
 			attackString += String.format("MOV %d: %-16s ",i+1,atNames[i]); // format the attack information for printing
 		}
-		return String.format("%-15s HP: %s %-7s NRG: %-2d/50 TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(hp,maxHp),hp+"/"+maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
+		return String.format("%-15s "+PkmnTools.rygColourMultiplier(hp,maxHp)+"HP: %s %-7s"+PkmnTools.pbcColourMultiplier(energy, 50)+" NRG: %-2d/50"+PkmnTools.ANSI_RESET+" TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(hp,maxHp),hp+"/"+maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
 	}
 	
 	public boolean equals(Object obj){ // used for figuring out whether two pokemon are equal or not
