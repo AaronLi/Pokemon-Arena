@@ -81,7 +81,7 @@ public class Party{
 			}
 			if(PkmnArena.options[PkmnArena.POKEMON_DETAILS]){ // print the details or just the name of each pokemon
 				for(int i = 0;i<pickablePokemon.size();i++){ // print all the pickable pokemon
-					System.out.printf("%3d. %s\n",i+1,pokedex.getPokemon(pokemonNumbers.get(i))); // print detailed version
+					System.out.printf(PkmnTools.ANSI_CYAN+"%3d"+PkmnTools.ANSI_RESET+" %s\n",i+1,pokedex.getPokemon(pokemonNumbers.get(i))); // print detailed version
 				}
 			}
 			else{
@@ -89,10 +89,11 @@ public class Party{
 					if(i%4 == 0){ // new line every fourth pokemon
 						System.out.println();
 					}
-					System.out.printf("%3d. %-13s ",i+1,pickablePokemon.get(i)); // Print simple version in a compact grid
-				}	
+					System.out.printf(PkmnTools.ANSI_CYAN+"%3d"+PkmnTools.ANSI_RESET +" %-13s ",i+1,pickablePokemon.get(i)); // Print simple version in a compact grid
+				}
+				System.out.println();
 			}
-			System.out.println();
+			System.out.println("Enter a number: ");
 			uIn = PkmnArena.kb.nextLine();
 			if(uIn.equals("d")){ // if the user wants the detailed view
 				PkmnArena.options[PkmnArena.POKEMON_DETAILS] = true;
@@ -111,11 +112,20 @@ public class Party{
 			else if(uIn.replaceAll("[0-9]+","").equals("") && !uIn.equals("")){ // if the user's input only contains numbers (removing all numbers results in nothing)
 				picked = Integer.parseInt(uIn); // turn the input into an integer that cna be used to get pokemon
 				if (0<picked && picked < pickablePokemon.size()+1){ // if the selected pokemon is within the range of selectable pokemon
-					System.out.printf("You picked %s!\n",pokedex.getPokemon(pokemonNumbers.get(picked-1)).getName());
-					userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked-1))); // add the pokemon to the output party
-					pickablePokemon.remove(picked-1); // remove the name of the pokemon
-					pokemonNumbers.remove(picked-1); // remove the index of the pokemon
-					numPicked++;
+					Pokemon selectedPokemon = pokedex.getPokemon(pokemonNumbers.get(picked-1));
+					System.out.printf("You picked "+PkmnTools.ANSI_CYAN+"%s"+PkmnTools.ANSI_RESET+"!\n",selectedPokemon.getName());
+					System.out.printf("Health: %s"+PkmnTools.ANSI_GREEN+" %d/%d"+PkmnTools.ANSI_RESET+"\nType: %s\nWeakness: %s\nResistance: %s\nMoves:\n",PkmnTools.makeBar(selectedPokemon.getHealth(),selectedPokemon.getMaxHealth()),selectedPokemon.getHealth(),selectedPokemon.getMaxHealth(),selectedPokemon.getType(), selectedPokemon.getWeakness(), selectedPokemon.getResistance());
+					for(int i = 0; i<selectedPokemon.getMoves().size(); i++){
+							System.out.printf(PkmnTools.ANSI_GREEN+"\t%3d."+PkmnTools.ANSI_RESET+" %s\n",i+1 ,selectedPokemon.getAttack(i));
+					}
+					System.out.println("\nConfirm? ("+PkmnTools.ANSI_GREEN+"Y"+PkmnTools.ANSI_WHITE+"/"+PkmnTools.ANSI_RED+"N"+PkmnTools.ANSI_RESET+")");
+					uIn = PkmnArena.kb.nextLine();
+					if(uIn.toLowerCase().equals("y")) {
+						userParty.addPokemon(pokedex.getPokemon(pokemonNumbers.get(picked - 1))); // add the pokemon to the output party
+						pickablePokemon.remove(picked - 1); // remove the name of the pokemon
+						pokemonNumbers.remove(picked - 1); // remove the index of the pokemon
+						numPicked++;
+					}
 				}
 				else{
 					System.out.println("Invalid Number");

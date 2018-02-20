@@ -80,8 +80,8 @@ public class PkmnArena{
 				break;
 			}
 		}
-		System.out.println(PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"MADE"+PkmnTools.ANSI_BG_WHITE+PkmnTools.ANSI_BLACK+" IN CA"+PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"NADA"+PkmnTools.ANSI_RESET);
-		System.out.println(PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"By A"+PkmnTools.ANSI_BG_WHITE+PkmnTools.ANSI_BLACK+"aron L"+PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"i   "+PkmnTools.ANSI_RESET);
+		//System.out.println(PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"MADE"+PkmnTools.ANSI_BG_WHITE+PkmnTools.ANSI_BLACK+" IN CA"+PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"NADA"+PkmnTools.ANSI_RESET);
+		//System.out.println(PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"By A"+PkmnTools.ANSI_BG_WHITE+PkmnTools.ANSI_BLACK+"aron L"+PkmnTools.ANSI_BG_RED+PkmnTools.ANSI_BLACK+"i   "+PkmnTools.ANSI_RESET);
 	}
 	
 	public static boolean pickAttack(Pokemon attacking, Pokemon defending){ //Prompt the user to pick the attack they wish to use, then attacks the computer's pokemon with it
@@ -91,7 +91,7 @@ public class PkmnArena{
 			System.out.println(options[ATTACK_DETAILS]?" s. Simple":" d. Details");
 			if(options[ATTACK_DETAILS]){ // if the user wants the detailed view
 				for(int i = 0; i<currentAttacks.length;i++){ // print out the detailed version of the attacks
-					System.out.printf("%2d. %s\n",i+1,attacking.getAttack(currentAttacks[i]).toString());
+					System.out.printf("%3d. %s\n",i+1,attacking.getAttack(currentAttacks[i]).toString());
 				}
 			}
 			else{

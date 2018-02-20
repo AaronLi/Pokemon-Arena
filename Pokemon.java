@@ -168,6 +168,24 @@ public class Pokemon{
 		this.setHealth(this.getHealth()-Math.min(dmgAmt,this.getHealth())); // damage will either reduce health or set it to 0
 	}
 
+	public ArrayList<Attack> getMoves() {
+		return moves;
+	}
+
+	public String getType() {
+
+		return type;
+	}
+
+	public String getResistance() {
+		return resistance;
+	}
+
+	public String getWeakness() {
+		return weakness;
+	}
+
+	@Override
 	public String toString(){
 		String attackString = "";
 		String[] atNames = this.attacks(); // get the names of the attacks
@@ -176,7 +194,7 @@ public class Pokemon{
 		}
 		return String.format("%-15s "+PkmnTools.rygColourMultiplier(hp,maxHp)+"HP: %s"+PkmnTools.rygColourMultiplier(hp,maxHp)+" %-7s"+PkmnTools.pbcColourMultiplier(energy, 50)+" NRG: %-2d/50"+PkmnTools.ANSI_RESET+" TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(hp,maxHp),hp+"/"+maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
 	}
-	
+	@Override
 	public boolean equals(Object obj){ // used for figuring out whether two pokemon are equal or not
 		if(obj instanceof Pokemon){ //check if the given object is a Pokemon
 			return ((Pokemon)obj).name.equals(this.name); // is equal if the objects are both pokemon and their names are equal

@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1224783f-dd47-47a5-b0b9-7ca8b55c075d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Party.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/Party.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnArena.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnArena.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnTools.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnTools.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Party.java" afterPath="$PROJECT_DIR$/Party.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PkmnArena.java" afterPath="$PROJECT_DIR$/PkmnArena.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PkmnTools.java" afterPath="$PROJECT_DIR$/PkmnTools.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pokemon.java" afterPath="$PROJECT_DIR$/Pokemon.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/workspace.xml" />
     </list>
@@ -24,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PkmnArena.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PkmnArena.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PkmnArena.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="85" column="4" lean-forward="true" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+            <state relative-caret-position="1600">
+              <caret line="111" column="47" lean-forward="false" selection-start-line="111" selection-start-column="47" selection-end-line="111" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -67,8 +67,8 @@
       <file leaf-file-name="PkmnTools.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PkmnTools.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="22" column="57" lean-forward="false" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
+            <state relative-caret-position="288">
+              <caret line="25" column="87" lean-forward="false" selection-start-line="25" selection-start-column="87" selection-end-line="25" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -84,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Party.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Party.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Party.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="56" column="76" lean-forward="false" selection-start-line="56" selection-start-column="76" selection-end-line="56" selection-end-column="76" />
+            <state relative-caret-position="224">
+              <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -107,22 +107,16 @@
       <file leaf-file-name="Pokemon.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Pokemon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="94" column="76" lean-forward="false" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
+            <state relative-caret-position="1616">
+              <caret line="170" column="41" lean-forward="false" selection-start-line="170" selection-start-column="41" selection-end-line="170" selection-end-column="41" />
               <folding>
-                <element signature="e#7847#7848#0" expanded="true" />
-                <element signature="e#7936#7937#0" expanded="true" />
+                <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+                <element signature="e#8239#8240#0" expanded="true" />
+                <element signature="e#8320#8321#0" expanded="true" />
+                <element signature="e#8344#8345#0" expanded="true" />
+                <element signature="e#8376#8377#0" expanded="true" />
+                <element signature="e#8398#8399#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Attack.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Attack.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -146,6 +140,9 @@
       <find>fainted</find>
       <find>trainer supreme</find>
       <find>healed</find>
+      <find>you are</find>
+      <find>pokemonNumbers</find>
+      <find>pokemonNumbers =</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -164,10 +161,10 @@
         <option value="$PROJECT_DIR$/PkmnTools.class" />
         <option value="$PROJECT_DIR$/possibleNames.txt" />
         <option value="$PROJECT_DIR$/allPokemon.txt" />
-        <option value="$PROJECT_DIR$/Party.java" />
-        <option value="$PROJECT_DIR$/Pokemon.java" />
         <option value="$PROJECT_DIR$/PkmnTools.java" />
         <option value="$PROJECT_DIR$/PkmnArena.java" />
+        <option value="$PROJECT_DIR$/Pokemon.java" />
+        <option value="$PROJECT_DIR$/Party.java" />
       </list>
     </option>
   </component>
@@ -197,9 +194,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,7 +226,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -397,11 +394,22 @@
       <workItem from="1512222495450" duration="1145000" />
       <workItem from="1512227896880" duration="156000" />
       <workItem from="1512228157292" duration="5097000" />
+      <workItem from="1512332789556" duration="166000" />
+      <workItem from="1512574168643" duration="651000" />
+      <workItem from="1512781757986" duration="122000" />
+      <workItem from="1513173550692" duration="50000" />
+      <workItem from="1513178359295" duration="553000" />
+      <workItem from="1513178944163" duration="1187000" />
+      <workItem from="1513264641670" duration="945000" />
+      <workItem from="1513351115311" duration="599000" />
+      <workItem from="1513367203008" duration="1037000" />
+      <workItem from="1513789615264" duration="386000" />
+      <workItem from="1515426735759" duration="8000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17299000" />
+    <option name="totallyTimeSpent" value="23003000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -409,7 +417,6 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -420,10 +427,9 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26918977" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3033049" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -435,7 +441,9 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,29 +453,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Pokemon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="45" column="58" lean-forward="false" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
-          <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Attack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="35" lean-forward="false" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Pokedex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -529,8 +520,12 @@
         <state relative-caret-position="672">
           <caret line="45" column="58" lean-forward="false" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
           <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
+            <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+            <element signature="e#8239#8240#0" expanded="true" />
+            <element signature="e#8320#8321#0" expanded="true" />
+            <element signature="e#8344#8345#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+            <element signature="e#8398#8399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -596,8 +591,12 @@
         <state relative-caret-position="672">
           <caret line="45" column="58" lean-forward="false" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
           <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
+            <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+            <element signature="e#8239#8240#0" expanded="true" />
+            <element signature="e#8320#8321#0" expanded="true" />
+            <element signature="e#8344#8345#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+            <element signature="e#8398#8399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -647,8 +646,12 @@
         <state relative-caret-position="672">
           <caret line="45" column="58" lean-forward="true" selection-start-line="45" selection-start-column="58" selection-end-line="45" selection-end-column="58" />
           <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
+            <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+            <element signature="e#8239#8240#0" expanded="true" />
+            <element signature="e#8320#8321#0" expanded="true" />
+            <element signature="e#8344#8345#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+            <element signature="e#8398#8399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -721,8 +724,12 @@
         <state relative-caret-position="2528">
           <caret line="185" column="1" lean-forward="true" selection-start-line="185" selection-start-column="1" selection-end-line="185" selection-end-column="1" />
           <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
+            <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+            <element signature="e#8239#8240#0" expanded="true" />
+            <element signature="e#8320#8321#0" expanded="true" />
+            <element signature="e#8344#8345#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+            <element signature="e#8398#8399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -763,8 +770,12 @@
         <state relative-caret-position="688">
           <caret line="46" column="41" lean-forward="false" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
           <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
+            <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+            <element signature="e#8239#8240#0" expanded="true" />
+            <element signature="e#8320#8321#0" expanded="true" />
+            <element signature="e#8344#8345#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+            <element signature="e#8398#8399#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -831,6 +842,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/Pokemon-Arena/possibleNames.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15408">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/Pokemon-Arena/allPokemon.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PkmnTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="25" column="87" lean-forward="false" selection-start-line="25" selection-start-column="87" selection-end-line="25" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Pokemon-Arena.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -839,37 +872,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Party.java">
+    <entry file="file://$PROJECT_DIR$/PkmnArena.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="56" column="76" lean-forward="false" selection-start-line="56" selection-start-column="76" selection-end-line="56" selection-end-column="76" />
+        <state relative-caret-position="1600">
+          <caret line="111" column="47" lean-forward="false" selection-start-line="111" selection-start-column="47" selection-end-line="111" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Pokemon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="94" column="76" lean-forward="false" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
+        <state relative-caret-position="1616">
+          <caret line="170" column="41" lean-forward="false" selection-start-line="170" selection-start-column="41" selection-end-line="170" selection-end-column="41" />
           <folding>
-            <element signature="e#7847#7848#0" expanded="true" />
-            <element signature="e#7936#7937#0" expanded="true" />
+            <element signature="method#attack#0;class#Pokemon#0" expanded="false" />
+            <element signature="e#8239#8240#0" expanded="true" />
+            <element signature="e#8320#8321#0" expanded="true" />
+            <element signature="e#8344#8345#0" expanded="true" />
+            <element signature="e#8376#8377#0" expanded="true" />
+            <element signature="e#8398#8399#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PkmnTools.java">
+    <entry file="file://$PROJECT_DIR$/Party.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="22" column="57" lean-forward="false" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PkmnArena.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="85" column="4" lean-forward="true" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="4" />
+        <state relative-caret-position="224">
+          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
           <folding />
         </state>
       </provider>
