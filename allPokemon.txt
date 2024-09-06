@@ -35,7 +35,7 @@ Nidorino,60,leaf, ,psychic,2,Double Kick,30,30,wild storm,Horn Drill,40,50,
 Nidoking,90,leaf, ,psychic,2,Thrash,30,20,wild storm,Toxic,30,40,wild storm
 Clefairy,40,normal,psychic,fighting,1,Sing,10,10,stun
 Clefable,70,normal,psychic,fighting,1,Sing,10,10,stun
-Vulpix,50,fire, ,water,1,Confuse Ray,20,20,10
+Vulpix,50,fire, ,water,1,Confuse Ray,20,20, 
 Ninetales,80,fire, ,water,2,Lure,20,10,stun,Fire Blast,40,40,wild storm
 Jigglypuff,60,normal,psychic,fighting,2,Lullaby,10,10,stun,Pound,20,20, 
 Wigglytuff,80,normal,psychic,fighting,2,Lullaby,10,10,stun,Do the Wave,30,10,wild storm
@@ -135,7 +135,7 @@ Eevee,50,normal,psychic,fighting,2,Tail Wag,10,0,stun,Quick Attack,20,10,wild st
 Vaporeon,80,water, ,electric,2,Quick Attack,20,10,wild storm,Water Gun,30,20,wild storm,
 Jolteon,70,electric, ,fighting,2,Quick Attack,20,10,wild storm,Pin Missile,30,20,wild storm,
 Flareon,70,fire, ,water,2,Quick Attack,20,10,wild storm,Flamethrower,40,60,wild card
-Porygon,30,normal,psychic,fighting,2,Conversion 1,10,0,disable,Conversion 2,20,10,disable 
+Porygon,30,normal,psychic,fighting,2,Conversion 1,10,0,disable,Conversion 2,20,10,disable
 Omanyte,40,water, ,leaf,1,Water Gun,10,10,wild storm
 Omastar,70,water, ,leaf,2,Water Gun,20,20,wild storm,Spike Cannon,30,30,wild storm
 Kabuto,30,fighting, ,leaf,1,scratch,10,10, 

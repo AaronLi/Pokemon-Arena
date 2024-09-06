@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1224783f-dd47-47a5-b0b9-7ca8b55c075d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Party.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/Party.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnArena.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnArena.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon.class" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Party.java" afterPath="$PROJECT_DIR$/Party.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PkmnArena.java" afterPath="$PROJECT_DIR$/PkmnArena.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pokemon.java" afterPath="$PROJECT_DIR$/Pokemon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/workspace.xml" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/PkmnArena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Attack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Party.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PkmnArena.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PkmnArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/PkmnBattle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PkmnArenaTools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PkmnTools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PkmnTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/PkmnTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokedex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokedex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Pokedex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon-Arena.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pokemon-Arena.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Pokemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allPokemon.txt" beforeDir="false" afterPath="$PROJECT_DIR$/allPokemon.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Attack$Special.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Attack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Party.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnArena.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnTools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokedex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon Arena.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon-Arena.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/allPokemon.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/checkNames.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/possibleNames.txt" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,6 +159,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -148,6 +181,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AaronLi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AaronLi/Pokemon-Arena.git&quot;,
+    &quot;accountId&quot;: &quot;c0d58a31-b220-45db-91b4-8f94c8958037&quot;
+  }
+}</component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
@@ -174,11 +219,18 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
+  <component name="ProjectId" id="2lgmoGPWSyYOndiHFOaQ195BdlI" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -229,41 +281,31 @@
       <pane id="Scratches" />
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.PkmnArena.executor": "Run",
+    "Maven.Pokemon-Arena [compile].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.PkmnArena">
-    <configuration name="PkmnArena" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="PkmnArena" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Pokemon-Arena" />
-      <envs />
-    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -271,79 +313,31 @@
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
+    <configuration name="PkmnArena" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dumfing.pokemon_arena.PkmnArena" />
+      <module name="Pokemon-Arena" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="checkNames" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -363,20 +357,25 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.PkmnArena" />
-      <item index="1" class="java.lang.String" itemvalue="Python.checkNames" />
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.PkmnArena" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.PkmnArena" />
-        <item index="1" class="java.lang.String" itemvalue="Python.checkNames" />
+      <list>
+        <item itemvalue="Application.PkmnArena" />
       </list>
     </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1224783f-dd47-47a5-b0b9-7ca8b55c075d" name="Default" comment="" />
@@ -448,15 +447,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Pokedex.java">

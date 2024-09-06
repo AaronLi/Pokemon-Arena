@@ -1,17 +1,41 @@
+package com.dumfing.pokemon_arena;
 //Pokemon.java
 //Aaron Li
 // Class for dealing with constructing pokemon from Strings as well as the pokemon themselves and when they attack
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
 
+@Builder(toBuilder = true)
 public class Pokemon{
 	//Pokemon variables
-	private int hp, maxHp;
-	private String name, type, resistance, weakness;
-	private boolean attacked = false; //whether the pokemon attacked in the last turn. If this is true then the pokemon will not recharge at the end of the users turn
-	private boolean[]debuffs = {false,false};
-	private int energy = 50;
-	private ArrayList<Attack> moves = new ArrayList<Attack>();
+	@Getter
+    private int health;
+    @Getter
+    private final int maxHealth;
+	@Getter
+    private final String name;
+    @Getter
+    private final String type;
+    @Getter
+    private final String resistance;
+    @Getter
+    private final String weakness;
+	@Setter
+	@Builder.Default
+    private boolean attacked = false; //whether the pokemon attacked in the last turn. If this is true then the pokemon will not recharge at the end of the users turn
+	private final boolean[]debuffs = {false,false};
+	@Getter
+	@Builder.Default
+    private int energy = 50;
+	@Getter
+    private ArrayList<Attack> moves = new ArrayList<Attack>();
 	//Static variables for constructing a Pokemon object from a String
 	private static final int NAME = 0;
 	private static final int HEALTH = 1;
@@ -29,58 +53,42 @@ public class Pokemon{
 	public static final int STUN_STATUS = 0;
 	public static final int DISABLE_STATUS = 1;
 	
-	public Pokemon(String infoIn){ // Constructor
+	public static Pokemon fromString(String infoIn){ // Constructor
 		int energyCost,damage,numAttacks;
 		String atName, special;
 		String[] pokeInfo = infoIn.split(","); // split the input into an array of Strings
-		name = pokeInfo[NAME];
-		hp = Integer.parseInt(pokeInfo[HEALTH]); // health and max health should be integers
-		maxHp = Integer.parseInt(pokeInfo[HEALTH]);
-		type = Character.toUpperCase(pokeInfo[TYPE].charAt(0))+pokeInfo[TYPE].substring(1); // capitalize the type, weakness, and resistance for easier printing in the future
-		resistance = Character.toUpperCase(pokeInfo[RESISTANCE].charAt(0))+pokeInfo[RESISTANCE].substring(1); 
-		weakness = Character.toUpperCase(pokeInfo[WEAKNESS].charAt(0))+pokeInfo[WEAKNESS].substring(1);
+		System.out.println(Arrays.toString(pokeInfo));
+		PokemonBuilder builder = Pokemon.builder()
+				.name(pokeInfo[NAME])
+				.health(Integer.parseInt(pokeInfo[HEALTH]))
+				.maxHealth(Integer.parseInt(pokeInfo[HEALTH]))
+				.type(Character.toUpperCase(pokeInfo[TYPE].charAt(0))+pokeInfo[TYPE].substring(1))
+				.resistance(Character.toUpperCase(pokeInfo[RESISTANCE].charAt(0))+pokeInfo[RESISTANCE].substring(1))
+				.weakness(Character.toUpperCase(pokeInfo[WEAKNESS].charAt(0))+pokeInfo[WEAKNESS].substring(1));
+		ArrayList<Attack> moves = new ArrayList<>();
 		numAttacks = Integer.parseInt(pokeInfo[NUM_ATTACKS]);// used for getting the right amount of attacks
 		for(int i = ATTACKS_START; i<ATTACKS_START+(4*numAttacks); i+=4){ 
 			atName = pokeInfo[i+ATTACK_NAME];
 			energyCost = Integer.parseInt(pokeInfo[i+ENERGY_COST]);
 			damage = Integer.parseInt(pokeInfo[i+DAMAGE]);
-			special = pokeInfo[i+SPECIAL]; // capitalize the special for printing
-			moves.add(new Attack(atName,energyCost,damage,Attack.Special.fromFileString(special))); // add attack to the pokemon's move list
+			special = pokeInfo[i+SPECIAL].toUpperCase(Locale.ROOT).replace(" ", "_"); // capitalize the special for printing
+			if(special.equals("_")) {
+				special = "NONE";
+			}
+			moves.add(new Attack(atName,Attack.Special.valueOf(special),energyCost,damage)); // add attack to the pokemon's move list
 		}
+		return builder.moves(moves).build();
 	}
-	public Pokemon(Pokemon pkmnIn){ //constructor for cloning pokemon
-		this.name = new String(pkmnIn.name);
-		this.hp = pkmnIn.hp;
-		this.maxHp = pkmnIn.maxHp;
-		this.type = pkmnIn.type;
-		this.resistance = pkmnIn.resistance;
-		this.weakness = pkmnIn.weakness;
-		this.energy = pkmnIn.energy;
-		this.moves = new ArrayList<Attack>(pkmnIn.moves);
-	}
-	public String getName(){
-		return this.name;
-	}
-	public boolean getDisable(){
+
+    public boolean getDisable(){
 		return debuffs[DISABLE_STATUS];
 	}
 	public boolean getStun(){
 		return debuffs[STUN_STATUS];
 	}
-	public int getHealth(){
-		return this.hp;
-	}
-	public int getMaxHealth(){
-		return this.maxHp;
-	}
-	public int getEnergy(){
-		return energy;
-	}
-	public void setAttacked(boolean attacked){
-		this.attacked = attacked;
-	}
-	public void setHealth(int health){
-		this.hp = Math.min(Math.max(0,health),maxHp); // health can't go below 0 or above max health
+
+    public void setHealth(int health){
+		this.health = Math.min(Math.max(0,health), maxHealth); // health can't go below 0 or above max health
 	}
 	public void setDisable(boolean value){
 		debuffs[DISABLE_STATUS] = value;
@@ -93,21 +101,15 @@ public class Pokemon{
 	}
 	public void heal(int amount){
 		System.out.printf(PkmnTools.ANSI_GREEN+"%s has healed 20 health!\n",getName());
-		setHealth(this.hp+amount);
+		setHealth(this.health + amount);
 	}
-	public Integer[] availableAttacks(){ // returns the indexes of the attacks the pokemon can use
-		ArrayList<Integer> possibleAttacks = new ArrayList<Integer>();
-		for(int i = 0;i < moves.size();i++){
-			if(moves.get(i).getCost() <= energy){ // will only add it to the list of returned values if the pokemon has more energy than the cost of the attack
-				possibleAttacks.add(new Integer(i));
-			}
-		}
-		return possibleAttacks.toArray(new Integer[possibleAttacks.size()]); // return as an array
+	public List<Attack> availableAttacks(){ // returns the indexes of the attacks the pokemon can use
+		return moves.stream().filter(move->move.getCost() <= energy).toList();
 	}
 	public void attack(Pokemon target, Attack attack){ //Method used for attacking other pokemon
 		int damage = attack.getDamage(); // basic damage without any modifiers
 		this.energy -= attack.getCost(); // reduce the attack cost from the attacking pokemon's energy pool
-		if(attack.getSpecial().equals(Attack.Special.WILD_CARD) && PkmnArena.rand.nextBoolean()){ // check whether or not the wild card effect is possible
+		if(attack.getSpecial().equals(Attack.Special.WILD_CARD) && PkmnBattle.rand.nextBoolean()){ // check whether or not the wild card effect is possible
 			System.out.println(PkmnTools.ANSI_PURPLE+"The attack failed..."+PkmnTools.ANSI_RESET);
 		}
 		else{
@@ -124,13 +126,13 @@ public class Pokemon{
 		}
 		//Specials
 		if(attack.getSpecial().equals(Attack.Special.STUN)){ // if the special is stun
-			if(PkmnArena.rand.nextBoolean()){ // rng 50/50 chance
+			if(PkmnBattle.rand.nextBoolean()){ // rng 50/50 chance
 				System.out.printf(PkmnTools.ANSI_YELLOW+"%s has been stunned!\n"+PkmnTools.ANSI_RESET,target.getName()); // Print if the pokemon has been stunned
 				target.debuffs[STUN_STATUS] = true; // make the pokemon stunned
 			}
 		}
 		else if(attack.getSpecial().equals(Attack.Special.WILD_STORM)){ // If the special is Wild storm
-			while(PkmnArena.rand.nextBoolean()){ // Loop with 50/50 chance of breaking each iteration
+			while(PkmnBattle.rand.nextBoolean()){ // Loop with 50/50 chance of breaking each iteration
 				System.out.printf(PkmnTools.ANSI_RED+"Wild storm!"+PkmnTools.ANSI_RESET+" %s used %s again and dealt an additional"+PkmnTools.ANSI_RED+" %d damage!\n"+PkmnTools.ANSI_RESET,name,attack.getName(),Math.max(damage-(debuffs[DISABLE_STATUS]?10:0),0)); // Print the resulting successful wild storm
 				target.damage(damage-(debuffs[DISABLE_STATUS]?10:0)); // damage the target
 			}
@@ -151,12 +153,8 @@ public class Pokemon{
 	}
 	
 
-	public String[] attacks(){ // returns a list of all the names of the pokemon's attacks
-		String[] sOut = new String[moves.size()]; // create an array that's as large as the pokemon's move list
-		for (int i = 0; i<moves.size();i++){ // go through the pokemons moves while adding the names of each one to sOut
-			sOut[i] = moves.get(i).getName();
-		}
-		return sOut;
+	public List<String> attackNames(){ // returns a list of all the names of the pokemon's attacks
+		return moves.stream().map(Attack::getName).toList();
 	}
 	public Attack getAttack(int attackIndex){ // get an attack object from the pokemon's move list
 		return moves.get(attackIndex);
@@ -168,31 +166,16 @@ public class Pokemon{
 		this.setHealth(this.getHealth()-Math.min(dmgAmt,this.getHealth())); // damage will either reduce health or set it to 0
 	}
 
-	public ArrayList<Attack> getMoves() {
-		return moves;
-	}
-
-	public String getType() {
-
-		return type;
-	}
-
-	public String getResistance() {
-		return resistance;
-	}
-
-	public String getWeakness() {
-		return weakness;
-	}
-
-	@Override
+    @Override
 	public String toString(){
-		String attackString = "";
-		String[] atNames = this.attacks(); // get the names of the attacks
-		for(int i =0; i<atNames.length;i++){
-			attackString += String.format("MOV %d: %-16s ",i+1,atNames[i]); // format the attack information for printing
+		StringBuilder attackString = new StringBuilder();
+		ListIterator<String> attackNameIterator = this.attackNames().listIterator();
+		while (attackNameIterator.hasNext()) {
+			int nextAttackNameIndex = attackNameIterator.nextIndex();
+			String nextAttackName = attackNameIterator.next();
+			attackString.append(String.format("MOV %d: %-16s ",nextAttackNameIndex+1,nextAttackName)); // format the attack information for printing
 		}
-		return String.format("%-15s "+PkmnTools.rygColourMultiplier(hp,maxHp)+"HP: %s"+PkmnTools.rygColourMultiplier(hp,maxHp)+" %-7s"+PkmnTools.pbcColourMultiplier(energy, 50)+" NRG: %-2d/50"+PkmnTools.ANSI_RESET+" TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(hp,maxHp),hp+"/"+maxHp,energy,type,resistance,weakness,attackString); // add the debuffs onto the end of the pokemon's info when printing
+		return String.format("%-15s "+PkmnTools.rygColourMultiplier(health, maxHealth)+"HP: %s"+PkmnTools.rygColourMultiplier(health, maxHealth)+" %-7s"+PkmnTools.pbcColourMultiplier(energy, 50)+" NRG: %-2d/50"+PkmnTools.ANSI_RESET+" TYP: %-8s RST: %-8s WKS: %-8s %-30s"+(debuffs[0]?" Stunned":"")+(debuffs[1]?" Disabled":""),name,PkmnTools.makeBar(health, maxHealth), health +"/"+ maxHealth,energy,type,resistance,weakness, attackString); // add the debuffs onto the end of the pokemon's info when printing
 	}
 	@Override
 	public boolean equals(Object obj){ // used for figuring out whether two pokemon are equal or not
