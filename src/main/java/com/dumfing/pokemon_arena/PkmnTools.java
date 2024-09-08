@@ -2,13 +2,14 @@ package com.dumfing.pokemon_arena;
 //PkmnTools.java
 //Aaron Li
 //Deals with the bot's moves and random naming as well as visualising health bars
+import com.dumfing.pokemon_arena.OptionConfiguration.Option;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class PkmnTools{
@@ -36,18 +37,18 @@ public class PkmnTools{
 
 		return possibleNames.get(PkmnBattle.rand.nextInt(possibleNames.size()));
 	}
-	public static void computerMove(Party computerParty, Party userParty){ // What happens when it's the Computer's turn to attack
+	public static void computerMove(Party computerParty, Party userParty, OptionConfiguration options){ // What happens when it's the Computer's turn to attack
 		List<Attack> possibleAttacks = computerParty.currentPokemon().availableAttacks(); // get the attacks that the pokemon has enough energy to use
 		if(computerParty.currentPokemon().getStun()){ // will skip the turn if the pokemon is stunned
 			System.out.printf("%s is stunned! The %s's turn has been skipped.\n",computerParty.currentPokemon().getName(),computerParty.getOwner());
 			computerParty.currentPokemon().setStun(false);
 		}
 		else if(!possibleAttacks.isEmpty()){ //if there are usable attacks for the pokemon to use
-			Pokemon attackingPokemon = userParty.currentPokemon();
+			Pokemon userPokemon = userParty.currentPokemon();
 			Attack plannedAttack = possibleAttacks.get(PkmnBattle.rand.nextInt(possibleAttacks.size())); // get a random attack from the list of possible attacks
 			System.out.printf("%s's %s used %s!\n",computerParty.getOwner(),computerParty.currentPokemon().getName(),plannedAttack.getName()); // print out what the computer chose
-			computerParty.currentPokemon().attack(attackingPokemon,plannedAttack); // attack the user's pokemon with the seslected attack
-			if(PkmnBattle.options[PkmnBattle.RESULT_DETAILS]){ // if the user wants more details about the attack
+			plannedAttack.apply(computerParty.currentPokemon(), userPokemon);
+			if(options.getOption(Option.ShowAttackResults)){ // if the user wants more details about the attack
 				System.out.printf("%s's %s now has"+PkmnTools.pbcColourMultiplier(computerParty.currentPokemon().getEnergy(), 50)+" %d energy\n"+PkmnTools.ANSI_RESET,computerParty.getOwner(),computerParty.currentPokemon().getName(),computerParty.currentPokemon().getEnergy());
 				System.out.printf("Your %s now has"+PkmnTools.rygColourMultiplier(userParty.currentPokemon().getHealth(),userParty.currentPokemon().getMaxHealth())+" %d health\n"+PkmnTools.ANSI_RESET,userParty.currentPokemon().getName(),userParty.currentPokemon().getHealth());
 			}
@@ -56,7 +57,7 @@ public class PkmnTools{
 			System.out.printf("%s skipped their turn%n",computerParty.getOwner()); // What happens when the bot doesn't have enough energy to attack
 		}
 	}
-	public static void computerTurn(Party uParty, Party cParty, Scanner kb){ // deals with whether the bot has been defeated or not
+	public static void computerTurn(Party uParty, Party cParty, OptionConfiguration options){ // deals with whether the bot has been defeated or not
 		//Computer
 
 		if(!cParty.getLivingPokemon().isEmpty()){ // if the computer's party still has pokemon
@@ -71,7 +72,7 @@ public class PkmnTools{
 			}
 
 			System.out.printf("---------- %s's Turn! ----------%n",cParty.getOwner()); // Start bot's turn
-			computerMove(cParty, uParty);// let the bot pick an attack to use
+			computerMove(cParty, uParty, options);// let the bot pick an attack to use
 		}
 		else{ // if the computerParty has no living pokemon
 			System.out.printf(PkmnTools.ANSI_RED+"%s has fainted!\n"+PkmnTools.ANSI_RESET,cParty.currentPokemon().getName()); // When the bot's pokemon have all fainted
@@ -89,7 +90,7 @@ public class PkmnTools{
 		return multiplyLetter(times,letter,"");
 	}
 	public static String multiplyLetter(int times, String letter, String made){
-		return times == 0?made:multiplyLetter(times-1,letter,made+letter);//call multiplyLetter while adding the letter to the end of made then reducing the number of times it should be added
+		return times <= 0?made:multiplyLetter(times-1,letter,made+letter);//call multiplyLetter while adding the letter to the end of made then reducing the number of times it should be added
 	}
 	public static String pickColourMultiplier(int val, int max, String[] colourScale){
 		return colourScale[(int)((colourScale.length-1)*((double)val/(double)max))];

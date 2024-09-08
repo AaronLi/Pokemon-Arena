@@ -5,46 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1224783f-dd47-47a5-b0b9-7ca8b55c075d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/PkmnArena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attack.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Attack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Attack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Party.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Party.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PkmnArena.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PkmnArena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/PkmnBattle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PkmnArenaTools.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PkmnTools.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PkmnTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/PkmnTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pokedex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pokedex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Pokedex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pokemon-Arena.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pokemon-Arena.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pokemon.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Pokemon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allPokemon.txt" beforeDir="false" afterPath="$PROJECT_DIR$/allPokemon.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Attack$Special.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Attack.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Party.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnArena.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/PkmnTools.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokedex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon Arena.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon-Arena.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/Pokemon.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/allPokemon.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/checkNames.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pokemon-Arena/possibleNames.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Pokemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dumfing/pokemon_arena/Pokemon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +183,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -288,21 +251,30 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.PkmnArena.executor": "Run",
+    "Maven.Pokemon-Arena [clean].executor": "Run",
     "Maven.Pokemon-Arena [compile].executor": "Run",
+    "Maven.Pokemon-Arena [validate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
+    "project.structure.side.proportion": "0.27471265",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="com.dumfing.pokemon_arena.OptionConfiguration" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="com.dumfing.pokemon_arena" />
     </key>
   </component>
   <component name="RunManager" selected="Application.PkmnArena">

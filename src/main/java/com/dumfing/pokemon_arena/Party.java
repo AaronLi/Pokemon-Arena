@@ -2,6 +2,8 @@ package com.dumfing.pokemon_arena;
 //Party.java
 //Aaron Li
 //Takes care of the player's and computer's Pokemon, picking pokemon, dealing with the active pokemon, healing, recharging
+import com.dumfing.pokemon_arena.OptionConfiguration.Option;
+import jakarta.inject.Inject;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -44,29 +46,28 @@ public class Party{
 			if (!member.hasAttacked()) { // if the pokemon has attacked it will recharge
 				member.recharge(10);
 			} else {
-				member.setAttacked(false); // if the pokemon attacked in the round before it will be able to recharge next round (unless it attacks again)
+				member.setAttackedThisTurn(false); // if the pokemon attacked in the round before it will be able to recharge next round (unless it attacks again)
 			}
 		});
 	}
 	public void healAll(){ // heal all pokemon in the party by 20 health
 		members.stream().filter(member->member.getHealth() > 0).forEach(member->member.heal(20));
 	}
-	public static Party pickParty(Pokedex pokedex, Scanner kb){ // used for picking the contents of a party
+	public static Party pickParty(Pokedex pokedex, Scanner kb, OptionConfiguration options){ // used for picking the contents of a party
 		int picked; // number of the pokemon the user picked
 		int partySize = 6;
-		String uIn; // user input
-		String[] pokemonPickedWords = {"","second ","third ","fourth ","fifth ","sixth ","sevent ","eighth ","ninth "}; // Used for making the prompt read more easily. Probably won't use all but expansion is there
+        String[] pokemonPickedWords = {"","second ","third ","fourth ","fifth ","sixth ","sevent ","eighth ","ninth "}; // Used for making the prompt read more easily. Probably won't use all but expansion is there
 		Party userParty = new Party("User"); // create a new party with an index of -1
-		ArrayList<Pokemon> pickablePokemon = new ArrayList<>(pokedex.allPokemon());  // the names of all pokemon in the pokedex
+		ArrayList<Pokemon> selectablePokemon = pokedex.allPokemon();  // the names of all pokemon in the pokedex
 
 		while(userParty.size() < partySize){
 			System.out.println("Please pick a "+pokemonPickedWords[userParty.size()]+"pokemon:\n"); // print the prompt
-			System.out.println((PkmnBattle.options[PkmnBattle.POKEMON_DETAILS]?"s. simple\n":"d. Details\n")+"p. Pick for me");
+			System.out.println((options.getOption(Option.PokemonDetails)?"s. simple\n":"d. Details\n")+"p. Pick for me");
 			if(userParty.size()>0){
 				System.out.println("f. Finished");
 			}
-			if(PkmnBattle.options[PkmnBattle.POKEMON_DETAILS]){ // print the details or just the name of each pokemon
-				ListIterator<Pokemon> pokemonListIterator = pickablePokemon.listIterator();
+			if(options.getOption(Option.PokemonDetails)){ // print the details or just the name of each pokemon
+				ListIterator<Pokemon> pokemonListIterator = selectablePokemon.listIterator();
 				while (pokemonListIterator.hasNext()) {
 					int choiceIndex = pokemonListIterator.nextIndex();
 					Pokemon choice = pokemonListIterator.next();
@@ -75,7 +76,7 @@ public class Party{
 
 			}
 			else{
-				ListIterator<Pokemon> pokemonListIterator = pickablePokemon.listIterator();
+				ListIterator<Pokemon> pokemonListIterator = selectablePokemon.listIterator();
 				while (pokemonListIterator.hasNext()) {
 					int choiceIndex = pokemonListIterator.nextIndex();
 					Pokemon choice = pokemonListIterator.next();
@@ -88,12 +89,13 @@ public class Party{
 				System.out.println();
 			}
 			System.out.println("Enter a number: ");
-			uIn = kb.nextLine();
-			if(uIn.equals("d")){ // if the user wants the detailed view
-				PkmnBattle.options[PkmnBattle.POKEMON_DETAILS] = true;
+            // user input
+            String uIn = kb.nextLine();
+            if(uIn.equals("d")){ // if the user wants the detailed view
+				options.setOption(Option.PokemonDetails, true);
 			}
 			else if(uIn.equals("s")){ // if the user wants the simple view
-				PkmnBattle.options[PkmnBattle.POKEMON_DETAILS] = false;
+				options.setOption(Option.PokemonDetails, false);
 			}
 			else if(uIn.equals("p")){
                 return userParty.fillPartyWithRandomPokemon(pokedex, null, 6);
@@ -103,8 +105,8 @@ public class Party{
 			}
 			else if(uIn.replaceAll("[0-9]+", "").isEmpty() && !uIn.isEmpty()){ // if the user's input only contains numbers (removing all numbers results in nothing)
 				picked = Integer.parseInt(uIn); // turn the input into an integer that cna be used to get pokemon
-				if (0<picked && picked < pickablePokemon.size()+1){ // if the selected pokemon is within the range of selectable pokemon
-					Pokemon selectedPokemon = pickablePokemon.get(picked - 1);
+				if (0<picked && picked < selectablePokemon.size()+1){ // if the selected pokemon is within the range of selectable pokemon
+					Pokemon selectedPokemon = selectablePokemon.get(picked - 1);
 					System.out.printf("You picked "+PkmnTools.ANSI_CYAN+"%s"+PkmnTools.ANSI_RESET+"!\n",selectedPokemon.getName());
 					System.out.printf("Health: %s"+PkmnTools.ANSI_GREEN+" %d/%d"+PkmnTools.ANSI_RESET+"\nType: %s\nWeakness: %s\nResistance: %s\nMoves:\n",PkmnTools.makeBar(selectedPokemon.getHealth(),selectedPokemon.getMaxHealth()),selectedPokemon.getHealth(),selectedPokemon.getMaxHealth(),selectedPokemon.getType(), selectedPokemon.getWeakness(), selectedPokemon.getResistance());
 					for(int i = 0; i<selectedPokemon.getMoves().size(); i++){
@@ -113,7 +115,7 @@ public class Party{
 					System.out.println("\nConfirm? ("+PkmnTools.ANSI_GREEN+"Y"+PkmnTools.ANSI_WHITE+"/"+PkmnTools.ANSI_RED+"N"+PkmnTools.ANSI_RESET+")");
 					uIn = kb.nextLine();
 					if(uIn.equalsIgnoreCase("y")) {
-						userParty.addPokemon(pickablePokemon.remove(picked - 1)); // add the pokemon to the output party
+						userParty.addPokemon(selectablePokemon.remove(picked - 1)); // add the pokemon to the output party
 					}
 				}
 				else{
@@ -126,7 +128,7 @@ public class Party{
 	
 	public Party fillPartyWithRandomPokemon(@NonNull Pokedex pokedex, Party excluded, int desiredSize){
 		int amountToAdd = desiredSize-this.size();
-		ArrayList<Pokemon> remainingPokemon = new ArrayList<>(pokedex.allPokemon()); //get all the pokemon from the pokedex
+		ArrayList<Pokemon> remainingPokemon = pokedex.allPokemon(); //get all the pokemon from the pokedex
 		if (excluded != null) {
 			remainingPokemon.removeAll(excluded.allMembers());
 		}
@@ -168,7 +170,7 @@ public class Party{
 		return members.stream().filter(member -> member.getHealth() > 0).findFirst();
 	}
 
-	public boolean pickActive(boolean allowBack, Scanner kb){ // deals with showing the user which pokemon they can to switch to and allows them to select one
+	public boolean pickActive(boolean allowBack, Scanner kb, OptionConfiguration options){ // deals with showing the user which pokemon they can to switch to and allows them to select one
 		String uIn;
 		boolean pickedNewPokemon = false; // false if the user decided to enter 0 to return
 		List<Pokemon> availableToPick = getLivingPokemon().stream().filter(pokemon->pokemon != active).toList();
@@ -176,19 +178,19 @@ public class Party{
 			if(allowBack){
 				System.out.println("0. Back");
 			}
-			System.out.println(PkmnBattle.options[PkmnBattle.POKEMON_DETAILS]?"s. Simple":"d. Details"); // add option for switching pokemon details on and off
+			System.out.println(options.getOption(Option.PokemonDetails)?"s. Simple":"d. Details"); // add option for switching pokemon details on and off
 			ListIterator<Pokemon> pokemonListIterator = availableToPick.listIterator();
 			while (pokemonListIterator.hasNext()) {
 				int choiceIndex = pokemonListIterator.nextIndex();
 				Pokemon choice = pokemonListIterator.next();
-				System.out.printf("%d. %s\n",choiceIndex+1, PkmnBattle.options[PkmnBattle.POKEMON_DETAILS]? choice: choice.getName()); // print the pokemon name or the pokemon details based on the options defined in pokemon arena
+				System.out.printf("%d. %s\n",choiceIndex+1, options.getOption(Option.PokemonDetails)? choice: choice.getName()); // print the pokemon name or the pokemon details based on the options defined in pokemon arena
 			}
 			uIn = kb.nextLine();
-			if(uIn.equals("s") && PkmnBattle.options[PkmnBattle.POKEMON_DETAILS]){ // if the user is trying to turn off detailed pokemon info
-				PkmnBattle.options[PkmnBattle.POKEMON_DETAILS] = false;
+			if(uIn.equals("s") && options.getOption(Option.PokemonDetails)){ // if the user is trying to turn off detailed pokemon info
+				options.setOption(Option.PokemonDetails, false);
 			}
-			else if(uIn.equals("d") && !PkmnBattle.options[PkmnBattle.POKEMON_DETAILS]){ // if the user is trying to turn on detailed pokemon info
-				PkmnBattle.options[PkmnBattle.POKEMON_DETAILS] = true;
+			else if(uIn.equals("d") && !options.getOption(Option.PokemonDetails)){ // if the user is trying to turn on detailed pokemon info
+				options.setOption(Option.PokemonDetails, true);
 			}
 			else if(uIn.replaceAll("[0-9]+", "").isEmpty() && !uIn.isEmpty()){
 				int parsedSelection = Integer.parseInt(uIn);

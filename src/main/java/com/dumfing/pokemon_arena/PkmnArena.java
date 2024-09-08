@@ -1,16 +1,12 @@
 package com.dumfing.pokemon_arena;
 
-import java.io.IOException;
-import java.util.Scanner;
+import com.dumfing.pokemon_arena.component.DaggerPokemonArenaComponent;
+import com.dumfing.pokemon_arena.component.PokemonArenaComponent;
 
 public class PkmnArena {
-    public static void main(String[] args) throws IOException {
-        Pokedex pokedex = new Pokedex("allPokemon.txt");
-        String botName = PkmnTools.enemyName();
-        PkmnBattle arena = new PkmnBattle(pokedex, botName);
-        Scanner kb = new Scanner(System.in);
+    public static void main(String[] args) {
+        PokemonArenaComponent component = DaggerPokemonArenaComponent.create();
 
-        arena.prepareForBattle(kb);
-        arena.battle(kb);
+        component.createPkmnBattle().battle();
     }
 }
